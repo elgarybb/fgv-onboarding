@@ -1,74 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>FGV Automation | Onboarding</title>
 
+
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       background: #0b0b0d;
       color: #f5f5f5;
+
       min-height: 100vh;
+
       display: flex;
       justify-content: center;
       align-items: center;
+
       padding: 30px 15px;
     }
+
 
     .container {
       width: 100%;
       max-width: 680px;
+
       background: #171719;
+
       border: 1px solid #2c2c30;
       border-radius: 18px;
+
       padding: 38px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,.35);
     }
+
 
     .brand {
       font-size: 14px;
       letter-spacing: 5px;
+
       color: #9b9ba1;
+
       margin-bottom: 28px;
     }
+
 
     .progress {
       display: flex;
       gap: 8px;
+
       margin-bottom: 34px;
     }
 
+
     .progress-bar {
       height: 4px;
+
       flex: 1;
+
       background: #36363b;
+
       border-radius: 10px;
-      transition: background .3s ease;
+
+      transition:
+        background .3s ease;
     }
+
 
     .progress-bar.active {
       background: #f2f2f2;
     }
 
+
     .step {
       display: none;
-      animation: fade .25s ease;
+
+      animation:
+        fade .25s ease;
     }
+
 
     .step.active {
       display: block;
     }
 
+
     @keyframes fade {
+
       from {
         opacity: 0;
         transform: translateY(8px);
@@ -78,310 +119,549 @@
         opacity: 1;
         transform: translateY(0);
       }
+
     }
+
 
     h1 {
       font-size: 32px;
+
       margin-bottom: 10px;
+
       letter-spacing: -1px;
     }
 
+
     .subtitle {
       color: #a5a5aa;
+
       line-height: 1.6;
+
       margin-bottom: 28px;
     }
+
 
     .field {
       margin-bottom: 20px;
     }
 
+
     label {
       display: block;
+
       font-size: 14px;
+
       margin-bottom: 8px;
+
       color: #d5d5d8;
     }
+
 
     input,
     select,
     textarea {
+
       width: 100%;
+
       background: #101012;
+
       border: 1px solid #343439;
+
       color: white;
+
       padding: 15px;
+
       border-radius: 10px;
+
       font-size: 15px;
+
       outline: none;
     }
 
+
     textarea {
       resize: vertical;
+
       min-height: 100px;
     }
+
 
     input:focus,
     select:focus,
     textarea:focus {
+
       border-color: #77777d;
     }
 
+
     .options {
+
       display: grid;
+
       gap: 12px;
+
       margin-top: 10px;
     }
 
+
     .option {
+
       background: #101012;
+
       border: 1px solid #343439;
+
       padding: 16px;
+
       border-radius: 10px;
+
       cursor: pointer;
+
       transition: .2s;
     }
 
+
     .option:hover {
+
       border-color: #77777d;
     }
 
+
     .option.selected {
+
       border-color: #ffffff;
+
       background: #1d1d20;
     }
 
+
     .option input {
+
       display: none;
     }
 
+
     .option-title {
+
       font-weight: 600;
+
       margin-bottom: 5px;
     }
 
+
     .option-text {
+
       font-size: 13px;
+
       color: #96969c;
+
       line-height: 1.4;
     }
 
+
     .buttons {
+
       display: flex;
+
       gap: 12px;
+
       margin-top: 30px;
     }
 
+
     button {
+
       border: none;
+
       padding: 15px 22px;
+
       border-radius: 10px;
+
       font-size: 15px;
+
       font-weight: 600;
+
       cursor: pointer;
+
       transition: .2s;
     }
 
+
+    button:disabled {
+
+      opacity: .6;
+
+      cursor: not-allowed;
+    }
+
+
     .primary {
+
       flex: 1;
+
       background: #f2f2f2;
+
       color: #151515;
     }
 
+
     .primary:hover {
+
       background: white;
     }
 
+
     .secondary {
+
       background: #27272b;
+
       color: white;
     }
 
+
     .secondary:hover {
+
       background: #333338;
     }
 
+
     .summary {
+
       background: #101012;
+
       border: 1px solid #343439;
+
       border-radius: 12px;
+
       padding: 20px;
+
       line-height: 1.7;
     }
 
+
     .summary strong {
+
       color: white;
     }
 
+
     .success {
+
       text-align: center;
+
       padding: 30px 10px;
     }
 
+
     .success h1 {
+
       margin-bottom: 15px;
     }
 
+
     @media (max-width: 600px) {
+
       .container {
+
         padding: 25px;
       }
 
+
       h1 {
+
         font-size: 26px;
       }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
   <div class="container">
 
-    <div class="brand">FGV AUTOMATION</div>
+
+    <div class="brand">
+      FGV AUTOMATION
+    </div>
+
 
     <div class="progress">
+
       <div class="progress-bar active"></div>
+
       <div class="progress-bar"></div>
+
       <div class="progress-bar"></div>
+
       <div class="progress-bar"></div>
+
     </div>
+
 
 
     <!-- PASO 1 -->
 
     <div class="step active">
 
-      <h1>Vamos a configurar tu restaurante.</h1>
+
+      <h1>
+        Vamos a configurar tu restaurante.
+      </h1>
+
 
       <p class="subtitle">
-        En unos minutos tendremos la información necesaria para adaptar
+
+        En unos minutos tendremos la
+        información necesaria para adaptar
         FGV Automation a tu negocio.
+
       </p>
 
+
+
       <div class="field">
-        <label>Nombre del restaurante</label>
+
+        <label>
+          Nombre del restaurante
+        </label>
+
         <input
           type="text"
           id="name"
           placeholder="Ej. Restaurante La Plaza"
         >
+
       </div>
 
+
+
       <div class="field">
-        <label>Tipo de negocio</label>
+
+        <label>
+          Tipo de negocio
+        </label>
+
 
         <select id="business_type">
-          <option value="">Selecciona una opción</option>
-          <option value="restaurant">Restaurante</option>
-          <option value="bar_restaurant">Bar / Restaurante</option>
-          <option value="cafe">Cafetería</option>
-          <option value="other">Otro</option>
+
+          <option value="">
+            Selecciona una opción
+          </option>
+
+          <option value="restaurant">
+            Restaurante
+          </option>
+
+          <option value="bar_restaurant">
+            Bar / Restaurante
+          </option>
+
+          <option value="cafe">
+            Cafetería
+          </option>
+
+          <option value="other">
+            Otro
+          </option>
+
         </select>
+
       </div>
 
+
+
       <div class="field">
-        <label>Ciudad</label>
+
+        <label>
+          Ciudad
+        </label>
+
         <input
           type="text"
           id="city"
           placeholder="Ej. Albacete"
         >
+
       </div>
 
+
+
       <div class="field">
-        <label>Dirección</label>
+
+        <label>
+          Dirección
+        </label>
+
         <input
           type="text"
           id="address"
           placeholder="Ej. Calle Mayor, 10"
         >
+
       </div>
+
+
 
       <div class="buttons">
-        <button class="primary" onclick="nextStep()">
+
+        <button
+          class="primary"
+          onclick="nextStep()"
+        >
           Continuar
         </button>
+
       </div>
 
+
     </div>
+
 
 
     <!-- PASO 2 -->
 
     <div class="step">
 
-      <h1>Información de contacto.</h1>
+
+      <h1>
+        Información de contacto.
+      </h1>
+
 
       <p class="subtitle">
-        Estos datos permitirán identificar y configurar correctamente
+
+        Estos datos permitirán identificar
+        y configurar correctamente
         el establecimiento.
+
       </p>
 
+
+
       <div class="field">
-        <label>Teléfono</label>
+
+        <label>
+          Teléfono
+        </label>
+
         <input
           type="tel"
           id="phone"
           placeholder="Ej. 600 000 000"
         >
+
       </div>
 
+
+
       <div class="field">
-        <label>Email del restaurante</label>
+
+        <label>
+          Email del restaurante
+        </label>
+
         <input
           type="email"
           id="email"
           placeholder="Ej. hola@restaurante.com"
         >
+
       </div>
 
+
+
       <div class="field">
-        <label>Zona horaria</label>
+
+        <label>
+          Zona horaria
+        </label>
+
 
         <select id="timezone">
+
           <option value="Europe/Madrid">
             España - Europe/Madrid
           </option>
+
         </select>
+
       </div>
+
+
 
       <div class="field">
-        <label>Idioma principal</label>
+
+        <label>
+          Idioma principal
+        </label>
+
 
         <select id="language">
-          <option value="es">Español</option>
-          <option value="en">English</option>
+
+          <option value="es">
+            Español
+          </option>
+
+          <option value="en">
+            English
+          </option>
+
         </select>
+
       </div>
+
+
 
       <div class="buttons">
 
-        <button class="secondary" onclick="previousStep()">
+        <button
+          class="secondary"
+          onclick="previousStep()"
+        >
           Atrás
         </button>
 
-        <button class="primary" onclick="nextStep()">
+
+        <button
+          class="primary"
+          onclick="nextStep()"
+        >
           Continuar
         </button>
 
       </div>
 
+
     </div>
+
 
 
     <!-- PASO 3 -->
 
     <div class="step">
 
-      <h1>¿Cómo gestionáis las reservas?</h1>
+
+      <h1>
+        ¿Cómo gestionáis las reservas?
+      </h1>
+
 
       <p class="subtitle">
-        FGV Automation puede integrarse con tu sistema actual o gestionar
+
+        FGV Automation puede integrarse
+        con tu sistema actual o gestionar
         las reservas directamente.
+
       </p>
 
+
+
       <div class="options">
+
 
         <label class="option">
 
@@ -391,15 +671,25 @@
             value="digital"
           >
 
+
           <div class="option-title">
-            Ya utilizamos un sistema de reservas
+
+            Ya utilizamos un sistema
+            de reservas
+
           </div>
 
+
           <div class="option-text">
-            Google Calendar, CoverManager, TheFork u otro sistema.
+
+            Google Calendar,
+            CoverManager,
+            TheFork u otro sistema.
+
           </div>
 
         </label>
+
 
 
         <label class="option">
@@ -410,26 +700,40 @@
             value="manual"
           >
 
+
           <div class="option-title">
-            Gestionamos las reservas manualmente
+
+            Gestionamos las reservas
+            manualmente
+
           </div>
 
+
           <div class="option-text">
-            Agenda, libreta, llamadas o WhatsApp.
+
+            Agenda, libreta,
+            llamadas o WhatsApp.
+
           </div>
 
         </label>
 
+
       </div>
 
 
-      <div id="integrationFields" style="display:none; margin-top:20px;">
+
+      <div
+        id="integrationFields"
+        style="display:none; margin-top:20px;"
+      >
 
         <div class="field">
 
           <label>
             ¿Qué sistema utilizáis?
           </label>
+
 
           <select id="reservation_system">
 
@@ -460,38 +764,58 @@
       </div>
 
 
+
       <div class="buttons">
 
-        <button class="secondary" onclick="previousStep()">
+        <button
+          class="secondary"
+          onclick="previousStep()"
+        >
           Atrás
         </button>
 
-        <button class="primary" onclick="nextStep()">
+
+        <button
+          class="primary"
+          onclick="nextStep()"
+        >
           Continuar
         </button>
 
       </div>
 
+
     </div>
+
 
 
     <!-- PASO 4 -->
 
     <div class="step">
 
-      <h1>Reglas básicas del restaurante.</h1>
+
+      <h1>
+        Reglas básicas del restaurante.
+      </h1>
+
 
       <p class="subtitle">
-        Esto ayudará a FGV Automation a responder y gestionar reservas
+
+        Esto ayudará a FGV Automation
+        a responder y gestionar reservas
         siguiendo las normas de tu negocio.
+
       </p>
+
 
 
       <div class="field">
 
         <label>
-          Número máximo de personas por reserva
+          Número máximo de personas
+          por reserva
         </label>
+
 
         <input
           type="number"
@@ -502,11 +826,14 @@
       </div>
 
 
+
       <div class="field">
 
         <label>
-          ¿Con cuánta antelación se puede reservar?
+          ¿Con cuánta antelación
+          se puede reservar?
         </label>
+
 
         <select id="booking_advance">
 
@@ -535,11 +862,14 @@
       </div>
 
 
+
       <div class="field">
 
         <label>
-          Instrucciones especiales para las reservas
+          Instrucciones especiales
+          para las reservas
         </label>
+
 
         <textarea
           id="special_rules"
@@ -549,61 +879,100 @@
       </div>
 
 
+
       <div class="buttons">
 
-        <button class="secondary" onclick="previousStep()">
+        <button
+          class="secondary"
+          onclick="previousStep()"
+        >
           Atrás
         </button>
 
-        <button class="primary" onclick="nextStep()">
+
+        <button
+          class="primary"
+          onclick="nextStep()"
+        >
           Revisar configuración
         </button>
 
       </div>
 
+
     </div>
+
 
 
     <!-- RESUMEN -->
 
     <div class="step">
 
-      <h1>Todo preparado.</h1>
+
+      <h1>
+        Todo preparado.
+      </h1>
+
 
       <p class="subtitle">
-        Revisa la información antes de crear la configuración.
+
+        Revisa la información antes
+        de crear la configuración.
+
       </p>
 
-      <div class="summary" id="summary"></div>
+
+      <div
+        class="summary"
+        id="summary"
+      ></div>
+
 
       <div class="buttons">
 
-        <button class="secondary" onclick="previousStep()">
+        <button
+          class="secondary"
+          onclick="previousStep()"
+        >
           Atrás
         </button>
 
-        <button class="primary" onclick="finishOnboarding()">
+
+        <button
+          class="primary"
+          onclick="finishOnboarding()"
+        >
           Finalizar configuración
         </button>
 
       </div>
 
+
     </div>
+
 
 
     <!-- ÉXITO -->
 
     <div class="step">
 
+
       <div class="success">
 
-        <h1>Restaurante configurado.</h1>
+        <h1>
+          Restaurante configurado.
+        </h1>
+
 
         <p class="subtitle">
-          La información del onboarding ha sido recopilada correctamente.
+
+          La información del onboarding
+          ha sido recopilada correctamente.
+
         </p>
 
       </div>
+
 
     </div>
 
@@ -611,144 +980,281 @@
   </div>
 
 
+
+  <!-- SUPABASE -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
   <script>
+
+
+    const SUPABASE_URL =
+      "https://ehifmrfhysnnikcpdtqg.supabase.co";
+
+
+    const SUPABASE_KEY =
+      "sb_publishable_oz9UHM_4VYm-RqWerIYOSg_YFOBxO24";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
 
     let currentStep = 0;
 
-    const steps = document.querySelectorAll(".step");
-    const progressBars = document.querySelectorAll(".progress-bar");
 
+    const steps =
+      document.querySelectorAll(".step");
+
+
+    const progressBars =
+      document.querySelectorAll(
+        ".progress-bar"
+      );
+
+
+
+    /*
+      SELECCIÓN DEL SISTEMA DE RESERVAS
+    */
 
     document
-      .querySelectorAll('input[name="reservation_type"]')
+      .querySelectorAll(
+        'input[name="reservation_type"]'
+      )
       .forEach(input => {
 
-        input.addEventListener("change", function() {
 
-          document
-            .querySelectorAll(".option")
-            .forEach(option => {
+        input.addEventListener(
+          "change",
+          function() {
 
-              option.classList.remove("selected");
-
-            });
-
-
-          this
-            .closest(".option")
-            .classList
-            .add("selected");
-
-
-          if (this.value === "digital") {
 
             document
-              .getElementById("integrationFields")
-              .style
-              .display = "block";
+              .querySelectorAll(".option")
+              .forEach(option => {
 
-          } else {
+                option.classList.remove(
+                  "selected"
+                );
 
-            document
-              .getElementById("integrationFields")
-              .style
-              .display = "none";
+              });
+
+
+            this
+              .closest(".option")
+              .classList
+              .add("selected");
+
+
+
+            if (
+              this.value === "digital"
+            ) {
+
+
+              document
+                .getElementById(
+                  "integrationFields"
+                )
+                .style.display = "block";
+
+
+            } else {
+
+
+              document
+                .getElementById(
+                  "integrationFields"
+                )
+                .style.display = "none";
+
+
+            }
 
           }
+        );
 
-        });
 
       });
 
+
+
+    /*
+      MOSTRAR PASO
+    */
 
     function showStep() {
 
-      steps.forEach((step, index) => {
 
-        step.classList.toggle(
-          "active",
-          index === currentStep
-        );
-
-      });
+      steps.forEach(
+        (step, index) => {
 
 
-      progressBars.forEach((bar, index) => {
+          step.classList.toggle(
+            "active",
+            index === currentStep
+          );
 
-        bar.classList.toggle(
-          "active",
-          index <= Math.min(currentStep, 3)
-        );
 
-      });
+        }
+      );
+
+
+
+      progressBars.forEach(
+        (bar, index) => {
+
+
+          bar.classList.toggle(
+            "active",
+            index <= Math.min(
+              currentStep,
+              3
+            )
+          );
+
+
+        }
+      );
+
 
     }
 
 
+
+    /*
+      SIGUIENTE PASO
+    */
+
     function nextStep() {
+
 
       if (!validateStep()) {
         return;
       }
 
 
+
       if (currentStep === 3) {
+
         createSummary();
+
       }
 
 
-      if (currentStep < steps.length - 1) {
+
+      if (
+        currentStep <
+        steps.length - 1
+      ) {
+
 
         currentStep++;
 
+
         showStep();
+
 
       }
 
+
     }
 
+
+
+    /*
+      PASO ANTERIOR
+    */
 
     function previousStep() {
 
+
       if (currentStep > 0) {
+
 
         currentStep--;
 
+
         showStep();
 
+
       }
+
 
     }
 
 
+
+    /*
+      VALIDACIÓN
+    */
+
     function validateStep() {
+
+
+      /*
+        PASO 1
+      */
 
       if (currentStep === 0) {
 
+
         const name =
-          document.getElementById("name").value;
+          document
+            .getElementById("name")
+            .value
+            .trim();
+
 
         const businessType =
-          document.getElementById("business_type").value;
+          document
+            .getElementById(
+              "business_type"
+            )
+            .value;
+
 
         const city =
-          document.getElementById("city").value;
+          document
+            .getElementById("city")
+            .value
+            .trim();
 
 
-        if (!name || !businessType || !city) {
+
+        if (
+          !name ||
+          !businessType ||
+          !city
+        ) {
+
 
           alert(
             "Completa los campos obligatorios."
           );
 
+
           return false;
 
         }
 
+
       }
 
 
+
+      /*
+        PASO 3
+      */
+
       if (currentStep === 2) {
+
 
         const reservationType =
           document.querySelector(
@@ -756,20 +1262,26 @@
           );
 
 
+
         if (!reservationType) {
+
 
           alert(
             "Selecciona cómo gestionáis las reservas."
           );
+
 
           return false;
 
         }
 
 
+
         if (
-          reservationType.value === "digital"
+          reservationType.value ===
+          "digital"
         ) {
+
 
           const system =
             document
@@ -779,19 +1291,25 @@
               .value;
 
 
+
           if (!system) {
+
 
             alert(
               "Selecciona el sistema de reservas."
             );
 
+
             return false;
 
           }
 
+
         }
 
+
       }
+
 
 
       return true;
@@ -799,7 +1317,13 @@
     }
 
 
-    function createSummary() {
+
+    /*
+      RECOGER TODOS LOS DATOS
+    */
+
+    function getOnboardingData() {
+
 
       const reservationType =
         document.querySelector(
@@ -807,261 +1331,587 @@
         );
 
 
-      const data = {
 
-        name:
-          document.getElementById("name").value,
+      return {
 
-        businessType:
-          document.getElementById("business_type").value,
 
-        city:
-          document.getElementById("city").value,
+        establishment: {
 
-        address:
-          document.getElementById("address").value,
 
-        phone:
-          document.getElementById("phone").value,
+          name:
+            document
+              .getElementById("name")
+              .value
+              .trim(),
 
-        email:
-          document.getElementById("email").value,
 
-        timezone:
-          document.getElementById("timezone").value,
+          business_type:
+            document
+              .getElementById(
+                "business_type"
+              )
+              .value,
 
-        language:
-          document.getElementById("language").value,
 
-        reservationType:
-          reservationType
-            ? reservationType.value
-            : "",
+          phone:
+            document
+              .getElementById("phone")
+              .value
+              .trim(),
 
-        reservationSystem:
-          document
-            .getElementById("reservation_system")
-            .value,
 
-        maxPeople:
-          document
-            .getElementById("max_people")
-            .value,
+          email:
+            document
+              .getElementById("email")
+              .value
+              .trim(),
 
-        bookingAdvance:
-          document
-            .getElementById("booking_advance")
-            .value,
 
-        specialRules:
-          document
-            .getElementById("special_rules")
-            .value
+          address:
+            document
+              .getElementById("address")
+              .value
+              .trim(),
+
+
+          timezone:
+            document
+              .getElementById("timezone")
+              .value,
+
+
+          language:
+            document
+              .getElementById("language")
+              .value
+
+        },
+
+
+
+        config: {
+
+
+          city:
+            document
+              .getElementById("city")
+              .value
+              .trim(),
+
+
+          reservation_type:
+            reservationType
+              ? reservationType.value
+              : null,
+
+
+          reservation_system:
+            document
+              .getElementById(
+                "reservation_system"
+              )
+              .value
+              ||
+              null
+
+        },
+
+
+
+        business_rules: {
+
+
+          max_people:
+            document
+              .getElementById(
+                "max_people"
+              )
+              .value
+              ||
+              null,
+
+
+          booking_advance:
+            document
+              .getElementById(
+                "booking_advance"
+              )
+              .value,
+
+
+          special_rules:
+            document
+              .getElementById(
+                "special_rules"
+              )
+              .value
+              .trim()
+
+        }
+
 
       };
+
+    }
+
+
+
+    /*
+      CREAR RESUMEN
+    */
+
+    function createSummary() {
+
+
+      const data =
+        getOnboardingData();
+
+
+
+      const businessTypeLabels = {
+
+
+        restaurant:
+          "Restaurante",
+
+
+        bar_restaurant:
+          "Bar / Restaurante",
+
+
+        cafe:
+          "Cafetería",
+
+
+        other:
+          "Otro"
+
+
+      };
+
+
+
+      const reservationTypeLabels = {
+
+
+        digital:
+          "Sistema externo",
+
+
+        manual:
+          "Gestión manual"
+
+
+      };
+
+
+
+      const bookingAdvanceLabels = {
+
+
+        same_day:
+          "El mismo día",
+
+
+        "1_day":
+          "Hasta 1 día antes",
+
+
+        "7_days":
+          "Hasta 7 días antes",
+
+
+        "30_days":
+          "Hasta 30 días antes",
+
+
+        custom:
+          "Personalizado"
+
+
+      };
+
 
 
       document
         .getElementById("summary")
         .innerHTML = `
 
+
           <strong>Restaurante:</strong>
-          ${data.name}
+          ${data.establishment.name}
+
+
           <br><br>
+
 
           <strong>Tipo:</strong>
-          ${data.businessType}
+          ${
+            businessTypeLabels[
+              data.establishment.business_type
+            ]
+            ||
+            data.establishment.business_type
+          }
+
+
           <br>
+
 
           <strong>Ciudad:</strong>
-          ${data.city}
+          ${data.config.city}
+
+
           <br>
+
 
           <strong>Dirección:</strong>
-          ${data.address || "No indicada"}
+          ${
+            data.establishment.address
+            ||
+            "No indicada"
+          }
+
+
           <br><br>
+
 
           <strong>Teléfono:</strong>
-          ${data.phone || "No indicado"}
+          ${
+            data.establishment.phone
+            ||
+            "No indicado"
+          }
+
+
           <br>
+
 
           <strong>Email:</strong>
-          ${data.email || "No indicado"}
+          ${
+            data.establishment.email
+            ||
+            "No indicado"
+          }
+
+
           <br><br>
+
 
           <strong>Reservas:</strong>
-          ${data.reservationType}
+          ${
+            reservationTypeLabels[
+              data.config.reservation_type
+            ]
+            ||
+            "No indicado"
+          }
+
+
           <br>
+
 
           <strong>Sistema:</strong>
-          ${data.reservationSystem || "FGV Automation"}
+          ${
+            data.config.reservation_system
+            ||
+            "FGV Automation"
+          }
+
+
           <br><br>
+
 
           <strong>Máximo personas:</strong>
-          ${data.maxPeople || "No indicado"}
+          ${
+            data.business_rules.max_people
+            ||
+            "No indicado"
+          }
+
+
           <br>
 
+
           <strong>Antelación:</strong>
-          ${data.bookingAdvance}
+          ${
+            bookingAdvanceLabels[
+              data.business_rules.booking_advance
+            ]
+            ||
+            data.business_rules.booking_advance
+          }
+
+
           <br><br>
 
-          <strong>Reglas especiales:</strong>
-          ${data.specialRules || "Ninguna"}
 
-        `;
+          <strong>Reglas especiales:</strong>
+          ${
+            data.business_rules.special_rules
+            ||
+            "Ninguna"
+          }
+
+
+      `;
+
 
     }
 
 
-    function finishOnboarding() {
 
-      const onboardingData = {
+    /*
+      FINALIZAR ONBOARDING
+    */
 
-        establishment: {
-
-          name:
-            document.getElementById("name").value,
-
-          business_type:
-            document
-              .getElementById("business_type")
-              .value,
-
-          phone:
-            document.getElementById("phone").value,
-
-          email:
-            document.getElementById("email").value,
-
-          address:
-            document.getElementById("address").value,
-
-          timezone:
-            document.getElementById("timezone").value,
-
-          language:
-            document.getElementById("language").value
-
-        },
+    async function finishOnboarding() {
 
 
-        config: {
-
-          city:
-            document.getElementById("city").value,
-
-          reservation_type:
-            document
-              .querySelector(
-                'input[name="reservation_type"]:checked'
-              )
-              ?.value,
-
-          reservation_system:
-            document
-              .getElementById("reservation_system")
-              .value
-
-        },
+      const onboardingData =
+        getOnboardingData();
 
 
-        business_rules: {
 
-          max_people:
-            document
-              .getElementById("max_people")
-              .value,
+      const finishButton =
+        document.querySelector(
+          'button[onclick="finishOnboarding()"]'
+        );
 
-          booking_advance:
-            document
-              .getElementById("booking_advance")
-              .value,
 
-          special_rules:
-            document
-              .getElementById("special_rules")
-              .value
 
-        }
+      if (finishButton) {
 
-      };
+
+        finishButton.disabled =
+          true;
+
+
+        finishButton.textContent =
+          "Guardando...";
+
+
+      }
+
 
 
       try {
-  // 1. Crear el establecimiento
-  const { data: establishment, error: establishmentError } = await supabase
-    .from("establishments")
-    .insert({
-      name: onboardingData.name,
-      business_type: onboardingData.business_type,
-      phone: onboardingData.phone || null,
-      email: onboardingData.email || null,
-      address: onboardingData.address || null,
-      timezone: onboardingData.timezone || "Europe/Madrid",
-      language: onboardingData.language || "es",
-      status: "active",
-      active: true
-    })
-    .select()
-    .single();
 
-  if (establishmentError) throw establishmentError;
 
-  // 2. Guardar la configuración completa
-  const { error: configError } = await supabase
-    .from("establishment_config")
-    .insert({
-      establishment_id: establishment.id,
-      config: onboardingData
-    });
+        /*
+          1. CREAR ESTABLECIMIENTO
+        */
 
-  if (configError) throw configError;
+        const {
+          data: establishment,
+          error: establishmentError
+        } = await supabaseClient
 
-  // 3. Guardar reglas especiales
-  if (onboardingData.special_rules) {
-    const { error: rulesError } = await supabase
-      .from("business_rules")
-      .insert({
-        establishment_id: establishment.id,
-        name: "Reglas iniciales",
-        rule_type: "general",
-        rule: {
-          special_rules: onboardingData.special_rules
-        },
-        active: true
-      });
+          .from(
+            "establishments"
+          )
 
-    if (rulesError) throw rulesError;
-  }
+          .insert({
 
-  console.log("ONBOARDING GUARDADO:", onboardingData);
+            name:
+              onboardingData
+                .establishment
+                .name,
 
-  currentStep = 5;
-  showStep();
+            business_type:
+              onboardingData
+                .establishment
+                .business_type,
 
-} catch (error) {
-  console.error("ERROR GUARDANDO ONBOARDING:", error);
+            phone:
+              onboardingData
+                .establishment
+                .phone
+              ||
+              null,
 
-  alert(
-    "Ha ocurrido un error al guardar la configuración. Revisa la consola."
-  );
-}
+            email:
+              onboardingData
+                .establishment
+                .email
+              ||
+              null,
+
+            address:
+              onboardingData
+                .establishment
+                .address
+              ||
+              null,
+
+            timezone:
+              onboardingData
+                .establishment
+                .timezone
+              ||
+              "Europe/Madrid",
+
+            language:
+              onboardingData
+                .establishment
+                .language
+              ||
+              "es",
+
+            status:
+              "active",
+
+            active:
+              true
+
+          })
+
+          .select()
+
+          .single();
+
+
+
+        if (establishmentError) {
+
+          throw establishmentError;
+
+        }
+
+
+
+        /*
+          2. GUARDAR CONFIGURACIÓN
+        */
+
+        const {
+          error: configError
+        } = await supabaseClient
+
+          .from(
+            "establishment_config"
+          )
+
+          .insert({
+
+            establishment_id:
+              establishment.id,
+
+            config:
+              onboardingData.config
+
+          });
+
+
+
+        if (configError) {
+
+          throw configError;
+
+        }
+
+
+
+        /*
+          3. GUARDAR REGLAS
+        */
+
+        const {
+          error: rulesError
+        } = await supabaseClient
+
+          .from(
+            "business_rules"
+          )
+
+          .insert({
+
+            establishment_id:
+              establishment.id,
+
+            name:
+              "Reglas iniciales",
+
+            rule_type:
+              "general",
+
+            rule:
+              onboardingData
+                .business_rules,
+
+            active:
+              true
+
+          });
+
+
+
+        if (rulesError) {
+
+          throw rulesError;
+
+        }
+
+
+
+        /*
+          ONBOARDING GUARDADO
+        */
+
+        console.log(
+          "ONBOARDING GUARDADO:",
+          onboardingData
+        );
+
+
+
+        /*
+          MOSTRAR ÉXITO
+        */
+
+        currentStep = 5;
+
+        showStep();
+
+
+      } catch (error) {
+
+
+        console.error(
+          "ERROR GUARDANDO ONBOARDING:",
+          error
+        );
+
+
+        alert(
+          "Ha ocurrido un error al guardar la configuración. Revisa la consola."
+        );
+
+
+
+        if (finishButton) {
+
+
+          finishButton.disabled =
+            false;
+
+
+          finishButton.textContent =
+            "Finalizar configuración";
+
+
+        }
+
+
+      }
+
 
     }
 
+
   </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-  const SUPABASE_URL = "https://ehifmrfhysnnikcpdtqg.supabase.co";
-
-  const SUPABASE_KEY = "sb_publishable_oz9UHM_4VYm-RqWerIYOSg_YFOBxO24";
-
-  const supabase = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
-</script>
 
 </body>
+
 </html>

@@ -1257,30 +1257,25 @@
         );
 
         const {
-          data: establishmentConfig,
-          error: configError
-        } = await supabaseClient
-          .from("establishment_config")
-          .insert(configData)
-          .select()
-          .single();
+  error: configError
+} = await supabaseClient
+  .from("establishment_config")
+  .insert(configData);
 
-        if (configError) {
+if (configError) {
 
-          console.error(
-            "ERROR CONFIGURACIÓN:",
-            configError
-          );
+  console.error(
+    "ERROR CONFIGURACIÓN:",
+    configError
+  );
 
-          throw configError;
+  throw configError;
 
-        }
+}
 
-        console.log(
-          "CONFIGURACIÓN CREADA:",
-          establishmentConfig
-        );
-
+console.log(
+  "CONFIGURACIÓN CREADA CORRECTAMENTE"
+);
         /*
         =======================================
         ÉXITO

@@ -987,15 +987,65 @@
       };
 
 
-      console.log(
-        "ONBOARDING DATA:",
-        onboardingData
-      );
+      try {
+  // 1. Crear el establecimiento
+  const { data: establishment, error: establishmentError } = await supabase
+    .from("establishments")
+    .insert({
+      name: onboardingData.name,
+      business_type: onboardingData.business_type,
+      phone: onboardingData.phone || null,
+      email: onboardingData.email || null,
+      address: onboardingData.address || null,
+      timezone: onboardingData.timezone || "Europe/Madrid",
+      language: onboardingData.language || "es",
+      status: "active",
+      active: true
+    })
+    .select()
+    .single();
 
+  if (establishmentError) throw establishmentError;
 
-      currentStep = 5;
+  // 2. Guardar la configuración completa
+  const { error: configError } = await supabase
+    .from("establishment_config")
+    .insert({
+      establishment_id: establishment.id,
+      config: onboardingData
+    });
 
-      showStep();
+  if (configError) throw configError;
+
+  // 3. Guardar reglas especiales
+  if (onboardingData.special_rules) {
+    const { error: rulesError } = await supabase
+      .from("business_rules")
+      .insert({
+        establishment_id: establishment.id,
+        name: "Reglas iniciales",
+        rule_type: "general",
+        rule: {
+          special_rules: onboardingData.special_rules
+        },
+        active: true
+      });
+
+    if (rulesError) throw rulesError;
+  }
+
+  console.log("ONBOARDING GUARDADO:", onboardingData);
+
+  currentStep = 5;
+  showStep();
+
+} catch (error) {
+  console.error("ERROR GUARDANDO ONBOARDING:", error);
+
+  alert(
+    "Ha ocurrido un error al guardar la configuración. Revisa la consola."
+  );
+}
 
     }
 

@@ -6,7 +6,6 @@
 
   <title>FGV Automation | Onboarding</title>
 
-  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -355,7 +354,6 @@
 
       </div>
 
-
       <!-- PASO 2 -->
 
       <div class="step" id="step2">
@@ -434,7 +432,6 @@
 
       </div>
 
-
       <!-- PASO 3 -->
 
       <div class="step" id="step3">
@@ -465,7 +462,6 @@
 
           </div>
 
-
           <div
             class="option"
             id="externalOption"
@@ -485,7 +481,6 @@
 
         </div>
 
-
         <div
           class="field"
           id="reservationSystemContainer"
@@ -501,7 +496,6 @@
           />
 
         </div>
-
 
         <div
           id="manualConfiguration"
@@ -521,7 +515,6 @@
 
           </div>
 
-
           <div class="field">
 
             <label>¿Con cuánta antelación se puede reservar?</label>
@@ -533,7 +526,6 @@
             />
 
           </div>
-
 
           <div class="field">
 
@@ -547,7 +539,6 @@
           </div>
 
         </div>
-
 
         <div class="actions">
 
@@ -568,7 +559,6 @@
         </div>
 
       </div>
-
 
       <!-- PASO 4 -->
 
@@ -612,7 +602,6 @@
 
       </div>
 
-
       <!-- ÉXITO -->
 
       <div
@@ -642,7 +631,6 @@
 
   </div>
 
-
   <script>
 
     /*
@@ -663,7 +651,6 @@
         SUPABASE_KEY
       );
 
-
     /*
     ==========================================
     ESTADO DEL ONBOARDING
@@ -673,7 +660,6 @@
     let currentStep = 1;
 
     let reservationType = null;
-
 
     /*
     ==========================================
@@ -697,7 +683,6 @@
       });
 
     }
-
 
     function showStep(stepNumber) {
 
@@ -723,7 +708,6 @@
       updateProgress(stepNumber);
 
     }
-
 
     function nextStep(stepNumber) {
 
@@ -753,7 +737,6 @@
 
       }
 
-
       if (stepNumber === 3) {
 
         const phone =
@@ -779,7 +762,6 @@
         }
 
       }
-
 
       if (stepNumber === 4) {
 
@@ -823,13 +805,11 @@
 
     }
 
-
     function previousStep(stepNumber) {
 
       showStep(stepNumber);
 
     }
-
 
     /*
     ==========================================
@@ -861,7 +841,6 @@
           "manualConfiguration"
         );
 
-
       manualOption.classList.remove(
         "selected"
       );
@@ -869,7 +848,6 @@
       externalOption.classList.remove(
         "selected"
       );
-
 
       if (type === "manual") {
 
@@ -884,7 +862,6 @@
           "block";
 
       }
-
 
       if (type === "external") {
 
@@ -901,7 +878,6 @@
       }
 
     }
-
 
     /*
     ==========================================
@@ -998,7 +974,6 @@
 
     }
 
-
     /*
     ==========================================
     RESUMEN FINAL
@@ -1010,11 +985,10 @@
       const data =
         getFormData();
 
-      let reservationsText =
+      const reservationsText =
         data.reservation_type === "manual"
           ? "Gestión manual"
           : "Sistema externo";
-
 
       document
         .getElementById("summary")
@@ -1054,7 +1028,6 @@
 
           </div>
 
-
           <div class="summary-section">
 
             <strong>
@@ -1073,7 +1046,6 @@
 
           </div>
 
-
           <div class="summary-section">
 
             <strong>
@@ -1091,7 +1063,6 @@
             ${data.reservation_system}
 
           </div>
-
 
           ${
             data.reservation_type === "manual"
@@ -1129,7 +1100,6 @@
 
     }
 
-
     /*
     ==========================================
     GUARDAR EN SUPABASE
@@ -1153,28 +1123,26 @@
           "errorMessage"
         );
 
-
       errorMessage.style.display =
         "none";
 
-
       button.disabled = true;
-
       backButton.disabled = true;
 
       button.textContent =
         "Guardando...";
-
 
       try {
 
         const data =
           getFormData();
 
-
         /*
         =======================================
         1. CREAR ESTABLECIMIENTO
+
+        No enviamos city porque esa columna
+        no existe en establishments.
         =======================================
         */
 
@@ -1186,32 +1154,35 @@
           business_type:
             data.business_type,
 
-          city:
-            data.city,
-
           address:
             data.address || null,
 
           phone:
-            data.phone,
+            data.phone || null,
 
           email:
-            data.email,
+            data.email || null,
 
           timezone:
-            data.timezone,
+            data.timezone ||
+            "Europe/Madrid",
 
           language:
-            data.language
+            data.language ||
+            "Español",
+
+          status:
+            "active",
+
+          active:
+            true
 
         };
 
-
         console.log(
-          "DATOS A ENVIAR:",
+          "DATOS ESTABLECIMIENTO:",
           establishmentData
         );
-
 
         const {
           data: establishment,
@@ -1221,7 +1192,6 @@
           .insert(establishmentData)
           .select()
           .single();
-
 
         if (establishmentError) {
 
@@ -1234,16 +1204,21 @@
 
         }
 
-
         console.log(
           "ESTABLECIMIENTO CREADO:",
           establishment
         );
 
-
         /*
         =======================================
         2. GUARDAR CONFIGURACIÓN
+
+        establishment_config utiliza:
+        - establishment_id
+        - config (jsonb)
+
+        Todo lo específico de la configuración
+        va dentro de config.
         =======================================
         */
 
@@ -1252,43 +1227,43 @@
           establishment_id:
             establishment.id,
 
-          reservation_type:
-            data.reservation_type,
+          config: {
 
-          reservation_system:
-            data.reservation_system,
+            city:
+              data.city || null,
 
-          max_people:
-            data.max_people,
+            reservation_type:
+              data.reservation_type || null,
 
-          booking_advance:
-            data.booking_advance,
+            reservation_system:
+              data.reservation_system || null,
 
-          special_rules:
-            data.special_rules
+            max_people:
+              data.max_people,
+
+            booking_advance:
+              data.booking_advance || null,
+
+            special_rules:
+              data.special_rules || null
+
+          }
 
         };
-
 
         console.log(
           "CONFIGURACIÓN A ENVIAR:",
           configData
         );
 
-
         const {
+          data: establishmentConfig,
           error: configError
         } = await supabaseClient
           .from("establishment_config")
-          .insert(configData);
-
-
-        /*
-        Si la tabla establishment_config
-        todavía tiene columnas diferentes,
-        mostramos el error pero no borramos
-        el establecimiento ya creado.
-        */
+          .insert(configData)
+          .select()
+          .single();
 
         if (configError) {
 
@@ -1297,18 +1272,22 @@
             configError
           );
 
-          /*
-          Por ahora no bloqueamos todo
-          el onboarding si falla esta
-          segunda inserción.
-          */
+          throw configError;
 
         }
 
+        console.log(
+          "CONFIGURACIÓN CREADA:",
+          establishmentConfig
+        );
 
         /*
         =======================================
         ÉXITO
+
+        Solo aparece si se han creado:
+        1. establishments
+        2. establishment_config
         =======================================
         */
 
@@ -1322,19 +1301,15 @@
 
           });
 
-
         document
           .getElementById("stepSuccess")
           .classList.add("active");
 
-
         updateProgress(4);
-
 
         console.log(
           "ONBOARDING COMPLETADO CORRECTAMENTE"
         );
-
 
       } catch (error) {
 
@@ -1343,26 +1318,24 @@
           error
         );
 
-
         let message =
           "Ha ocurrido un error al guardar la configuración.";
 
-
-        if (error && error.message) {
+        if (
+          error &&
+          error.message
+        ) {
 
           message +=
             " " + error.message;
 
         }
 
-
         errorMessage.textContent =
           message;
 
-
         errorMessage.style.display =
           "block";
-
 
         button.disabled =
           false;

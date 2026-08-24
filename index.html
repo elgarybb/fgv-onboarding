@@ -1276,20 +1276,10 @@ if (configError) {
 console.log(
   "CONFIGURACIÓN CREADA CORRECTAMENTE"
 );
-        
-        /*
-        =======================================
-        ÉXITO
 
-        Solo aparece si se han creado:
-        1. establishments
-        2. establishment_config
-        =======================================
-        */
-
-       /*
+/*
 =======================================
-ÉXITO
+ONBOARDING COMPLETADO
 =======================================
 */
 
@@ -1308,11 +1298,12 @@ REDIRECCIÓN AL DASHBOARD
 =======================================
 */
 
-window.location.href =
+window.location.replace(
   "dashboard.html?id=" +
   encodeURIComponent(
     establishment.id
-  );
+  )
+);
 
       } catch (error) {
 

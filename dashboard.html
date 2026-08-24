@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -202,9 +204,13 @@
 
 <body>
 
-  <div id="loading" class="loading">
+  <div
+    id="loading"
+    class="loading"
+  >
     Cargando restaurante...
   </div>
+
 
   <div
     id="app"
@@ -229,6 +235,7 @@
 
       </header>
 
+
       <section class="hero">
 
         <h1 id="restaurantName">
@@ -242,6 +249,7 @@
         </div>
 
       </section>
+
 
       <section class="grid">
 
@@ -260,6 +268,7 @@
 
         </div>
 
+
         <div class="card">
 
           <div class="card-label">
@@ -274,6 +283,7 @@
           </div>
 
         </div>
+
 
         <div class="card">
 
@@ -292,17 +302,21 @@
 
       </section>
 
+
       <section>
 
         <h2 class="menu-title">
           Gestión del restaurante
         </h2>
 
+
         <div class="menu">
 
           <div class="menu-item">
 
-            <h3>Reservas</h3>
+            <h3>
+              Reservas
+            </h3>
 
             <p>
               Gestiona las reservas y disponibilidad
@@ -311,9 +325,12 @@
 
           </div>
 
+
           <div class="menu-item">
 
-            <h3>Clientes</h3>
+            <h3>
+              Clientes
+            </h3>
 
             <p>
               Consulta y gestiona la información
@@ -322,9 +339,12 @@
 
           </div>
 
+
           <div class="menu-item">
 
-            <h3>Configuración</h3>
+            <h3>
+              Configuración
+            </h3>
 
             <p>
               Modifica las reglas y preferencias
@@ -356,6 +376,7 @@
     const SUPABASE_KEY =
       "sb_publishable_oz9UHM_4VYm-RqWerIYOSg_YFOBxO24";
 
+
     const supabaseClient =
       window.supabase.createClient(
         SUPABASE_URL,
@@ -374,6 +395,7 @@
         window.location.search
       );
 
+
     const establishmentId =
       params.get("id");
 
@@ -388,6 +410,12 @@
 
       try {
 
+        /*
+        ======================================
+        COMPROBAR ID
+        ======================================
+        */
+
         if (!establishmentId) {
 
           throw new Error(
@@ -395,6 +423,12 @@
           );
 
         }
+
+
+        console.log(
+          "CARGANDO DASHBOARD:",
+          establishmentId
+        );
 
 
         /*
@@ -418,9 +452,20 @@
 
         if (establishmentError) {
 
+          console.error(
+            "ERROR CARGANDO ESTABLECIMIENTO:",
+            establishmentError
+          );
+
           throw establishmentError;
 
         }
+
+
+        console.log(
+          "ESTABLECIMIENTO CARGADO:",
+          establishment
+        );
 
 
         /*
@@ -430,7 +475,7 @@
         */
 
         const {
-          data: configRow,
+          data: configRows,
           error: configError
         } = await supabaseClient
           .from("establishment_config")
@@ -439,14 +484,38 @@
             "establishment_id",
             establishmentId
           )
-          .single();
+          .limit(1);
 
 
         if (configError) {
 
+          console.error(
+            "ERROR CARGANDO CONFIGURACIÓN:",
+            configError
+          );
+
           throw configError;
 
         }
+
+
+        /*
+        ======================================
+        OBTENER CONFIGURACIÓN
+        ======================================
+        */
+
+        const configRow =
+          configRows &&
+          configRows.length > 0
+            ? configRows[0]
+            : null;
+
+
+        console.log(
+          "CONFIGURACIÓN CARGADA:",
+          configRow
+        );
 
 
         /*
@@ -456,24 +525,42 @@
         */
 
         const config =
-          configRow.config || {};
+          configRow &&
+          configRow.config
+            ? configRow.config
+            : {};
+
+
+        console.log(
+          "CONFIG FINAL:",
+          config
+        );
 
 
         /*
         ======================================
-        PINTAR DATOS
+        PINTAR NOMBRE
         ======================================
         */
 
         document
-          .getElementById("restaurantName")
+          .getElementById(
+            "restaurantName"
+          )
           .textContent =
             establishment.name ||
             "Restaurante";
 
 
+        /*
+        ======================================
+        PINTAR UBICACIÓN
+        ======================================
+        */
+
         const locationParts =
           [];
+
 
         if (config.city) {
 
@@ -482,6 +569,7 @@
           );
 
         }
+
 
         if (establishment.address) {
 
@@ -497,18 +585,33 @@
             "restaurantLocation"
           )
           .textContent =
-            locationParts.join(" · ");
+            locationParts.join(
+              " · "
+            );
 
+
+        /*
+        ======================================
+        PINTAR GESTIÓN DE RESERVAS
+        ======================================
+        */
 
         document
           .getElementById(
             "reservationType"
           )
           .textContent =
-            config.reservation_type === "manual"
+            config.reservation_type ===
+            "manual"
               ? "Gestión manual"
               : "Sistema externo";
 
+
+        /*
+        ======================================
+        PINTAR SISTEMA
+        ======================================
+        */
 
         document
           .getElementById(
@@ -518,6 +621,12 @@
             config.reservation_system ||
             "No configurado";
 
+
+        /*
+        ======================================
+        PINTAR TIPO DE NEGOCIO
+        ======================================
+        */
 
         document
           .getElementById(
@@ -530,20 +639,35 @@
 
         /*
         ======================================
+        OCULTAR LOADING
+        ======================================
+        */
+
+        document
+          .getElementById(
+            "loading"
+          )
+          .style.display =
+            "none";
+
+
+        /*
+        ======================================
         MOSTRAR APP
         ======================================
         */
 
         document
-          .getElementById("loading")
-          .style.display =
-            "none";
-
-
-        document
-          .getElementById("app")
+          .getElementById(
+            "app"
+          )
           .style.display =
             "block";
+
+
+        console.log(
+          "DASHBOARD CARGADO CORRECTAMENTE"
+        );
 
 
       } catch (error) {
@@ -579,7 +703,7 @@
 
     /*
     ==========================================
-    INICIAR
+    INICIAR DASHBOARD
     ==========================================
     */
 
@@ -588,4 +712,5 @@
   </script>
 
 </body>
+
 </html>

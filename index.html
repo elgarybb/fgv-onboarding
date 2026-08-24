@@ -12,7 +12,6 @@
 
   <title>FGV Automation | Onboarding</title>
 
-
   <style>
 
     * {
@@ -20,7 +19,6 @@
       margin: 0;
       padding: 0;
     }
-
 
     body {
       font-family:
@@ -41,7 +39,6 @@
       padding: 30px 15px;
     }
 
-
     .container {
       width: 100%;
       max-width: 680px;
@@ -57,7 +54,6 @@
         0 20px 60px rgba(0,0,0,.35);
     }
 
-
     .brand {
       font-size: 14px;
       letter-spacing: 5px;
@@ -67,7 +63,6 @@
       margin-bottom: 28px;
     }
 
-
     .progress {
       display: flex;
       gap: 8px;
@@ -75,38 +70,30 @@
       margin-bottom: 34px;
     }
 
-
     .progress-bar {
       height: 4px;
-
       flex: 1;
 
       background: #36363b;
 
       border-radius: 10px;
 
-      transition:
-        background .3s ease;
+      transition: background .3s ease;
     }
-
 
     .progress-bar.active {
       background: #f2f2f2;
     }
 
-
     .step {
       display: none;
 
-      animation:
-        fade .25s ease;
+      animation: fade .25s ease;
     }
-
 
     .step.active {
       display: block;
     }
-
 
     @keyframes fade {
 
@@ -122,7 +109,6 @@
 
     }
 
-
     h1 {
       font-size: 32px;
 
@@ -130,7 +116,6 @@
 
       letter-spacing: -1px;
     }
-
 
     .subtitle {
       color: #a5a5aa;
@@ -140,11 +125,9 @@
       margin-bottom: 28px;
     }
 
-
     .field {
       margin-bottom: 20px;
     }
-
 
     label {
       display: block;
@@ -155,7 +138,6 @@
 
       color: #d5d5d8;
     }
-
 
     input,
     select,
@@ -178,21 +160,17 @@
       outline: none;
     }
 
-
     textarea {
       resize: vertical;
 
       min-height: 100px;
     }
 
-
     input:focus,
     select:focus,
     textarea:focus {
-
       border-color: #77777d;
     }
-
 
     .options {
 
@@ -202,7 +180,6 @@
 
       margin-top: 10px;
     }
-
 
     .option {
 
@@ -219,12 +196,9 @@
       transition: .2s;
     }
 
-
     .option:hover {
-
       border-color: #77777d;
     }
-
 
     .option.selected {
 
@@ -233,12 +207,9 @@
       background: #1d1d20;
     }
 
-
     .option input {
-
       display: none;
     }
-
 
     .option-title {
 
@@ -246,7 +217,6 @@
 
       margin-bottom: 5px;
     }
-
 
     .option-text {
 
@@ -257,7 +227,6 @@
       line-height: 1.4;
     }
 
-
     .buttons {
 
       display: flex;
@@ -266,7 +235,6 @@
 
       margin-top: 30px;
     }
-
 
     button {
 
@@ -285,14 +253,12 @@
       transition: .2s;
     }
 
-
     button:disabled {
 
       opacity: .6;
 
       cursor: not-allowed;
     }
-
 
     .primary {
 
@@ -303,12 +269,9 @@
       color: #151515;
     }
 
-
     .primary:hover {
-
       background: white;
     }
-
 
     .secondary {
 
@@ -317,12 +280,9 @@
       color: white;
     }
 
-
     .secondary:hover {
-
       background: #333338;
     }
-
 
     .summary {
 
@@ -337,12 +297,9 @@
       line-height: 1.7;
     }
 
-
     .summary strong {
-
       color: white;
     }
-
 
     .success {
 
@@ -351,24 +308,43 @@
       padding: 30px 10px;
     }
 
-
     .success h1 {
-
       margin-bottom: 15px;
     }
 
+    .error-box {
+
+      display: none;
+
+      margin-top: 20px;
+
+      padding: 14px;
+
+      border-radius: 10px;
+
+      background: rgba(255, 70, 70, .08);
+
+      border: 1px solid rgba(255, 70, 70, .25);
+
+      color: #ffb3b3;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+    }
 
     @media (max-width: 600px) {
 
       .container {
-
         padding: 25px;
       }
 
-
       h1 {
-
         font-size: 26px;
+      }
+
+      .buttons {
+        flex-direction: column;
       }
 
     }
@@ -402,16 +378,13 @@
     </div>
 
 
-
     <!-- PASO 1 -->
 
     <div class="step active">
 
-
       <h1>
         Vamos a configurar tu restaurante.
       </h1>
-
 
       <p class="subtitle">
 
@@ -420,7 +393,6 @@
         FGV Automation a tu negocio.
 
       </p>
-
 
 
       <div class="field">
@@ -436,7 +408,6 @@
         >
 
       </div>
-
 
 
       <div class="field">
@@ -473,7 +444,6 @@
       </div>
 
 
-
       <div class="field">
 
         <label>
@@ -487,7 +457,6 @@
         >
 
       </div>
-
 
 
       <div class="field">
@@ -505,7 +474,6 @@
       </div>
 
 
-
       <div class="buttons">
 
         <button
@@ -517,20 +485,16 @@
 
       </div>
 
-
     </div>
-
 
 
     <!-- PASO 2 -->
 
     <div class="step">
 
-
       <h1>
         Información de contacto.
       </h1>
-
 
       <p class="subtitle">
 
@@ -539,7 +503,6 @@
         el establecimiento.
 
       </p>
-
 
 
       <div class="field">
@@ -557,7 +520,6 @@
       </div>
 
 
-
       <div class="field">
 
         <label>
@@ -573,13 +535,11 @@
       </div>
 
 
-
       <div class="field">
 
         <label>
           Zona horaria
         </label>
-
 
         <select id="timezone">
 
@@ -592,13 +552,11 @@
       </div>
 
 
-
       <div class="field">
 
         <label>
           Idioma principal
         </label>
-
 
         <select id="language">
 
@@ -613,7 +571,6 @@
         </select>
 
       </div>
-
 
 
       <div class="buttons">
@@ -635,20 +592,16 @@
 
       </div>
 
-
     </div>
-
 
 
     <!-- PASO 3 -->
 
     <div class="step">
 
-
       <h1>
         ¿Cómo gestionáis las reservas?
       </h1>
-
 
       <p class="subtitle">
 
@@ -657,7 +610,6 @@
         las reservas directamente.
 
       </p>
-
 
 
       <div class="options">
@@ -671,14 +623,10 @@
             value="digital"
           >
 
-
           <div class="option-title">
-
             Ya utilizamos un sistema
             de reservas
-
           </div>
-
 
           <div class="option-text">
 
@@ -691,7 +639,6 @@
         </label>
 
 
-
         <label class="option">
 
           <input
@@ -700,14 +647,10 @@
             value="manual"
           >
 
-
           <div class="option-title">
-
             Gestionamos las reservas
             manualmente
-
           </div>
-
 
           <div class="option-text">
 
@@ -720,7 +663,6 @@
 
 
       </div>
-
 
 
       <div
@@ -764,7 +706,6 @@
       </div>
 
 
-
       <div class="buttons">
 
         <button
@@ -784,20 +725,16 @@
 
       </div>
 
-
     </div>
-
 
 
     <!-- PASO 4 -->
 
     <div class="step">
 
-
       <h1>
         Reglas básicas del restaurante.
       </h1>
-
 
       <p class="subtitle">
 
@@ -808,14 +745,12 @@
       </p>
 
 
-
       <div class="field">
 
         <label>
           Número máximo de personas
           por reserva
         </label>
-
 
         <input
           type="number"
@@ -824,7 +759,6 @@
         >
 
       </div>
-
 
 
       <div class="field">
@@ -862,7 +796,6 @@
       </div>
 
 
-
       <div class="field">
 
         <label>
@@ -870,14 +803,12 @@
           para las reservas
         </label>
 
-
         <textarea
           id="special_rules"
           placeholder="Ej. No aceptamos reservas en terraza, se debe confirmar el número de personas, etc."
         ></textarea>
 
       </div>
-
 
 
       <div class="buttons">
@@ -899,20 +830,16 @@
 
       </div>
 
-
     </div>
-
 
 
     <!-- RESUMEN -->
 
     <div class="step">
 
-
       <h1>
         Todo preparado.
       </h1>
-
 
       <p class="subtitle">
 
@@ -928,6 +855,12 @@
       ></div>
 
 
+      <div
+        class="error-box"
+        id="errorBox"
+      ></div>
+
+
       <div class="buttons">
 
         <button
@@ -940,6 +873,7 @@
 
         <button
           class="primary"
+          id="finishButton"
           onclick="finishOnboarding()"
         >
           Finalizar configuración
@@ -947,15 +881,12 @@
 
       </div>
 
-
     </div>
-
 
 
     <!-- ÉXITO -->
 
     <div class="step">
-
 
       <div class="success">
 
@@ -963,22 +894,20 @@
           Restaurante configurado.
         </h1>
 
-
         <p class="subtitle">
 
           La información del onboarding
-          ha sido recopilada correctamente.
+          se ha guardado correctamente
+          en FGV Automation.
 
         </p>
 
       </div>
 
-
     </div>
 
 
   </div>
-
 
 
   <!-- SUPABASE -->
@@ -987,6 +916,15 @@
 
 
   <script>
+
+
+    /*
+      ==================================================
+
+      CONFIGURACIÓN SUPABASE
+
+      ==================================================
+    */
 
 
     const SUPABASE_URL =
@@ -1000,9 +938,24 @@
     const supabaseClient =
       window.supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_KEY
+        SUPABASE_KEY,
+        {
+          auth: {
+            persistSession: false,
+            autoRefreshToken: false,
+            detectSessionInUrl: false
+          }
+        }
       );
 
+
+    /*
+      ==================================================
+
+      VARIABLES GENERALES
+
+      ==================================================
+    */
 
 
     let currentStep = 0;
@@ -1013,22 +966,23 @@
 
 
     const progressBars =
-      document.querySelectorAll(
-        ".progress-bar"
-      );
-
+      document.querySelectorAll(".progress-bar");
 
 
     /*
+      ==================================================
+
       SELECCIÓN DEL SISTEMA DE RESERVAS
+
+      ==================================================
     */
+
 
     document
       .querySelectorAll(
         'input[name="reservation_type"]'
       )
       .forEach(input => {
-
 
         input.addEventListener(
           "change",
@@ -1052,42 +1006,48 @@
               .add("selected");
 
 
+            const integrationFields =
+              document.getElementById(
+                "integrationFields"
+              );
+
 
             if (
               this.value === "digital"
             ) {
 
-
-              document
-                .getElementById(
-                  "integrationFields"
-                )
-                .style.display = "block";
-
+              integrationFields.style.display =
+                "block";
 
             } else {
 
+              integrationFields.style.display =
+                "none";
+
 
               document
                 .getElementById(
-                  "integrationFields"
+                  "reservation_system"
                 )
-                .style.display = "none";
-
+                .value = "";
 
             }
+
 
           }
         );
 
-
       });
 
 
-
     /*
+      ==================================================
+
       MOSTRAR PASO
+
+      ==================================================
     */
+
 
     function showStep() {
 
@@ -1095,21 +1055,17 @@
       steps.forEach(
         (step, index) => {
 
-
           step.classList.toggle(
             "active",
             index === currentStep
           );
 
-
         }
       );
 
 
-
       progressBars.forEach(
         (bar, index) => {
-
 
           bar.classList.toggle(
             "active",
@@ -1119,18 +1075,27 @@
             )
           );
 
-
         }
       );
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
 
     }
 
 
-
     /*
+      ==================================================
+
       SIGUIENTE PASO
+
+      ==================================================
     */
+
 
     function nextStep() {
 
@@ -1140,7 +1105,6 @@
       }
 
 
-
       if (currentStep === 3) {
 
         createSummary();
@@ -1148,18 +1112,14 @@
       }
 
 
-
       if (
         currentStep <
         steps.length - 1
       ) {
 
-
         currentStep++;
 
-
         showStep();
-
 
       }
 
@@ -1167,22 +1127,23 @@
     }
 
 
-
     /*
+      ==================================================
+
       PASO ANTERIOR
+
+      ==================================================
     */
+
 
     function previousStep() {
 
 
       if (currentStep > 0) {
 
-
         currentStep--;
 
-
         showStep();
-
 
       }
 
@@ -1190,10 +1151,14 @@
     }
 
 
-
     /*
+      ==================================================
+
       VALIDACIÓN
+
+      ==================================================
     */
+
 
     function validateStep() {
 
@@ -1201,6 +1166,7 @@
       /*
         PASO 1
       */
+
 
       if (currentStep === 0) {
 
@@ -1227,18 +1193,15 @@
             .trim();
 
 
-
         if (
           !name ||
           !businessType ||
           !city
         ) {
 
-
           alert(
-            "Completa los campos obligatorios."
+            "Completa el nombre, tipo de negocio y ciudad."
           );
-
 
           return false;
 
@@ -1248,10 +1211,10 @@
       }
 
 
-
       /*
         PASO 3
       */
+
 
       if (currentStep === 2) {
 
@@ -1262,19 +1225,15 @@
           );
 
 
-
         if (!reservationType) {
-
 
           alert(
             "Selecciona cómo gestionáis las reservas."
           );
 
-
           return false;
 
         }
-
 
 
         if (
@@ -1291,14 +1250,11 @@
               .value;
 
 
-
           if (!system) {
-
 
             alert(
               "Selecciona el sistema de reservas."
             );
-
 
             return false;
 
@@ -1311,16 +1267,20 @@
       }
 
 
-
       return true;
+
 
     }
 
 
-
     /*
+      ==================================================
+
       RECOGER TODOS LOS DATOS
+
+      ==================================================
     */
+
 
     function getOnboardingData() {
 
@@ -1329,7 +1289,6 @@
         document.querySelector(
           'input[name="reservation_type"]:checked'
         );
-
 
 
       return {
@@ -1385,8 +1344,8 @@
               .getElementById("language")
               .value
 
-        },
 
+        },
 
 
         config: {
@@ -1411,11 +1370,10 @@
                 "reservation_system"
               )
               .value
-              ||
-              null
+              || null
+
 
         },
-
 
 
         business_rules: {
@@ -1427,8 +1385,7 @@
                 "max_people"
               )
               .value
-              ||
-              null,
+              || null,
 
 
           booking_advance:
@@ -1447,18 +1404,24 @@
               .value
               .trim()
 
+
         }
 
 
       };
 
+
     }
 
 
-
     /*
+      ==================================================
+
       CREAR RESUMEN
+
+      ==================================================
     */
+
 
     function createSummary() {
 
@@ -1467,83 +1430,62 @@
         getOnboardingData();
 
 
-
       const businessTypeLabels = {
-
 
         restaurant:
           "Restaurante",
 
-
         bar_restaurant:
           "Bar / Restaurante",
-
 
         cafe:
           "Cafetería",
 
-
         other:
           "Otro"
 
-
       };
-
 
 
       const reservationTypeLabels = {
 
-
         digital:
           "Sistema externo",
-
 
         manual:
           "Gestión manual"
 
-
       };
-
 
 
       const bookingAdvanceLabels = {
 
-
         same_day:
           "El mismo día",
-
 
         "1_day":
           "Hasta 1 día antes",
 
-
         "7_days":
           "Hasta 7 días antes",
-
 
         "30_days":
           "Hasta 30 días antes",
 
-
         custom:
           "Personalizado"
 
-
       };
-
 
 
       document
         .getElementById("summary")
         .innerHTML = `
 
-
           <strong>Restaurante:</strong>
           ${data.establishment.name}
 
-
           <br><br>
-
 
           <strong>Tipo:</strong>
           ${
@@ -1554,16 +1496,12 @@
             data.establishment.business_type
           }
 
-
           <br>
-
 
           <strong>Ciudad:</strong>
           ${data.config.city}
 
-
           <br>
-
 
           <strong>Dirección:</strong>
           ${
@@ -1572,9 +1510,7 @@
             "No indicada"
           }
 
-
           <br><br>
-
 
           <strong>Teléfono:</strong>
           ${
@@ -1583,9 +1519,7 @@
             "No indicado"
           }
 
-
           <br>
-
 
           <strong>Email:</strong>
           ${
@@ -1594,9 +1528,7 @@
             "No indicado"
           }
 
-
           <br><br>
-
 
           <strong>Reservas:</strong>
           ${
@@ -1607,9 +1539,7 @@
             "No indicado"
           }
 
-
           <br>
-
 
           <strong>Sistema:</strong>
           ${
@@ -1618,9 +1548,7 @@
             "FGV Automation"
           }
 
-
           <br><br>
-
 
           <strong>Máximo personas:</strong>
           ${
@@ -1629,9 +1557,7 @@
             "No indicado"
           }
 
-
           <br>
-
 
           <strong>Antelación:</strong>
           ${
@@ -1642,9 +1568,7 @@
             data.business_rules.booking_advance
           }
 
-
           <br><br>
-
 
           <strong>Reglas especiales:</strong>
           ${
@@ -1653,17 +1577,69 @@
             "Ninguna"
           }
 
-
-      `;
+        `;
 
 
     }
 
 
+    /*
+      ==================================================
+
+      MOSTRAR ERROR
+
+      ==================================================
+    */
+
+
+    function showError(message) {
+
+
+      const errorBox =
+        document.getElementById(
+          "errorBox"
+        );
+
+
+      errorBox.textContent =
+        message;
+
+
+      errorBox.style.display =
+        "block";
+
+
+    }
+
+
+    function hideError() {
+
+
+      const errorBox =
+        document.getElementById(
+          "errorBox"
+        );
+
+
+      errorBox.textContent =
+        "";
+
+
+      errorBox.style.display =
+        "none";
+
+
+    }
+
 
     /*
+      ==================================================
+
       FINALIZAR ONBOARDING
+
+      ==================================================
     */
+
 
     async function finishOnboarding() {
 
@@ -1672,44 +1648,66 @@
         getOnboardingData();
 
 
-
       const finishButton =
-        document.querySelector(
-          'button[onclick="finishOnboarding()"]'
+        document.getElementById(
+          "finishButton"
         );
 
 
-
-      if (finishButton) {
-
-
-        finishButton.disabled =
-          true;
+      hideError();
 
 
-        finishButton.textContent =
-          "Guardando...";
+      finishButton.disabled =
+        true;
 
 
-      }
+      finishButton.textContent =
+        "Guardando...";
 
+
+      console.log(
+        "INICIANDO ONBOARDING:",
+        onboardingData
+      );
 
 
       try {
 
 
         /*
+          COMPROBAR CONEXIÓN
+        */
+
+
+        const {
+          error: connectionError
+        } = await supabaseClient
+          .from("establishments")
+          .select("id")
+          .limit(1);
+
+
+        if (connectionError) {
+
+          console.error(
+            "ERROR DE CONEXIÓN SUPABASE:",
+            connectionError
+          );
+
+        }
+
+
+        /*
           1. CREAR ESTABLECIMIENTO
         */
+
 
         const {
           data: establishment,
           error: establishmentError
         } = await supabaseClient
 
-          .from(
-            "establishments"
-          )
+          .from("establishments")
 
           .insert({
 
@@ -1718,48 +1716,51 @@
                 .establishment
                 .name,
 
+
             business_type:
               onboardingData
                 .establishment
                 .business_type,
 
+
             phone:
               onboardingData
                 .establishment
                 .phone
-              ||
-              null,
+              || null,
+
 
             email:
               onboardingData
                 .establishment
                 .email
-              ||
-              null,
+              || null,
+
 
             address:
               onboardingData
                 .establishment
                 .address
-              ||
-              null,
+              || null,
+
 
             timezone:
               onboardingData
                 .establishment
                 .timezone
-              ||
-              "Europe/Madrid",
+              || "Europe/Madrid",
+
 
             language:
               onboardingData
                 .establishment
                 .language
-              ||
-              "es",
+              || "es",
+
 
             status:
               "active",
+
 
             active:
               true
@@ -1771,18 +1772,28 @@
           .single();
 
 
-
         if (establishmentError) {
+
+          console.error(
+            "ERROR CREANDO ESTABLECIMIENTO:",
+            establishmentError
+          );
 
           throw establishmentError;
 
         }
 
 
+        console.log(
+          "ESTABLECIMIENTO CREADO:",
+          establishment
+        );
+
 
         /*
           2. GUARDAR CONFIGURACIÓN
         */
+
 
         const {
           error: configError
@@ -1797,24 +1808,29 @@
             establishment_id:
               establishment.id,
 
+
             config:
               onboardingData.config
 
           });
 
 
-
         if (configError) {
+
+          console.error(
+            "ERROR GUARDANDO CONFIGURACIÓN:",
+            configError
+          );
 
           throw configError;
 
         }
 
 
-
         /*
           3. GUARDAR REGLAS
         */
+
 
         const {
           error: rulesError
@@ -1829,15 +1845,19 @@
             establishment_id:
               establishment.id,
 
+
             name:
               "Reglas iniciales",
+
 
             rule_type:
               "general",
 
+
             rule:
               onboardingData
                 .business_rules,
+
 
             active:
               true
@@ -1845,31 +1865,40 @@
           });
 
 
-
         if (rulesError) {
+
+          console.error(
+            "ERROR GUARDANDO REGLAS:",
+            rulesError
+          );
 
           throw rulesError;
 
         }
 
 
-
         /*
-          ONBOARDING GUARDADO
+          GUARDADO CORRECTO
         */
 
+
         console.log(
-          "ONBOARDING GUARDADO:",
-          onboardingData
+          "ONBOARDING GUARDADO CORRECTAMENTE"
         );
 
+
+        console.log(
+          onboardingData
+        );
 
 
         /*
           MOSTRAR ÉXITO
         */
 
+
         currentStep = 5;
+
 
         showStep();
 
@@ -1878,29 +1907,50 @@
 
 
         console.error(
-          "ERROR GUARDANDO ONBOARDING:",
+          "ERROR COMPLETO GUARDANDO ONBOARDING:",
           error
         );
 
 
-        alert(
-          "Ha ocurrido un error al guardar la configuración. Revisa la consola."
+        let errorMessage =
+          "Ha ocurrido un error al guardar la configuración.";
+
+
+        if (
+          error &&
+          error.message
+        ) {
+
+          errorMessage +=
+            " " +
+            error.message;
+
+        }
+
+
+        if (
+          error &&
+          error.code
+        ) {
+
+          errorMessage +=
+            " Código: " +
+            error.code;
+
+        }
+
+
+        showError(
+          errorMessage
         );
 
 
-
-        if (finishButton) {
-
-
-          finishButton.disabled =
-            false;
+        finishButton.disabled =
+          false;
 
 
-          finishButton.textContent =
-            "Finalizar configuración";
-
-
-        }
+        finishButton.textContent =
+          "Finalizar configuración";
 
 
       }

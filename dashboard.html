@@ -36,6 +36,7 @@
       min-height: 100vh;
       background: var(--bg);
       color: var(--text);
+
       font-family:
         Inter,
         -apple-system,
@@ -96,10 +97,13 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(
-        auto-fit,
-        minmax(240px, 1fr)
-      );
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(240px, 1fr)
+        );
+
       gap: 18px;
       margin-bottom: 40px;
     }
@@ -131,10 +135,13 @@
 
     .menu {
       display: grid;
-      grid-template-columns: repeat(
-        auto-fit,
-        minmax(200px, 1fr)
-      );
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(200px, 1fr)
+        );
+
       gap: 16px;
     }
 
@@ -164,9 +171,11 @@
 
     .loading {
       min-height: 100vh;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       color: var(--muted);
       font-size: 16px;
     }
@@ -174,10 +183,13 @@
     .error {
       max-width: 600px;
       margin: 100px auto;
+
       background: #1a1b1f;
       border: 1px solid #6b3035;
       border-radius: 16px;
+
       padding: 30px;
+
       color: #f0b8bc;
       line-height: 1.6;
     }
@@ -202,7 +214,13 @@
 
 </head>
 
+
 <body>
+
+
+  <!-- ============================= -->
+  <!-- LOADING -->
+  <!-- ============================= -->
 
   <div
     id="loading"
@@ -212,18 +230,29 @@
   </div>
 
 
+  <!-- ============================= -->
+  <!-- APP -->
+  <!-- ============================= -->
+
   <div
     id="app"
     style="display:none;"
   >
 
+
     <div class="container">
+
+
+      <!-- ========================= -->
+      <!-- HEADER -->
+      <!-- ========================= -->
 
       <header>
 
         <div class="brand">
           FGV AUTOMATION
         </div>
+
 
         <div class="status">
 
@@ -236,11 +265,16 @@
       </header>
 
 
+      <!-- ========================= -->
+      <!-- HERO -->
+      <!-- ========================= -->
+
       <section class="hero">
 
         <h1 id="restaurantName">
           Cargando...
         </h1>
+
 
         <div
           class="location"
@@ -251,7 +285,14 @@
       </section>
 
 
+      <!-- ========================= -->
+      <!-- CARDS -->
+      <!-- ========================= -->
+
       <section class="grid">
+
+
+        <!-- RESERVAS -->
 
         <div class="card">
 
@@ -269,6 +310,8 @@
         </div>
 
 
+        <!-- SISTEMA -->
+
         <div class="card">
 
           <div class="card-label">
@@ -285,6 +328,8 @@
         </div>
 
 
+        <!-- TIPO NEGOCIO -->
+
         <div class="card">
 
           <div class="card-label">
@@ -300,8 +345,13 @@
 
         </div>
 
+
       </section>
 
+
+      <!-- ========================= -->
+      <!-- GESTIÓN -->
+      <!-- ========================= -->
 
       <section>
 
@@ -311,6 +361,9 @@
 
 
         <div class="menu">
+
+
+          <!-- RESERVAS -->
 
           <div class="menu-item">
 
@@ -326,6 +379,8 @@
           </div>
 
 
+          <!-- CLIENTES -->
+
           <div class="menu-item">
 
             <h3>
@@ -340,6 +395,8 @@
           </div>
 
 
+          <!-- CONFIGURACIÓN -->
+
           <div class="menu-item">
 
             <h3>
@@ -353,16 +410,24 @@
 
           </div>
 
+
         </div>
 
       </section>
 
+
     </div>
+
 
   </div>
 
 
+  <!-- ============================= -->
+  <!-- JAVASCRIPT -->
+  <!-- ============================= -->
+
   <script>
+
 
     /*
     ==========================================
@@ -372,6 +437,7 @@
 
     const SUPABASE_URL =
       "https://ehifmrfhysnnikcpdtqg.supabase.co";
+
 
     const SUPABASE_KEY =
       "sb_publishable_oz9UHM_4VYm-RqWerIYOSg_YFOBxO24";
@@ -386,7 +452,7 @@
 
     /*
     ==========================================
-    OBTENER ESTABLISHMENT ID DESDE LA URL
+    OBTENER ID DESDE LA URL
     ==========================================
     */
 
@@ -400,6 +466,12 @@
       params.get("id");
 
 
+    console.log(
+      "ESTABLISHMENT ID:",
+      establishmentId
+    );
+
+
     /*
     ==========================================
     CARGAR DASHBOARD
@@ -409,6 +481,7 @@
     async function loadDashboard() {
 
       try {
+
 
         /*
         ======================================
@@ -438,7 +511,7 @@
         */
 
         const {
-          data: establishment,
+          data: establishmentRows,
           error: establishmentError
         } = await supabaseClient
           .from("establishments")
@@ -447,7 +520,7 @@
             "id",
             establishmentId
           )
-          .single();
+          .limit(1);
 
 
         if (establishmentError) {
@@ -460,6 +533,34 @@
           throw establishmentError;
 
         }
+
+
+        /*
+        ======================================
+        COMPROBAR RESULTADO
+        ======================================
+        */
+
+        if (
+          !establishmentRows ||
+          establishmentRows.length === 0
+        ) {
+
+          throw new Error(
+            "No se ha encontrado el restaurante solicitado."
+          );
+
+        }
+
+
+        /*
+        ======================================
+        OBTENER ESTABLECIMIENTO
+        ======================================
+        */
+
+        const establishment =
+          establishmentRows[0];
 
 
         console.log(
@@ -520,7 +621,7 @@
 
         /*
         ======================================
-        EXTRAER JSON CONFIG
+        EXTRAER CONFIG
         ======================================
         */
 
@@ -539,7 +640,7 @@
 
         /*
         ======================================
-        PINTAR NOMBRE
+        NOMBRE RESTAURANTE
         ======================================
         */
 
@@ -554,13 +655,18 @@
 
         /*
         ======================================
-        PINTAR UBICACIÓN
+        UBICACIÓN
         ======================================
         */
 
         const locationParts =
           [];
 
+
+        /*
+        La ciudad está guardada
+        dentro del JSON config
+        */
 
         if (config.city) {
 
@@ -585,14 +691,16 @@
             "restaurantLocation"
           )
           .textContent =
-            locationParts.join(
-              " · "
-            );
+            locationParts.length > 0
+              ? locationParts.join(
+                  " · "
+                )
+              : "Ubicación no especificada";
 
 
         /*
         ======================================
-        PINTAR GESTIÓN DE RESERVAS
+        GESTIÓN DE RESERVAS
         ======================================
         */
 
@@ -604,12 +712,14 @@
             config.reservation_type ===
             "manual"
               ? "Gestión manual"
-              : "Sistema externo";
+              : config.reservation_type
+                ? "Sistema externo"
+                : "No configurado";
 
 
         /*
         ======================================
-        PINTAR SISTEMA
+        SISTEMA DE RESERVAS
         ======================================
         */
 
@@ -624,7 +734,7 @@
 
         /*
         ======================================
-        PINTAR TIPO DE NEGOCIO
+        TIPO DE NEGOCIO
         ======================================
         */
 
@@ -672,11 +782,47 @@
 
       } catch (error) {
 
+
+        /*
+        ======================================
+        ERROR
+        ======================================
+        */
+
         console.error(
           "ERROR CARGANDO DASHBOARD:",
           error
         );
 
+
+        const errorMessage =
+          error &&
+          error.message
+            ? error.message
+            : String(error);
+
+
+        /*
+        Ocultamos el loading
+        */
+
+        const loading =
+          document.getElementById(
+            "loading"
+          );
+
+
+        if (loading) {
+
+          loading.style.display =
+            "none";
+
+        }
+
+
+        /*
+        Mostramos error
+        */
 
         document.body.innerHTML = `
 
@@ -689,12 +835,13 @@
             <br>
 
             <p>
-              ${error.message || error}
+              ${errorMessage}
             </p>
 
           </div>
 
         `;
+
 
       }
 
@@ -709,7 +856,9 @@
 
     loadDashboard();
 
+
   </script>
+
 
 </body>
 

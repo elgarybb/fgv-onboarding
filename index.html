@@ -1287,25 +1287,32 @@ console.log(
         =======================================
         */
 
-        document
-          .querySelectorAll(".step")
-          .forEach(step => {
+       /*
+=======================================
+ÉXITO
+=======================================
+*/
 
-            step.classList.remove(
-              "active"
-            );
+console.log(
+  "ONBOARDING COMPLETADO CORRECTAMENTE"
+);
 
-          });
+console.log(
+  "REDIRIGIENDO AL DASHBOARD:",
+  establishment.id
+);
 
-        document
-          .getElementById("stepSuccess")
-          .classList.add("active");
+/*
+=======================================
+REDIRECCIÓN AL DASHBOARD
+=======================================
+*/
 
-        updateProgress(4);
-
-        console.log(
-          "ONBOARDING COMPLETADO CORRECTAMENTE"
-        );
+window.location.href =
+  "dashboard.html?id=" +
+  encodeURIComponent(
+    establishment.id
+  );
 
       } catch (error) {
 

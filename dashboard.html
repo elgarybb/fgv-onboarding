@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>FGV Automation | Dashboard</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #090a0d;
+      --card: #1a1b1f;
+      --card-dark: #111217;
+      --border: #30323a;
+      --text: #f1f1f3;
+      --muted: #a0a1a8;
+      --green: #58d68d;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 50px;
+    }
+
+    .brand {
+      font-size: 13px;
+      letter-spacing: 6px;
+      color: #a9abb3;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      font-size: 14px;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .hero {
+      margin-bottom: 35px;
+    }
+
+    h1 {
+      font-size: 42px;
+      letter-spacing: -1.5px;
+      margin-bottom: 10px;
+    }
+
+    .location {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(240px, 1fr)
+      );
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .card-label {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .card-value {
+      font-size: 21px;
+      font-weight: 600;
+    }
+
+    .menu-title {
+      font-size: 18px;
+      margin-bottom: 18px;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(200px, 1fr)
+      );
+      gap: 16px;
+    }
+
+    .menu-item {
+      background: var(--card-dark);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 22px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .menu-item:hover {
+      border-color: #777b87;
+      transform: translateY(-2px);
+    }
+
+    .menu-item h3 {
+      margin-bottom: 8px;
+    }
+
+    .menu-item p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .loading {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .error {
+      max-width: 600px;
+      margin: 100px auto;
+      background: #1a1b1f;
+      border: 1px solid #6b3035;
+      border-radius: 16px;
+      padding: 30px;
+      color: #f0b8bc;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+
+      .container {
+        padding: 25px 18px;
+      }
+
+      header {
+        margin-bottom: 35px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div id="loading" class="loading">
+    Cargando restaurante...
+  </div>
+
+  <div
+    id="app"
+    style="display:none;"
+  >
+
+    <div class="container">
+
+      <header>
+
+        <div class="brand">
+          FGV AUTOMATION
+        </div>
+
+        <div class="status">
+
+          <div class="status-dot"></div>
+
+          Configuración activa
+
+        </div>
+
+      </header>
+
+      <section class="hero">
+
+        <h1 id="restaurantName">
+          Cargando...
+        </h1>
+
+        <div
+          class="location"
+          id="restaurantLocation"
+        >
+        </div>
+
+      </section>
+
+      <section class="grid">
+
+        <div class="card">
+
+          <div class="card-label">
+            Gestión de reservas
+          </div>
+
+          <div
+            class="card-value"
+            id="reservationType"
+          >
+            —
+          </div>
+
+        </div>
+
+        <div class="card">
+
+          <div class="card-label">
+            Sistema
+          </div>
+
+          <div
+            class="card-value"
+            id="reservationSystem"
+          >
+            —
+          </div>
+
+        </div>
+
+        <div class="card">
+
+          <div class="card-label">
+            Tipo de negocio
+          </div>
+
+          <div
+            class="card-value"
+            id="businessType"
+          >
+            —
+          </div>
+
+        </div>
+
+      </section>
+
+      <section>
+
+        <h2 class="menu-title">
+          Gestión del restaurante
+        </h2>
+
+        <div class="menu">
+
+          <div class="menu-item">
+
+            <h3>Reservas</h3>
+
+            <p>
+              Gestiona las reservas y disponibilidad
+              del restaurante.
+            </p>
+
+          </div>
+
+          <div class="menu-item">
+
+            <h3>Clientes</h3>
+
+            <p>
+              Consulta y gestiona la información
+              de tus clientes.
+            </p>
+
+          </div>
+
+          <div class="menu-item">
+
+            <h3>Configuración</h3>
+
+            <p>
+              Modifica las reglas y preferencias
+              del restaurante.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /*
+    ==========================================
+    SUPABASE
+    ==========================================
+    */
+
+    const SUPABASE_URL =
+      "https://ehifmrfhysnnikcpdtqg.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_oz9UHM_4VYm-RqWerIYOSg_YFOBxO24";
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    /*
+    ==========================================
+    OBTENER ESTABLISHMENT ID DESDE LA URL
+    ==========================================
+    */
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    const establishmentId =
+      params.get("id");
+
+
+    /*
+    ==========================================
+    CARGAR DASHBOARD
+    ==========================================
+    */
+
+    async function loadDashboard() {
+
+      try {
+
+        if (!establishmentId) {
+
+          throw new Error(
+            "No se ha encontrado el identificador del restaurante."
+          );
+
+        }
+
+
+        /*
+        ======================================
+        CARGAR ESTABLECIMIENTO
+        ======================================
+        */
+
+        const {
+          data: establishment,
+          error: establishmentError
+        } = await supabaseClient
+          .from("establishments")
+          .select("*")
+          .eq(
+            "id",
+            establishmentId
+          )
+          .single();
+
+
+        if (establishmentError) {
+
+          throw establishmentError;
+
+        }
+
+
+        /*
+        ======================================
+        CARGAR CONFIGURACIÓN
+        ======================================
+        */
+
+        const {
+          data: configRow,
+          error: configError
+        } = await supabaseClient
+          .from("establishment_config")
+          .select("*")
+          .eq(
+            "establishment_id",
+            establishmentId
+          )
+          .single();
+
+
+        if (configError) {
+
+          throw configError;
+
+        }
+
+
+        /*
+        ======================================
+        EXTRAER JSON CONFIG
+        ======================================
+        */
+
+        const config =
+          configRow.config || {};
+
+
+        /*
+        ======================================
+        PINTAR DATOS
+        ======================================
+        */
+
+        document
+          .getElementById("restaurantName")
+          .textContent =
+            establishment.name ||
+            "Restaurante";
+
+
+        const locationParts =
+          [];
+
+        if (config.city) {
+
+          locationParts.push(
+            config.city
+          );
+
+        }
+
+        if (establishment.address) {
+
+          locationParts.push(
+            establishment.address
+          );
+
+        }
+
+
+        document
+          .getElementById(
+            "restaurantLocation"
+          )
+          .textContent =
+            locationParts.join(" · ");
+
+
+        document
+          .getElementById(
+            "reservationType"
+          )
+          .textContent =
+            config.reservation_type === "manual"
+              ? "Gestión manual"
+              : "Sistema externo";
+
+
+        document
+          .getElementById(
+            "reservationSystem"
+          )
+          .textContent =
+            config.reservation_system ||
+            "No configurado";
+
+
+        document
+          .getElementById(
+            "businessType"
+          )
+          .textContent =
+            establishment.business_type ||
+            "No especificado";
+
+
+        /*
+        ======================================
+        MOSTRAR APP
+        ======================================
+        */
+
+        document
+          .getElementById("loading")
+          .style.display =
+            "none";
+
+
+        document
+          .getElementById("app")
+          .style.display =
+            "block";
+
+
+      } catch (error) {
+
+        console.error(
+          "ERROR CARGANDO DASHBOARD:",
+          error
+        );
+
+
+        document.body.innerHTML = `
+
+          <div class="error">
+
+            <h2>
+              No se ha podido cargar el restaurante
+            </h2>
+
+            <br>
+
+            <p>
+              ${error.message || error}
+            </p>
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /*
+    ==========================================
+    INICIAR
+    ==========================================
+    */
+
+    loadDashboard();
+
+  </script>
+
+</body>
+</html>

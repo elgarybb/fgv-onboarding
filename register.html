@@ -184,6 +184,10 @@
     </p>
 
 
+    <!-- ========================== -->
+    <!-- FORMULARIO DE REGISTRO -->
+    <!-- ========================== -->
+
     <form id="registerForm">
 
       <label for="name">
@@ -250,11 +254,19 @@
     </form>
 
 
+    <!-- ========================== -->
+    <!-- MENSAJES -->
+    <!-- ========================== -->
+
     <div
       id="message"
       class="message"
     ></div>
 
+
+    <!-- ========================== -->
+    <!-- LOGIN -->
+    <!-- ========================== -->
 
     <div class="login-section">
 
@@ -274,13 +286,24 @@
   </div>
 
 
+  <!-- ========================== -->
+  <!-- SUPABASE -->
+  <!-- ========================== -->
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
   <script>
 
+    /*
+    ==========================================
+    CONFIGURACIÓN SUPABASE
+    ==========================================
+    */
+
     const SUPABASE_URL =
       "https://ehifmrfhysnnikcpdtqg.supabase.co";
+
 
     const SUPABASE_KEY =
       "sb_publishable_oz9UHM_4VYm-RqWerIYOSg_YFOBxO24";
@@ -293,27 +316,45 @@
       );
 
 
+    /*
+    ==========================================
+    ELEMENTOS
+    ==========================================
+    */
+
     const registerForm =
       document.getElementById("registerForm");
+
 
     const nameInput =
       document.getElementById("name");
 
+
     const emailInput =
       document.getElementById("email");
+
 
     const passwordInput =
       document.getElementById("password");
 
+
     const confirmPasswordInput =
       document.getElementById("confirmPassword");
+
 
     const registerButton =
       document.getElementById("registerButton");
 
+
     const message =
       document.getElementById("message");
 
+
+    /*
+    ==========================================
+    MOSTRAR MENSAJE
+    ==========================================
+    */
 
     function showMessage(text, type) {
 
@@ -329,6 +370,12 @@
     }
 
 
+    /*
+    ==========================================
+    REGISTRO
+    ==========================================
+    */
+
     registerForm.addEventListener(
       "submit",
 
@@ -340,17 +387,26 @@
         const name =
           nameInput.value.trim();
 
+
         const email =
           emailInput.value.trim();
 
+
         const password =
           passwordInput.value;
+
 
         const confirmPassword =
           confirmPasswordInput.value;
 
 
-        if (password !== confirmPassword) {
+        /*
+        VALIDAR CONTRASEÑAS
+        */
+
+        if (
+          password !== confirmPassword
+        ) {
 
           showMessage(
             "Las contraseñas no coinciden.",
@@ -362,7 +418,13 @@
         }
 
 
-        if (password.length < 6) {
+        /*
+        VALIDAR LONGITUD
+        */
+
+        if (
+          password.length < 6
+        ) {
 
           showMessage(
             "La contraseña debe tener al menos 6 caracteres.",
@@ -374,38 +436,59 @@
         }
 
 
+        /*
+        DESACTIVAR BOTÓN
+        */
+
         registerButton.disabled =
           true;
+
 
         registerButton.textContent =
           "Creando cuenta...";
 
 
+        /*
+        CREAR USUARIO
+        */
+
         const {
           data,
           error
         } =
-          await supabaseClient.auth.signUp({
+          await supabaseClient
+            .auth
+            .signUp({
 
-            email: email,
+              email: email,
 
-            password: password,
+              password: password,
 
-            options: {
+              options: {
 
-              data: {
+                data: {
 
-                full_name: name
+                  full_name: name
 
-              },
+                },
 
-              emailRedirectTo:
-                "https://elgarybb.github.io/fgv-onboarding/register.html"
 
-            }
+                /*
+                Después de confirmar el email,
+                Supabase vuelve a esta página.
+                */
 
-          });
+                emailRedirectTo:
+                  "https://elgarybb.github.io/fgv-onboarding/register.html"
 
+              }
+
+            });
+
+
+        /*
+        ERROR
+        */
 
         if (error) {
 
@@ -414,16 +497,20 @@
             error
           );
 
+
           showMessage(
             error.message,
             "error"
           );
 
+
           registerButton.disabled =
             false;
 
+
           registerButton.textContent =
             "Crear cuenta y continuar";
+
 
           return;
 
@@ -436,7 +523,14 @@
         );
 
 
-        if (data.session) {
+        /*
+        SI SUPABASE YA HA CREADO
+        UNA SESIÓN, IR AL ONBOARDING
+        */
+
+        if (
+          data.session
+        ) {
 
           showMessage(
             "Cuenta creada correctamente. Vamos a configurar tu restaurante...",
@@ -460,6 +554,11 @@
         }
 
 
+        /*
+        SI REQUIERE CONFIRMACIÓN
+        DE EMAIL
+        */
+
         showMessage(
           "Cuenta creada correctamente. Revisa tu correo para confirmar tu cuenta.",
           "success"
@@ -469,6 +568,7 @@
         registerButton.disabled =
           false;
 
+
         registerButton.textContent =
           "Crear cuenta y continuar";
 
@@ -476,6 +576,12 @@
 
     );
 
+
+    /*
+    ==========================================
+    DETECTAR CONFIRMACIÓN DE EMAIL
+    ==========================================
+    */
 
     supabaseClient.auth.onAuthStateChange(
       function(event, session) {
@@ -486,7 +592,7 @@
         ) {
 
           window.location.href =
-            "onboarding.html";
+            "index.html";
 
         }
 

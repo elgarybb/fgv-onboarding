@@ -323,7 +323,7 @@
 
 
       <a
-        href="register.html"
+        href="https://elgarybb.github.io/fgv-onboarding/register.html"
         class="register-button"
       >
 
@@ -487,6 +487,12 @@
 
         if (error) {
 
+          console.error(
+            "ERROR LOGIN:",
+            error
+          );
+
+
           showMessage(
             error.message,
             "error"
@@ -507,6 +513,13 @@
 
 
 
+        console.log(
+          "LOGIN CORRECTO:",
+          data
+        );
+
+
+
         showMessage(
           "Inicio de sesión correcto. Redirigiendo...",
           "success"
@@ -518,7 +531,7 @@
           function() {
 
             window.location.href =
-              "dashboard.html";
+              "https://elgarybb.github.io/fgv-onboarding/dashboard.html";
 
           },
           500
@@ -584,6 +597,12 @@
 
 
         if (error) {
+
+          console.error(
+            "ERROR RESET PASSWORD:",
+            error
+          );
+
 
           showMessage(
             error.message,

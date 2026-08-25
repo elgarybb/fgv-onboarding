@@ -184,10 +184,6 @@
     </p>
 
 
-    <!-- ========================== -->
-    <!-- FORMULARIO DE REGISTRO -->
-    <!-- ========================== -->
-
     <form id="registerForm">
 
       <label for="name">
@@ -254,19 +250,11 @@
     </form>
 
 
-    <!-- ========================== -->
-    <!-- MENSAJES -->
-    <!-- ========================== -->
-
     <div
       id="message"
       class="message"
     ></div>
 
-
-    <!-- ========================== -->
-    <!-- LOGIN -->
-    <!-- ========================== -->
 
     <div class="login-section">
 
@@ -285,10 +273,6 @@
 
   </div>
 
-
-  <!-- ========================== -->
-  <!-- SUPABASE -->
-  <!-- ========================== -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -400,13 +384,31 @@
           confirmPasswordInput.value;
 
 
-        /*
-        VALIDAR CONTRASEÑAS
-        */
+        if (!name) {
 
-        if (
-          password !== confirmPassword
-        ) {
+          showMessage(
+            "Introduce tu nombre.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (!email) {
+
+          showMessage(
+            "Introduce tu correo electrónico.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (password !== confirmPassword) {
 
           showMessage(
             "Las contraseñas no coinciden.",
@@ -418,13 +420,7 @@
         }
 
 
-        /*
-        VALIDAR LONGITUD
-        */
-
-        if (
-          password.length < 6
-        ) {
+        if (password.length < 6) {
 
           showMessage(
             "La contraseña debe tener al menos 6 caracteres.",
@@ -436,10 +432,6 @@
         }
 
 
-        /*
-        DESACTIVAR BOTÓN
-        */
-
         registerButton.disabled =
           true;
 
@@ -448,47 +440,31 @@
           "Creando cuenta...";
 
 
-        /*
-        CREAR USUARIO
-        */
-
         const {
           data,
           error
         } =
-          await supabaseClient
-            .auth
-            .signUp({
+          await supabaseClient.auth.signUp({
 
-              email: email,
+            email: email,
 
-              password: password,
+            password: password,
 
-              options: {
+            options: {
 
-                data: {
+              data: {
 
-                  full_name: name
+                full_name: name
 
-                },
+              },
 
+              emailRedirectTo:
+                "https://elgarybb.github.io/fgv-onboarding/"
 
-                /*
-                Después de confirmar el email,
-                Supabase vuelve a esta página.
-                */
+            }
 
-                emailRedirectTo:
-                  "https://elgarybb.github.io/fgv-onboarding/register.html"
+          });
 
-              }
-
-            });
-
-
-        /*
-        ERROR
-        */
 
         if (error) {
 
@@ -524,13 +500,11 @@
 
 
         /*
-        SI SUPABASE YA HA CREADO
-        UNA SESIÓN, IR AL ONBOARDING
+        Si Supabase permite iniciar sesión
+        directamente después del registro.
         */
 
-        if (
-          data.session
-        ) {
+        if (data.session) {
 
           showMessage(
             "Cuenta creada correctamente. Vamos a configurar tu restaurante...",
@@ -542,7 +516,7 @@
             function() {
 
               window.location.href =
-                "index.html";
+                "https://elgarybb.github.io/fgv-onboarding/";
 
             },
             1000
@@ -555,12 +529,11 @@
 
 
         /*
-        SI REQUIERE CONFIRMACIÓN
-        DE EMAIL
+        Si requiere confirmar el correo.
         */
 
         showMessage(
-          "Cuenta creada correctamente. Revisa tu correo para confirmar tu cuenta.",
+          "Cuenta creada correctamente. Revisa tu correo y confirma tu cuenta para continuar.",
           "success"
         );
 
@@ -579,7 +552,8 @@
 
     /*
     ==========================================
-    DETECTAR CONFIRMACIÓN DE EMAIL
+    DETECTAR INICIO DE SESIÓN
+    DESPUÉS DE CONFIRMAR EMAIL
     ==========================================
     */
 
@@ -592,7 +566,7 @@
         ) {
 
           window.location.href =
-            "index.html";
+            "https://elgarybb.github.io/fgv-onboarding/";
 
         }
 

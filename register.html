@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>FGV Automation | Crear cuenta</title>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      background: #0b0e14;
+      color: #f5f7fa;
+
+      font-family: Arial, sans-serif;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+    }
+
+
+    .card {
+      width: 100%;
+      max-width: 520px;
+
+      background: #1b1f27;
+
+      border: 1px solid #303744;
+
+      border-radius: 18px;
+
+      padding: 40px;
+    }
+
+
+    .brand {
+      font-size: 12px;
+
+      letter-spacing: 7px;
+
+      font-weight: bold;
+
+      color: #aeb6c2;
+
+      margin-bottom: 32px;
+    }
+
+
+    h1 {
+      margin: 0 0 10px;
+
+      font-size: 34px;
+    }
+
+
+    .subtitle {
+      color: #aeb6c2;
+
+      line-height: 1.6;
+
+      margin-bottom: 30px;
+    }
+
+
+    label {
+      display: block;
+
+      font-size: 14px;
+
+      margin-bottom: 8px;
+
+      color: #d7dce3;
+
+      font-weight: bold;
+    }
+
+
+    input {
+      width: 100%;
+
+      padding: 15px;
+
+      margin-bottom: 20px;
+
+      border-radius: 10px;
+
+      border: 1px solid #3a4352;
+
+      background: #0f131a;
+
+      color: white;
+
+      font-size: 16px;
+
+      outline: none;
+    }
+
+
+    input:focus {
+      border-color: #7ed7bd;
+    }
+
+
+    button {
+      width: 100%;
+
+      padding: 16px;
+
+      border: none;
+
+      border-radius: 10px;
+
+      background: #7ed7bd;
+
+      color: #102018;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+
+    button:disabled {
+      opacity: 0.6;
+
+      cursor: not-allowed;
+    }
+
+
+    .login-section {
+      margin-top: 28px;
+
+      padding-top: 25px;
+
+      border-top: 1px solid #303744;
+
+      text-align: center;
+    }
+
+
+    .login-text {
+      color: #aeb6c2;
+
+      font-size: 14px;
+
+      margin-bottom: 14px;
+    }
+
+
+    .login-button {
+      display: block;
+
+      width: 100%;
+
+      padding: 15px;
+
+      border-radius: 10px;
+
+      border: 1px solid #7ed7bd;
+
+      background: transparent;
+
+      color: #7ed7bd;
+
+      font-size: 15px;
+
+      font-weight: bold;
+
+      text-decoration: none;
+
+      transition: 0.2s;
+    }
+
+
+    .login-button:hover {
+      background: rgba(126, 215, 189, 0.08);
+    }
+
+
+    .message {
+      display: none;
+
+      margin-top: 20px;
+
+      padding: 14px;
+
+      border-radius: 10px;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+    }
+
+
+    .success {
+      background: rgba(80, 200, 140, 0.12);
+
+      border: 1px solid #3b9b73;
+
+      color: #8be0bd;
+    }
+
+
+    .error {
+      background: rgba(220, 80, 80, 0.12);
+
+      border: 1px solid #a94d4d;
+
+      color: #ff9a9a;
+    }
+
+
+    .password-note {
+      margin-top: -10px;
+      margin-bottom: 20px;
+
+      color: #7f8794;
+
+      font-size: 12px;
+    }
+
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div class="card">
+
+
+    <div class="brand">
+
+      FGV AUTOMATION
+
+    </div>
+
+
+    <h1>
+
+      Crea tu cuenta
+
+    </h1>
+
+
+    <p class="subtitle">
+
+      Empieza a configurar FGV Automation para tu restaurante.
+
+    </p>
+
+
+
+    <!-- ========================== -->
+    <!-- FORMULARIO REGISTRO -->
+    <!-- ========================== -->
+
+    <form id="registerForm">
+
+
+      <label for="name">
+
+        Tu nombre
+
+      </label>
+
+
+      <input
+        type="text"
+        id="name"
+        placeholder="Introduce tu nombre"
+        required
+      >
+
+
+
+      <label for="email">
+
+        Correo electrónico
+
+      </label>
+
+
+      <input
+        type="email"
+        id="email"
+        placeholder="tu@email.com"
+        required
+      >
+
+
+
+      <label for="password">
+
+        Contraseña
+
+      </label>
+
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Crea una contraseña"
+        required
+        minlength="6"
+      >
+
+
+      <div class="password-note">
+
+        La contraseña debe tener al menos 6 caracteres.
+
+      </div>
+
+
+
+      <label for="confirmPassword">
+
+        Confirmar contraseña
+
+      </label>
+
+
+      <input
+        type="password"
+        id="confirmPassword"
+        placeholder="Repite tu contraseña"
+        required
+        minlength="6"
+      >
+
+
+
+      <button
+        type="submit"
+        id="registerButton"
+      >
+
+        Crear cuenta y continuar
+
+      </button>
+
+
+    </form>
+
+
+
+    <!-- ========================== -->
+    <!-- MENSAJES -->
+    <!-- ========================== -->
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+
+
+    <!-- ========================== -->
+    <!-- LOGIN -->
+    <!-- ========================== -->
+
+    <div class="login-section">
+
+
+      <div class="login-text">
+
+        ¿Ya tienes una cuenta?
+
+      </div>
+
+
+      <a
+        href="login.html"
+        class="login-button"
+      >
+
+        Iniciar sesión
+
+      </a>
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- ========================== -->
+  <!-- SUPABASE -->
+  <!-- ========================== -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+
+  <script>
+
+
+    /*
+    ==========================================
+    CONFIGURACIÓN SUPABASE
+    ==========================================
+    */
+
+    const SUPABASE_URL =
+      "https://ehifmrfhysnnikcpdtqg.supabase.co";
+
+
+    const SUPABASE_KEY =
+      "sb_publishable_oz9UHM_4VYm-RqWerIYOSg_YFOBxO24";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+
+    /*
+    ==========================================
+    ELEMENTOS
+    ==========================================
+    */
+
+    const registerForm =
+      document.getElementById(
+        "registerForm"
+      );
+
+
+    const nameInput =
+      document.getElementById(
+        "name"
+      );
+
+
+    const emailInput =
+      document.getElementById(
+        "email"
+      );
+
+
+    const passwordInput =
+      document.getElementById(
+        "password"
+      );
+
+
+    const confirmPasswordInput =
+      document.getElementById(
+        "confirmPassword"
+      );
+
+
+    const registerButton =
+      document.getElementById(
+        "registerButton"
+      );
+
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+
+
+    /*
+    ==========================================
+    MOSTRAR MENSAJE
+    ==========================================
+    */
+
+    function showMessage(text, type) {
+
+      message.style.display =
+        "block";
+
+
+      message.textContent =
+        text;
+
+
+      message.className =
+        "message " + type;
+
+    }
+
+
+
+    /*
+    ==========================================
+    REGISTRO
+    ==========================================
+    */
+
+    registerForm.addEventListener(
+      "submit",
+
+      async function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+          nameInput.value.trim();
+
+
+        const email =
+          emailInput.value.trim();
+
+
+        const password =
+          passwordInput.value;
+
+
+        const confirmPassword =
+          confirmPasswordInput.value;
+
+
+
+        /*
+        VALIDAR CONTRASEÑAS
+        */
+
+        if (
+          password !== confirmPassword
+        ) {
+
+          showMessage(
+            "Las contraseñas no coinciden.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+
+        /*
+        VALIDAR LONGITUD
+        */
+
+        if (
+          password.length < 6
+        ) {
+
+          showMessage(
+            "La contraseña debe tener al menos 6 caracteres.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+
+        /*
+        DESACTIVAR BOTÓN
+        */
+
+        registerButton.disabled =
+          true;
+
+
+        registerButton.textContent =
+          "Creando cuenta...";
+
+
+
+        /*
+        CREAR USUARIO
+        */
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .auth
+            .signUp({
+
+              email: email,
+
+              password: password,
+
+              options: {
+
+                data: {
+
+                  full_name: name
+
+                }
+
+              }
+
+            });
+
+
+
+        /*
+        ERROR
+        */
+
+        if (error) {
+
+          console.error(
+            "ERROR REGISTRO:",
+            error
+          );
+
+
+          showMessage(
+            error.message,
+            "error"
+          );
+
+
+          registerButton.disabled =
+            false;
+
+
+          registerButton.textContent =
+            "Crear cuenta y continuar";
+
+
+          return;
+
+        }
+
+
+
+        console.log(
+          "USUARIO CREADO:",
+          data
+        );
+
+
+
+        /*
+        COMPROBAR SESIÓN
+        */
+
+        if (
+          data.session
+        ) {
+
+          showMessage(
+            "Cuenta creada correctamente. Vamos a configurar tu restaurante...",
+            "success"
+          );
+
+
+          setTimeout(
+            function() {
+
+              window.location.href =
+                "onboarding.html";
+
+            },
+            1000
+          );
+
+
+          return;
+
+        }
+
+
+
+        /*
+        CONFIRMACIÓN DE EMAIL
+        */
+
+        showMessage(
+          "Cuenta creada correctamente. Revisa tu correo para confirmar tu cuenta antes de continuar.",
+          "success"
+        );
+
+
+        registerButton.disabled =
+          false;
+
+
+        registerButton.textContent =
+          "Crear cuenta y continuar";
+
+      }
+
+    );
+
+
+  </script>
+
+
+</body>
+
+</html>

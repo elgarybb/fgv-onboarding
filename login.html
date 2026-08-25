@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>FGV Automation | Acceso</title>
 
+
   <style>
+
     * {
       box-sizing: border-box;
     }
+
 
     body {
       margin: 0;
@@ -23,6 +32,7 @@
       padding: 20px;
     }
 
+
     .card {
       width: 100%;
       max-width: 520px;
@@ -32,6 +42,7 @@
       padding: 40px;
     }
 
+
     .brand {
       font-size: 12px;
       letter-spacing: 7px;
@@ -40,16 +51,19 @@
       margin-bottom: 32px;
     }
 
+
     h1 {
       margin: 0 0 10px;
       font-size: 34px;
     }
+
 
     .subtitle {
       color: #aeb6c2;
       line-height: 1.6;
       margin-bottom: 30px;
     }
+
 
     label {
       display: block;
@@ -58,6 +72,7 @@
       color: #d7dce3;
       font-weight: bold;
     }
+
 
     input {
       width: 100%;
@@ -71,9 +86,11 @@
       outline: none;
     }
 
+
     input:focus {
       border-color: #7ed7bd;
     }
+
 
     button {
       width: 100%;
@@ -88,19 +105,22 @@
       transition: 0.2s;
     }
 
+
     button:hover {
       opacity: 0.9;
     }
+
 
     button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
     }
 
+
     .forgot {
       display: block;
       width: 100%;
-      margin-top: 22px;
+      margin-top: 18px;
       background: transparent;
       color: #aeb6c2;
       padding: 8px;
@@ -110,10 +130,47 @@
       cursor: pointer;
     }
 
+
     .forgot:hover {
       color: #ffffff;
       opacity: 1;
     }
+
+
+    .register-section {
+      margin-top: 28px;
+      padding-top: 25px;
+      border-top: 1px solid #303744;
+      text-align: center;
+    }
+
+
+    .register-text {
+      color: #aeb6c2;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+
+    .register-button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #7ed7bd;
+      background: transparent;
+      color: #7ed7bd;
+      font-size: 15px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+
+    .register-button:hover {
+      background: rgba(126, 215, 189, 0.08);
+    }
+
 
     .message {
       display: none;
@@ -124,11 +181,13 @@
       line-height: 1.5;
     }
 
+
     .success {
       background: rgba(80, 200, 140, 0.12);
       border: 1px solid #3b9b73;
       color: #8be0bd;
     }
+
 
     .error {
       background: rgba(220, 80, 80, 0.12);
@@ -137,25 +196,51 @@
     }
 
   </style>
+
 </head>
+
 
 <body>
 
+
   <div class="card">
 
-    <div class="brand">FGV AUTOMATION</div>
 
-    <h1>Accede a tu cuenta</h1>
+    <div class="brand">
+
+      FGV AUTOMATION
+
+    </div>
+
+
+    <h1>
+
+      Accede a tu cuenta
+
+    </h1>
+
 
     <p class="subtitle">
+
       Gestiona las reservas y la configuración de tu restaurante.
+
     </p>
+
+
+
+    <!-- ========================== -->
+    <!-- LOGIN -->
+    <!-- ========================== -->
 
     <form id="loginForm">
 
+
       <label for="email">
+
         Correo electrónico
+
       </label>
+
 
       <input
         type="email"
@@ -164,9 +249,14 @@
         required
       >
 
+
+
       <label for="password">
+
         Contraseña
+
       </label>
+
 
       <input
         type="password"
@@ -175,37 +265,100 @@
         required
       >
 
+
+
       <button
         type="submit"
         id="loginButton"
       >
+
         Iniciar sesión
+
       </button>
 
+
     </form>
+
+
+
+    <!-- ========================== -->
+    <!-- RESET PASSWORD -->
+    <!-- ========================== -->
 
     <button
       type="button"
       id="resetButton"
       class="forgot"
     >
+
       ¿Has olvidado tu contraseña?
+
     </button>
+
+
+
+    <!-- ========================== -->
+    <!-- MENSAJES -->
+    <!-- ========================== -->
 
     <div
       id="message"
       class="message"
     ></div>
 
+
+
+    <!-- ========================== -->
+    <!-- CREAR CUENTA -->
+    <!-- ========================== -->
+
+    <div class="register-section">
+
+
+      <div class="register-text">
+
+        ¿Todavía no tienes cuenta?
+
+      </div>
+
+
+      <a
+        href="register.html"
+        class="register-button"
+      >
+
+        Crear cuenta
+
+      </a>
+
+
+    </div>
+
+
   </div>
 
 
+
+  <!-- ========================== -->
+  <!-- SUPABASE -->
+  <!-- ========================== -->
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
 
   <script>
 
+
+    /*
+    ==========================================
+    CONFIGURACIÓN SUPABASE
+    ==========================================
+    */
+
     const SUPABASE_URL =
       "https://ehifmrfhysnnikcpdtqg.supabase.co";
+
 
     const SUPABASE_KEY =
       "sb_publishable_oz9UHM_4VYm-RqWerIYOSg_YFOBxO24";
@@ -218,36 +371,66 @@
       );
 
 
+
+    /*
+    ==========================================
+    ELEMENTOS
+    ==========================================
+    */
+
     const loginForm =
       document.getElementById("loginForm");
+
 
     const emailInput =
       document.getElementById("email");
 
+
     const passwordInput =
       document.getElementById("password");
+
 
     const loginButton =
       document.getElementById("loginButton");
 
+
     const resetButton =
       document.getElementById("resetButton");
+
 
     const message =
       document.getElementById("message");
 
 
+
+    /*
+    ==========================================
+    MOSTRAR MENSAJE
+    ==========================================
+    */
+
     function showMessage(text, type) {
 
-      message.style.display = "block";
+      message.style.display =
+        "block";
 
-      message.textContent = text;
+
+      message.textContent =
+        text;
+
 
       message.className =
         "message " + type;
 
     }
 
+
+
+    /*
+    ==========================================
+    INICIAR SESIÓN
+    ==========================================
+    */
 
     loginForm.addEventListener(
       "submit",
@@ -256,11 +439,14 @@
 
         event.preventDefault();
 
+
         const email =
           emailInput.value.trim();
 
+
         const password =
           passwordInput.value;
+
 
 
         if (!email || !password) {
@@ -275,23 +461,30 @@
         }
 
 
-        loginButton.disabled = true;
+
+        loginButton.disabled =
+          true;
+
 
         loginButton.textContent =
           "Iniciando sesión...";
+
 
 
         const {
           data,
           error
         } =
-          await supabaseClient.auth.signInWithPassword({
+          await supabaseClient
+            .auth
+            .signInWithPassword({
 
-            email: email,
+              email: email,
 
-            password: password
+              password: password
 
-          });
+            });
+
 
 
         if (error) {
@@ -301,20 +494,26 @@
             "error"
           );
 
-          loginButton.disabled = false;
+
+          loginButton.disabled =
+            false;
+
 
           loginButton.textContent =
             "Iniciar sesión";
+
 
           return;
 
         }
 
 
+
         showMessage(
           "Inicio de sesión correcto. Redirigiendo...",
           "success"
         );
+
 
 
         window.location.href =
@@ -325,6 +524,13 @@
     );
 
 
+
+    /*
+    ==========================================
+    RESTABLECER CONTRASEÑA
+    ==========================================
+    */
+
     resetButton.addEventListener(
       "click",
 
@@ -332,6 +538,7 @@
 
         const email =
           emailInput.value.trim();
+
 
 
         if (!email) {
@@ -346,22 +553,29 @@
         }
 
 
-        resetButton.disabled = true;
+
+        resetButton.disabled =
+          true;
+
 
         resetButton.textContent =
           "Enviando enlace...";
 
 
+
         const {
           error
         } =
-          await supabaseClient.auth.resetPasswordForEmail(
-            email,
-            {
-              redirectTo:
-                "https://elgarybb.github.io/fgv-onboarding/reset-password.html"
-            }
-          );
+          await supabaseClient
+            .auth
+            .resetPasswordForEmail(
+              email,
+              {
+                redirectTo:
+                  "https://elgarybb.github.io/fgv-onboarding/reset-password.html"
+              }
+            );
+
 
 
         if (error) {
@@ -371,14 +585,19 @@
             "error"
           );
 
-          resetButton.disabled = false;
+
+          resetButton.disabled =
+            false;
+
 
           resetButton.textContent =
             "¿Has olvidado tu contraseña?";
 
+
           return;
 
         }
+
 
 
         showMessage(
@@ -387,7 +606,10 @@
         );
 
 
-        resetButton.disabled = false;
+
+        resetButton.disabled =
+          false;
+
 
         resetButton.textContent =
           "¿Has olvidado tu contraseña?";
@@ -396,7 +618,10 @@
 
     );
 
+
   </script>
 
+
 </body>
+
 </html>

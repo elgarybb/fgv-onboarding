@@ -279,12 +279,6 @@
 
   <script>
 
-    /*
-    ==========================================
-    CONFIGURACIÓN SUPABASE
-    ==========================================
-    */
-
     const SUPABASE_URL =
       "https://ehifmrfhysnnikcpdtqg.supabase.co";
 
@@ -299,12 +293,6 @@
         SUPABASE_KEY
       );
 
-
-    /*
-    ==========================================
-    ELEMENTOS
-    ==========================================
-    */
 
     const registerForm =
       document.getElementById("registerForm");
@@ -334,12 +322,6 @@
       document.getElementById("message");
 
 
-    /*
-    ==========================================
-    MOSTRAR MENSAJE
-    ==========================================
-    */
-
     function showMessage(text, type) {
 
       message.style.display =
@@ -353,12 +335,6 @@
 
     }
 
-
-    /*
-    ==========================================
-    REGISTRO
-    ==========================================
-    */
 
     registerForm.addEventListener(
       "submit",
@@ -459,7 +435,7 @@
               },
 
               emailRedirectTo:
-                "https://elgarybb.github.io/fgv-onboarding/"
+                "https://elgarybb.github.io/fgv-onboarding/index.html"
 
             }
 
@@ -516,7 +492,7 @@
             function() {
 
               window.location.href =
-                "https://elgarybb.github.io/fgv-onboarding/";
+                "https://elgarybb.github.io/fgv-onboarding/index.html";
 
             },
             1000
@@ -529,7 +505,7 @@
 
 
         /*
-        Si requiere confirmar el correo.
+        Si requiere confirmación de email.
         */
 
         showMessage(
@@ -552,8 +528,8 @@
 
     /*
     ==========================================
-    DETECTAR INICIO DE SESIÓN
-    DESPUÉS DE CONFIRMAR EMAIL
+    DETECTAR SESIÓN DESPUÉS DE
+    CONFIRMAR EL EMAIL
     ==========================================
     */
 
@@ -566,7 +542,7 @@
         ) {
 
           window.location.href =
-            "https://elgarybb.github.io/fgv-onboarding/";
+            "https://elgarybb.github.io/fgv-onboarding/index.html";
 
         }
 

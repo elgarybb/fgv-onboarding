@@ -414,10 +414,8 @@
       message.style.display =
         "block";
 
-
       message.textContent =
         text;
-
 
       message.className =
         "message " + type;
@@ -516,8 +514,15 @@
 
 
 
-        window.location.href =
-          "dashboard.html";
+        setTimeout(
+          function() {
+
+            window.location.href =
+              "dashboard.html";
+
+          },
+          500
+        );
 
       }
 

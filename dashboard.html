@@ -25,7 +25,6 @@
 
 
     :root {
-
       --bg: #090a0d;
       --card: #1a1b1f;
       --card-dark: #111217;
@@ -33,388 +32,298 @@
       --text: #f1f1f3;
       --muted: #a0a1a8;
       --green: #58d68d;
-
+      --red: #f08080;
     }
 
 
     body {
-
       min-height: 100vh;
-
       background: var(--bg);
-
       color: var(--text);
-
       font-family:
         Inter,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
-
     }
 
 
     .container {
-
       width: 100%;
-
       max-width: 1100px;
-
       margin: 0 auto;
-
       padding: 40px 24px;
-
     }
 
 
     header {
-
       display: flex;
-
       justify-content: space-between;
-
       align-items: center;
-
       margin-bottom: 50px;
-
+      gap: 20px;
     }
 
 
     .header-left {
-
       display: flex;
-
       align-items: center;
-
       gap: 18px;
-
     }
 
 
     .brand {
-
       font-size: 13px;
-
       letter-spacing: 6px;
-
       color: #a9abb3;
-
     }
 
 
+    .logout-button,
     .back-button {
-
       display: inline-flex;
-
       align-items: center;
-
       gap: 9px;
-
       background: transparent;
-
       border: 1px solid var(--border);
-
       color: var(--text);
-
       padding: 10px 15px;
-
       border-radius: 10px;
-
       cursor: pointer;
-
       font-size: 14px;
-
       font-weight: 500;
-
       transition: 0.2s;
-
     }
 
 
+    .logout-button:hover,
     .back-button:hover {
-
       border-color: #777b87;
-
       background: var(--card);
-
-    }
-
-
-    .back-arrow {
-
-      font-size: 20px;
-
-      line-height: 1;
-
     }
 
 
     .status {
-
       display: flex;
-
       align-items: center;
-
       gap: 8px;
-
       color: var(--green);
-
       font-size: 14px;
-
     }
 
 
     .status-dot {
-
       width: 9px;
-
       height: 9px;
-
       border-radius: 50%;
-
       background: var(--green);
-
     }
 
 
     .hero {
-
       margin-bottom: 35px;
-
     }
 
 
     h1 {
-
       font-size: 42px;
-
       letter-spacing: -1.5px;
-
       margin-bottom: 10px;
-
     }
 
 
-    .location {
-
+    .subtitle {
       color: var(--muted);
-
       font-size: 17px;
-
+      line-height: 1.6;
     }
 
 
     .grid {
-
       display: grid;
-
       grid-template-columns:
         repeat(
           auto-fit,
           minmax(240px, 1fr)
         );
-
       gap: 18px;
-
       margin-bottom: 40px;
-
     }
 
 
     .card {
-
       background: var(--card);
-
       border: 1px solid var(--border);
-
       border-radius: 18px;
-
       padding: 24px;
-
     }
 
 
     .card-label {
-
       color: var(--muted);
-
       font-size: 12px;
-
       letter-spacing: 1.5px;
-
       text-transform: uppercase;
-
       margin-bottom: 12px;
-
     }
 
 
     .card-value {
-
-      font-size: 21px;
-
+      font-size: 26px;
       font-weight: 600;
-
     }
 
 
     .menu-title {
-
-      font-size: 18px;
-
+      font-size: 20px;
       margin-bottom: 18px;
-
     }
 
 
     .menu {
-
       display: grid;
-
       grid-template-columns:
         repeat(
           auto-fit,
           minmax(200px, 1fr)
         );
-
       gap: 16px;
-
     }
 
 
     .menu-item {
-
       background: var(--card-dark);
-
       border: 1px solid var(--border);
-
       border-radius: 15px;
-
       padding: 22px;
-
       cursor: pointer;
-
       transition: 0.2s;
-
     }
 
 
     .menu-item:hover {
-
       border-color: #777b87;
-
       transform: translateY(-2px);
-
     }
 
 
     .menu-item h3 {
-
       margin-bottom: 8px;
-
     }
 
 
     .menu-item p {
-
       color: var(--muted);
-
       font-size: 14px;
-
       line-height: 1.5;
+    }
 
+
+    .restaurant-list {
+      display: grid;
+      gap: 14px;
+    }
+
+
+    .restaurant-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      background: var(--card-dark);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+
+    .restaurant-name {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+
+    .restaurant-info {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+
+    .open-button {
+      background: var(--green);
+      border: none;
+      color: #102018;
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
     }
 
 
     .loading {
-
       min-height: 100vh;
-
       display: flex;
-
       align-items: center;
-
       justify-content: center;
-
       color: var(--muted);
-
       font-size: 16px;
-
     }
 
 
     .error {
-
       max-width: 600px;
-
       margin: 100px auto;
-
       background: #1a1b1f;
-
       border: 1px solid #6b3035;
-
       border-radius: 16px;
-
       padding: 30px;
-
       color: #f0b8bc;
-
       line-height: 1.6;
+    }
 
+
+    .empty {
+      color: var(--muted);
+      padding: 20px 0;
     }
 
 
     @media (max-width: 600px) {
 
       .container {
-
         padding: 25px 18px;
-
       }
 
 
       header {
-
         margin-bottom: 35px;
-
+        flex-direction: column;
+        align-items: flex-start;
       }
 
 
       .header-left {
-
         gap: 10px;
-
-      }
-
-
-      .back-button {
-
-        padding: 9px 12px;
-
       }
 
 
       .brand {
-
         font-size: 10px;
-
         letter-spacing: 4px;
-
-      }
-
-
-      .status {
-
-        font-size: 12px;
-
       }
 
 
       h1 {
-
         font-size: 32px;
+      }
 
+
+      .restaurant-row {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
     }
@@ -435,7 +344,7 @@
     id="loading"
     class="loading"
   >
-    Cargando restaurante...
+    Cargando dashboard...
   </div>
 
 
@@ -449,7 +358,6 @@
     style="display:none;"
   >
 
-
     <div class="container">
 
 
@@ -459,264 +367,274 @@
 
       <header>
 
-
         <div class="header-left">
 
-
-          <!-- BOTÓN VOLVER -->
-
-          <button
-            class="back-button"
-            type="button"
-            onclick="goBackToSuperadmin()"
-          >
-
-            <span class="back-arrow">
-              ←
-            </span>
-
-            Volver
-
-          </button>
-
-
-          <!-- MARCA -->
-
           <div class="brand">
-
             FGV AUTOMATION
-
           </div>
 
-
         </div>
 
 
-        <!-- ESTADO -->
-
-        <div class="status">
-
-          <div class="status-dot"></div>
-
-          Configuración activa
-
-        </div>
-
+        <button
+          type="button"
+          class="logout-button"
+          onclick="logout()"
+        >
+          Cerrar sesión
+        </button>
 
       </header>
 
 
 
       <!-- ========================= -->
-      <!-- HERO -->
+      <!-- SUPERADMIN DASHBOARD -->
       <!-- ========================= -->
 
-      <section class="hero">
+      <div
+        id="superadminDashboard"
+        style="display:none;"
+      >
+
+        <section class="hero">
+
+          <h1>
+            Panel de administración
+          </h1>
+
+          <p class="subtitle">
+            Gestión general de FGV Automation.
+          </p>
+
+        </section>
 
 
-        <h1 id="restaurantName">
+        <section class="grid">
 
-          Cargando...
+          <div class="card">
 
-        </h1>
+            <div class="card-label">
+              Restaurantes
+            </div>
 
-
-        <div
-          class="location"
-          id="restaurantLocation"
-        >
-        </div>
-
-
-      </section>
-
-
-
-      <!-- ========================= -->
-      <!-- CARDS -->
-      <!-- ========================= -->
-
-      <section class="grid">
-
-
-        <!-- RESERVAS -->
-
-        <div class="card">
-
-
-          <div class="card-label">
-
-            Gestión de reservas
+            <div
+              class="card-value"
+              id="totalRestaurants"
+            >
+              —
+            </div>
 
           </div>
+
+
+          <div class="card">
+
+            <div class="card-label">
+              Usuario
+            </div>
+
+            <div
+              class="card-value"
+              id="adminEmail"
+              style="font-size:16px;"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-label">
+              Estado
+            </div>
+
+            <div class="card-value">
+              <span class="status">
+                <span class="status-dot"></span>
+                Superadmin
+              </span>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <section>
+
+          <h2 class="menu-title">
+            Restaurantes registrados
+          </h2>
+
+          <div
+            id="restaurantList"
+            class="restaurant-list"
+          >
+          </div>
+
+        </section>
+
+      </div>
+
+
+
+      <!-- ========================= -->
+      <!-- RESTAURANT DASHBOARD -->
+      <!-- ========================= -->
+
+      <div
+        id="restaurantDashboard"
+        style="display:none;"
+      >
+
+        <section class="hero">
+
+          <button
+            class="back-button"
+            type="button"
+            onclick="goBackToSuperadmin()"
+            style="margin-bottom:25px;"
+          >
+            ← Volver al panel
+          </button>
+
+
+          <h1 id="restaurantName">
+            Cargando...
+          </h1>
 
 
           <div
-            class="card-value"
-            id="reservationType"
+            class="subtitle"
+            id="restaurantLocation"
           >
-
-            —
-
           </div>
 
-
-        </div>
-
-
-
-        <!-- SISTEMA -->
-
-        <div class="card">
-
-
-          <div class="card-label">
-
-            Sistema
-
-          </div>
-
-
-          <div
-            class="card-value"
-            id="reservationSystem"
-          >
-
-            —
-
-          </div>
-
-
-        </div>
+        </section>
 
 
 
-        <!-- TIPO NEGOCIO -->
-
-        <div class="card">
+        <section class="grid">
 
 
-          <div class="card-label">
+          <div class="card">
 
-            Tipo de negocio
+            <div class="card-label">
+              Gestión de reservas
+            </div>
 
-          </div>
-
-
-          <div
-            class="card-value"
-            id="businessType"
-          >
-
-            —
-
-          </div>
-
-
-        </div>
-
-
-      </section>
-
-
-
-      <!-- ========================= -->
-      <!-- GESTIÓN -->
-      <!-- ========================= -->
-
-      <section>
-
-
-        <h2 class="menu-title">
-
-          Gestión del restaurante
-
-        </h2>
-
-
-
-        <div class="menu">
-
-
-          <!-- RESERVAS -->
-
-          <div class="menu-item">
-
-
-            <h3>
-
-              Reservas
-
-            </h3>
-
-
-            <p>
-
-              Gestiona las reservas y disponibilidad
-              del restaurante.
-
-            </p>
-
+            <div
+              class="card-value"
+              id="reservationType"
+            >
+              —
+            </div>
 
           </div>
 
 
 
-          <!-- CLIENTES -->
+          <div class="card">
 
-          <div class="menu-item">
+            <div class="card-label">
+              Sistema
+            </div>
 
-
-            <h3>
-
-              Clientes
-
-            </h3>
-
-
-            <p>
-
-              Consulta y gestiona la información
-              de tus clientes.
-
-            </p>
-
+            <div
+              class="card-value"
+              id="reservationSystem"
+            >
+              —
+            </div>
 
           </div>
 
 
 
-          <!-- CONFIGURACIÓN -->
+          <div class="card">
 
-          <div class="menu-item">
+            <div class="card-label">
+              Tipo de negocio
+            </div>
+
+            <div
+              class="card-value"
+              id="businessType"
+            >
+              —
+            </div>
+
+          </div>
+
+        </section>
 
 
-            <h3>
 
-              Configuración
+        <section>
 
-            </h3>
+          <h2 class="menu-title">
+            Gestión del restaurante
+          </h2>
 
 
-            <p>
+          <div class="menu">
 
-              Modifica las reglas y preferencias
-              del restaurante.
 
-            </p>
+            <div class="menu-item">
+
+              <h3>
+                Reservas
+              </h3>
+
+              <p>
+                Gestiona las reservas y disponibilidad
+                del restaurante.
+              </p>
+
+            </div>
+
+
+
+            <div class="menu-item">
+
+              <h3>
+                Clientes
+              </h3>
+
+              <p>
+                Consulta y gestiona la información
+                de tus clientes.
+              </p>
+
+            </div>
+
+
+
+            <div class="menu-item">
+
+              <h3>
+                Configuración
+              </h3>
+
+              <p>
+                Modifica las reglas y preferencias
+                del restaurante.
+              </p>
+
+            </div>
 
 
           </div>
 
+        </section>
 
-        </div>
-
-
-      </section>
+      </div>
 
 
     </div>
-
 
   </div>
 
@@ -753,21 +671,18 @@
 
     /*
     ==========================================
-    VOLVER AL PANEL SUPERADMIN
+    SUPERADMIN
     ==========================================
     */
 
-    function goBackToSuperadmin() {
-
-      window.history.back();
-
-    }
+    const SUPERADMIN_EMAIL =
+      "fgv2030mll@gmail.com";
 
 
 
     /*
     ==========================================
-    OBTENER ID DESDE LA URL
+    OBTENER ID DESDE URL
     ==========================================
     */
 
@@ -781,85 +696,291 @@
       params.get("id");
 
 
-    console.log(
-      "ESTABLISHMENT ID:",
-      establishmentId
-    );
+
+    /*
+    ==========================================
+    CERRAR SESIÓN
+    ==========================================
+    */
+
+    async function logout() {
+
+      await supabaseClient.auth.signOut();
+
+
+      window.location.href =
+        "login.html";
+
+    }
 
 
 
     /*
     ==========================================
-    CARGAR DASHBOARD
+    VOLVER AL PANEL SUPERADMIN
     ==========================================
     */
 
-    async function loadDashboard() {
+    function goBackToSuperadmin() {
 
-      try {
+      window.location.href =
+        "dashboard.html";
+
+    }
 
 
-        /*
-        ======================================
-        COMPROBAR ID
-        ======================================
-        */
 
-        if (!establishmentId) {
+    /*
+    ==========================================
+    MOSTRAR APP
+    ==========================================
+    */
 
-          throw new Error(
-            "No se ha encontrado el identificador del restaurante."
+    function showApp() {
+
+      document
+        .getElementById("loading")
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById("app")
+        .style.display =
+          "block";
+
+    }
+
+
+
+    /*
+    ==========================================
+    CARGAR SUPERADMIN
+    ==========================================
+    */
+
+    async function loadSuperadminDashboard(
+      user
+    ) {
+
+      document
+        .getElementById("superadminDashboard")
+        .style.display =
+          "block";
+
+
+      document
+        .getElementById("adminEmail")
+        .textContent =
+          user.email;
+
+
+      const {
+        data: establishments,
+        error
+      } =
+        await supabaseClient
+          .from("establishments")
+          .select("*")
+          .order(
+            "created_at",
+            {
+              ascending: false
+            }
           );
 
-        }
+
+      if (error) {
+
+        console.error(
+          "ERROR CARGANDO RESTAURANTES:",
+          error
+        );
+
+      }
 
 
-
-        console.log(
-          "CARGANDO DASHBOARD:",
-          establishmentId
+      const restaurantList =
+        document.getElementById(
+          "restaurantList"
         );
 
 
+      if (
+        !establishments ||
+        establishments.length === 0
+      ) {
 
-        /*
-        ======================================
-        CARGAR ESTABLECIMIENTO
-        ======================================
-        */
+        document
+          .getElementById(
+            "totalRestaurants"
+          )
+          .textContent =
+            "0";
+
+
+        restaurantList.innerHTML =
+          `
+            <div class="empty">
+              Todavía no hay restaurantes registrados.
+            </div>
+          `;
+
+
+        showApp();
+
+        return;
+
+      }
+
+
+      document
+        .getElementById(
+          "totalRestaurants"
+        )
+        .textContent =
+          establishments.length;
+
+
+      restaurantList.innerHTML =
+        establishments
+          .map(
+            function(establishment) {
+
+              const name =
+                establishment.name ||
+                "Restaurante sin nombre";
+
+
+              const address =
+                establishment.address ||
+                "Ubicación no especificada";
+
+
+              return `
+                <div class="restaurant-row">
+
+                  <div>
+
+                    <div class="restaurant-name">
+                      ${escapeHtml(name)}
+                    </div>
+
+                    <div class="restaurant-info">
+                      ${escapeHtml(address)}
+                    </div>
+
+                  </div>
+
+                  <button
+                    class="open-button"
+                    onclick="openRestaurant('${establishment.id}')"
+                  >
+                    Abrir
+                  </button>
+
+                </div>
+              `;
+
+            }
+          )
+          .join("");
+
+
+      showApp();
+
+    }
+
+
+
+    /*
+    ==========================================
+    ABRIR RESTAURANTE
+    ==========================================
+    */
+
+    function openRestaurant(id) {
+
+      window.location.href =
+        "dashboard.html?id=" +
+        encodeURIComponent(id);
+
+    }
+
+
+
+    /*
+    ==========================================
+    ESCAPAR HTML
+    ==========================================
+    */
+
+    function escapeHtml(value) {
+
+      return String(value)
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+
+    /*
+    ==========================================
+    CARGAR DASHBOARD RESTAURANTE
+    ==========================================
+    */
+
+    async function loadRestaurantDashboard() {
+
+      try {
+
+        document
+          .getElementById(
+            "restaurantDashboard"
+          )
+          .style.display =
+            "block";
+
 
         const {
           data: establishmentRows,
           error: establishmentError
-        } = await supabaseClient
-          .from("establishments")
-          .select("*")
-          .eq(
-            "id",
-            establishmentId
-          )
-          .limit(1);
-
+        } =
+          await supabaseClient
+            .from("establishments")
+            .select("*")
+            .eq(
+              "id",
+              establishmentId
+            )
+            .limit(1);
 
 
         if (establishmentError) {
-
-          console.error(
-            "ERROR CARGANDO ESTABLECIMIENTO:",
-            establishmentError
-          );
 
           throw establishmentError;
 
         }
 
-
-
-        /*
-        ======================================
-        COMPROBAR RESULTADO
-        ======================================
-        */
 
         if (
           !establishmentRows ||
@@ -873,62 +994,30 @@
         }
 
 
-
-        /*
-        ======================================
-        OBTENER ESTABLECIMIENTO
-        ======================================
-        */
-
         const establishment =
           establishmentRows[0];
 
 
-        console.log(
-          "ESTABLECIMIENTO CARGADO:",
-          establishment
-        );
-
-
-
-        /*
-        ======================================
-        CARGAR CONFIGURACIÓN
-        ======================================
-        */
-
         const {
           data: configRows,
           error: configError
-        } = await supabaseClient
-          .from("establishment_config")
-          .select("*")
-          .eq(
-            "establishment_id",
-            establishmentId
-          )
-          .limit(1);
-
+        } =
+          await supabaseClient
+            .from("establishment_config")
+            .select("*")
+            .eq(
+              "establishment_id",
+              establishmentId
+            )
+            .limit(1);
 
 
         if (configError) {
-
-          console.error(
-            "ERROR CARGANDO CONFIGURACIÓN:",
-            configError
-          );
 
           throw configError;
 
         }
 
-
-
-        /*
-        ======================================
-        OBTENER CONFIGURACIÓN
-        ======================================
-        */
 
         const configRow =
           configRows &&
@@ -937,38 +1026,12 @@
             : null;
 
 
-        console.log(
-          "CONFIGURACIÓN CARGADA:",
-          configRow
-        );
-
-
-
-        /*
-        ======================================
-        EXTRAER CONFIG
-        ======================================
-        */
-
         const config =
           configRow &&
           configRow.config
             ? configRow.config
             : {};
 
-
-        console.log(
-          "CONFIG FINAL:",
-          config
-        );
-
-
-
-        /*
-        ======================================
-        NOMBRE RESTAURANTE
-        ======================================
-        */
 
         document
           .getElementById(
@@ -978,13 +1041,6 @@
             establishment.name ||
             "Restaurante";
 
-
-
-        /*
-        ======================================
-        UBICACIÓN
-        ======================================
-        */
 
         const locationParts =
           [];
@@ -1020,13 +1076,6 @@
               : "Ubicación no especificada";
 
 
-
-        /*
-        ======================================
-        GESTIÓN DE RESERVAS
-        ======================================
-        */
-
         document
           .getElementById(
             "reservationType"
@@ -1040,13 +1089,6 @@
                 : "No configurado";
 
 
-
-        /*
-        ======================================
-        SISTEMA DE RESERVAS
-        ======================================
-        */
-
         document
           .getElementById(
             "reservationSystem"
@@ -1055,13 +1097,6 @@
             config.reservation_system ||
             "No configurado";
 
-
-
-        /*
-        ======================================
-        TIPO DE NEGOCIO
-        ======================================
-        */
 
         document
           .getElementById(
@@ -1072,49 +1107,9 @@
             "No especificado";
 
 
-
-        /*
-        ======================================
-        OCULTAR LOADING
-        ======================================
-        */
-
-        document
-          .getElementById(
-            "loading"
-          )
-          .style.display =
-            "none";
-
-
-
-        /*
-        ======================================
-        MOSTRAR APP
-        ======================================
-        */
-
-        document
-          .getElementById(
-            "app"
-          )
-          .style.display =
-            "block";
-
-
-        console.log(
-          "DASHBOARD CARGADO CORRECTAMENTE"
-        );
-
+        showApp();
 
       } catch (error) {
-
-
-        /*
-        ======================================
-        ERROR
-        ======================================
-        */
 
         console.error(
           "ERROR CARGANDO DASHBOARD:",
@@ -1122,59 +1117,40 @@
         );
 
 
-        const errorMessage =
-          error &&
-          error.message
-            ? error.message
-            : String(error);
-
-
-
-        /*
-        Ocultamos el loading
-        */
-
-        const loading =
-          document.getElementById(
-            "loading"
-          );
-
-
-        if (loading) {
-
-          loading.style.display =
+        document
+          .getElementById("loading")
+          .style.display =
             "none";
 
-        }
 
+        document.body.innerHTML =
+          `
+            <div class="error">
 
+              <h2>
+                No se ha podido cargar el restaurante
+              </h2>
 
-        /*
-        Mostramos error
-        */
+              <br>
 
-        document.body.innerHTML = `
+              <p>
+                ${escapeHtml(
+                  error.message ||
+                  String(error)
+                )}
+              </p>
 
-          <div class="error">
+              <br>
 
-            <h2>
+              <button
+                class="logout-button"
+                onclick="window.location.href='dashboard.html'"
+              >
+                Volver
+              </button>
 
-              No se ha podido cargar el restaurante
-
-            </h2>
-
-            <br>
-
-            <p>
-
-              ${errorMessage}
-
-            </p>
-
-          </div>
-
-        `;
-
+            </div>
+          `;
 
       }
 
@@ -1188,7 +1164,136 @@
     ==========================================
     */
 
-    loadDashboard();
+    async function initDashboard() {
+
+      const {
+        data: sessionData,
+        error
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
+
+
+      if (error) {
+
+        console.error(
+          "ERROR SESIÓN:",
+          error
+        );
+
+      }
+
+
+      const session =
+        sessionData.session;
+
+
+      if (!session) {
+
+        window.location.href =
+          "login.html";
+
+        return;
+
+      }
+
+
+      const user =
+        session.user;
+
+
+      const userEmail =
+        (
+          user.email ||
+          ""
+        )
+          .trim()
+          .toLowerCase();
+
+
+      const superadminEmail =
+        SUPERADMIN_EMAIL
+          .trim()
+          .toLowerCase();
+
+
+      /*
+      Si es el superadmin y no ha pedido
+      abrir un restaurante concreto,
+      mostramos el panel general.
+      */
+
+      if (
+        userEmail === superadminEmail &&
+        !establishmentId
+      ) {
+
+        await loadSuperadminDashboard(
+          user
+        );
+
+        return;
+
+      }
+
+
+      /*
+      Si hay un ID de restaurante,
+      cargamos el dashboard normal.
+      */
+
+      if (establishmentId) {
+
+        await loadRestaurantDashboard();
+
+        return;
+
+      }
+
+
+      /*
+      Usuario normal sin restaurante
+      seleccionado.
+      */
+
+      document
+        .getElementById("loading")
+        .style.display =
+          "none";
+
+
+      document.body.innerHTML =
+        `
+          <div class="error">
+
+            <h2>
+              No se ha encontrado ningún restaurante
+            </h2>
+
+            <br>
+
+            <p>
+              Tu cuenta todavía no tiene un restaurante configurado.
+            </p>
+
+            <br>
+
+            <button
+              class="logout-button"
+              onclick="logout()"
+            >
+              Cerrar sesión
+            </button>
+
+          </div>
+        `;
+
+    }
+
+
+
+    initDashboard();
 
 
   </script>

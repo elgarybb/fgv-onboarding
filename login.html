@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -116,6 +118,20 @@
       cursor: not-allowed;
     }
 
+    .forgot-password {
+      display: block;
+      text-align: center;
+      margin-top: 22px;
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .forgot-password:hover {
+      color: #ffffff;
+    }
+
     .error-message {
       display: none;
       margin-top: 20px;
@@ -125,6 +141,19 @@
       border: 1px solid rgba(239, 68, 68, 0.35);
       color: #fca5a5;
       font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(110, 231, 183, 0.1);
+      border: 1px solid rgba(110, 231, 183, 0.35);
+      color: #86efc5;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .loading-message {
@@ -136,7 +165,9 @@
     }
 
   </style>
+
 </head>
+
 
 <body>
 
@@ -148,15 +179,19 @@
         FGV AUTOMATION
       </div>
 
+
       <h1>
         Accede a tu cuenta
       </h1>
+
 
       <p class="subtitle">
         Gestiona las reservas y la configuración de tu restaurante.
       </p>
 
+
       <form id="loginForm">
+
 
         <div class="field">
 
@@ -173,6 +208,7 @@
 
         </div>
 
+
         <div class="field">
 
           <label for="password">
@@ -188,6 +224,7 @@
 
         </div>
 
+
         <button
           id="loginButton"
           type="submit"
@@ -195,7 +232,18 @@
           Iniciar sesión
         </button>
 
+
       </form>
+
+
+      <a
+        href="#"
+        id="forgotPassword"
+        class="forgot-password"
+      >
+        ¿Has olvidado tu contraseña?
+      </a>
+
 
       <div
         id="loadingMessage"
@@ -204,10 +252,18 @@
         Comprobando acceso...
       </div>
 
+
       <div
         id="errorMessage"
         class="error-message"
       ></div>
+
+
+      <div
+        id="successMessage"
+        class="success-message"
+      ></div>
+
 
     </section>
 
@@ -216,7 +272,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
   <script>
+
 
     /*
     =======================================
@@ -225,7 +283,8 @@
     */
 
     const SUPABASE_URL =
-      "https://ehimrfhysnnickpdtqg.supabase.co";
+      "https://heifmrfhysnnikcpdtqg.supabase.co";
+
 
     const SUPABASE_PUBLISHABLE_KEY =
       "sb_publishable_oz9UHM_4VYm-RqWerIYOSg_YFOBxO24";
@@ -240,7 +299,14 @@
     const supabase =
       window.supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
+        SUPABASE_PUBLISHABLE_KEY,
+        {
+          auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true
+          }
+        }
       );
 
 
@@ -253,20 +319,73 @@
     const loginForm =
       document.getElementById("loginForm");
 
+
     const emailInput =
       document.getElementById("email");
+
 
     const passwordInput =
       document.getElementById("password");
 
+
     const loginButton =
       document.getElementById("loginButton");
+
+
+    const forgotPassword =
+      document.getElementById("forgotPassword");
+
 
     const errorMessage =
       document.getElementById("errorMessage");
 
+
+    const successMessage =
+      document.getElementById("successMessage");
+
+
     const loadingMessage =
       document.getElementById("loadingMessage");
+
+
+    /*
+    =======================================
+    MOSTRAR ERROR
+    =======================================
+    */
+
+    function showError(message) {
+
+      successMessage.style.display =
+        "none";
+
+      errorMessage.textContent =
+        message;
+
+      errorMessage.style.display =
+        "block";
+
+    }
+
+
+    /*
+    =======================================
+    MOSTRAR ÉXITO
+    =======================================
+    */
+
+    function showSuccess(message) {
+
+      errorMessage.style.display =
+        "none";
+
+      successMessage.textContent =
+        message;
+
+      successMessage.style.display =
+        "block";
+
+    }
 
 
     /*
@@ -276,19 +395,22 @@
     */
 
     loginForm.addEventListener(
+
       "submit",
-      async function (event) {
+
+      async function(event) {
 
         event.preventDefault();
 
 
         /*
-        =======================================
         RESET INTERFAZ
-        =======================================
         */
 
         errorMessage.style.display =
+          "none";
+
+        successMessage.style.display =
           "none";
 
         loadingMessage.style.display =
@@ -302,13 +424,12 @@
 
 
         /*
-        =======================================
         DATOS DEL FORMULARIO
-        =======================================
         */
 
         const email =
           emailInput.value.trim();
+
 
         const password =
           passwordInput.value;
@@ -316,10 +437,9 @@
 
         try {
 
+
           /*
-          =======================================
           INICIAR SESIÓN
-          =======================================
           */
 
           const {
@@ -360,9 +480,7 @@
 
 
           /*
-          =======================================
           BUSCAR PERFIL
-          =======================================
           */
 
           const {
@@ -400,16 +518,7 @@
 
 
           /*
-          =======================================
           BUSCAR ACCESOS A RESTAURANTES
-          =======================================
-
-          Esto se consulta incluso para el
-          superadmin.
-
-          Así tú puedes entrar como superadmin
-          global y también tener acceso al
-          restaurante de prueba como owner.
           */
 
           const {
@@ -439,9 +548,7 @@
 
 
           /*
-          =======================================
           SUPERADMIN
-          =======================================
           */
 
           if (
@@ -449,26 +556,17 @@
             "superadmin"
           ) {
 
+
             console.log(
               "ACCESO SUPERADMIN"
             );
 
 
-            /*
-            De momento usamos el restaurante
-            asociado si existe.
-
-            Más adelante crearemos:
-
-            admin.html
-
-            que será tu dashboard maestro.
-            */
-
             if (
               establishments &&
               establishments.length > 0
             ) {
+
 
               window.location.href =
                 "dashboard.html?id=" +
@@ -476,18 +574,15 @@
                   establishments[0].establishment_id
                 );
 
+
               return;
 
             }
 
 
-            /*
-            Si eres superadmin pero todavía
-            no tienes restaurante asociado.
-            */
-
             window.location.href =
               "dashboard.html?admin=true";
+
 
             return;
 
@@ -495,9 +590,7 @@
 
 
           /*
-          =======================================
-        USUARIO DE RESTAURANTE
-          =======================================
+          USUARIO DE RESTAURANTE
           */
 
           if (
@@ -513,9 +606,7 @@
 
 
           /*
-          =======================================
           REDIRECCIÓN AL RESTAURANTE
-          =======================================
           */
 
           window.location.href =
@@ -526,6 +617,7 @@
 
 
         } catch (error) {
+
 
           console.error(
             "ERROR EN LOGIN:",
@@ -548,20 +640,21 @@
           }
 
 
-          errorMessage.textContent =
-            message;
-
-          errorMessage.style.display =
-            "block";
+          showError(
+            message
+          );
 
 
         } finally {
 
+
           loadingMessage.style.display =
             "none";
 
+
           loginButton.disabled =
             false;
+
 
           loginButton.textContent =
             "Iniciar sesión";
@@ -569,9 +662,123 @@
         }
 
       }
+
     );
+
+
+    /*
+    =======================================
+    RECUPERAR CONTRASEÑA
+    =======================================
+    */
+
+    forgotPassword.addEventListener(
+
+      "click",
+
+      async function(event) {
+
+        event.preventDefault();
+
+
+        errorMessage.style.display =
+          "none";
+
+        successMessage.style.display =
+          "none";
+
+
+        const email =
+          emailInput.value.trim();
+
+
+        if (!email) {
+
+          showError(
+            "Introduce tu correo electrónico primero para poder enviarte el enlace de recuperación."
+          );
+
+          emailInput.focus();
+
+          return;
+
+        }
+
+
+        forgotPassword.textContent =
+          "Enviando enlace...";
+
+
+        try {
+
+
+          const {
+            error
+          } =
+            await supabase.auth.resetPasswordForEmail(
+              email,
+              {
+                redirectTo:
+                  "https://elgarybb.github.io/fgv-onboarding/reset-password.html"
+              }
+            );
+
+
+          if (error) {
+            throw error;
+          }
+
+
+          showSuccess(
+            "Te hemos enviado un correo con un enlace para crear una nueva contraseña. Revisa también la carpeta de spam."
+          );
+
+
+        } catch (error) {
+
+
+          console.error(
+            "ERROR RECUPERANDO CONTRASEÑA:",
+            error
+          );
+
+
+          let message =
+            "No se ha podido enviar el correo de recuperación.";
+
+
+          if (
+            error &&
+            error.message
+          ) {
+
+            message =
+              error.message;
+
+          }
+
+
+          showError(
+            message
+          );
+
+
+        } finally {
+
+
+          forgotPassword.textContent =
+            "¿Has olvidado tu contraseña?";
+
+        }
+
+      }
+
+    );
+
 
   </script>
 
+
 </body>
+
 </html>

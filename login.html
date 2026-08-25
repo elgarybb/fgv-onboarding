@@ -232,7 +232,6 @@
           Iniciar sesión
         </button>
 
-
       </form>
 
 
@@ -264,7 +263,6 @@
         class="success-message"
       ></div>
 
-
     </section>
 
   </main>
@@ -275,7 +273,6 @@
 
   <script>
 
-
     /*
     =======================================
     CONFIGURACIÓN SUPABASE
@@ -283,7 +280,7 @@
     */
 
     const SUPABASE_URL =
-      "https://heifmrfhysnnikcpdtqg.supabase.co";
+      "https://ehifmrfhysnnikcpdtqg.supabase.co";
 
 
     const SUPABASE_PUBLISHABLE_KEY =
@@ -319,30 +316,23 @@
     const loginForm =
       document.getElementById("loginForm");
 
-
     const emailInput =
       document.getElementById("email");
-
 
     const passwordInput =
       document.getElementById("password");
 
-
     const loginButton =
       document.getElementById("loginButton");
-
 
     const forgotPassword =
       document.getElementById("forgotPassword");
 
-
     const errorMessage =
       document.getElementById("errorMessage");
 
-
     const successMessage =
       document.getElementById("successMessage");
-
 
     const loadingMessage =
       document.getElementById("loadingMessage");
@@ -402,11 +392,6 @@
 
         event.preventDefault();
 
-
-        /*
-        RESET INTERFAZ
-        */
-
         errorMessage.style.display =
           "none";
 
@@ -423,24 +408,14 @@
           "Accediendo...";
 
 
-        /*
-        DATOS DEL FORMULARIO
-        */
-
         const email =
           emailInput.value.trim();
-
 
         const password =
           passwordInput.value;
 
 
         try {
-
-
-          /*
-          INICIAR SESIÓN
-          */
 
           const {
             data: authData,
@@ -556,7 +531,6 @@
             "superadmin"
           ) {
 
-
             console.log(
               "ACCESO SUPERADMIN"
             );
@@ -567,13 +541,11 @@
               establishments.length > 0
             ) {
 
-
               window.location.href =
                 "dashboard.html?id=" +
                 encodeURIComponent(
                   establishments[0].establishment_id
                 );
-
 
               return;
 
@@ -582,7 +554,6 @@
 
             window.location.href =
               "dashboard.html?admin=true";
-
 
             return;
 
@@ -618,7 +589,6 @@
 
         } catch (error) {
 
-
           console.error(
             "ERROR EN LOGIN:",
             error
@@ -647,14 +617,11 @@
 
         } finally {
 
-
           loadingMessage.style.display =
             "none";
 
-
           loginButton.disabled =
             false;
-
 
           loginButton.textContent =
             "Iniciar sesión";
@@ -709,8 +676,11 @@
           "Enviando enlace...";
 
 
-        try {
+        forgotPassword.style.pointerEvents =
+          "none";
 
+
+        try {
 
           const {
             error
@@ -735,7 +705,6 @@
 
 
         } catch (error) {
-
 
           console.error(
             "ERROR RECUPERANDO CONTRASEÑA:",
@@ -765,9 +734,11 @@
 
         } finally {
 
-
           forgotPassword.textContent =
             "¿Has olvidado tu contraseña?";
+
+          forgotPassword.style.pointerEvents =
+            "auto";
 
         }
 
@@ -775,9 +746,7 @@
 
     );
 
-
   </script>
-
 
 </body>
 

@@ -1,649 +1,1524 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>FGV Automation | Onboarding</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    :root {
-      --bg: #090a0d;
-      --card: #1a1b1f;
-      --card-dark: #111217;
-      --border: #30323a;
-      --text: #f1f1f3;
-      --muted: #a0a1a8;
-      --input: #121318;
-      --button-dark: #282a31;
-    }
 
     body {
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
         sans-serif;
+
+      background: #0b0b0d;
+      color: #f5f5f5;
+
+      min-height: 100vh;
+
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 30px 20px;
+      align-items: center;
+
+      padding: 30px 15px;
     }
+
 
     .container {
       width: 100%;
-      max-width: 640px;
+      max-width: 680px;
+
+      background: #171719;
+
+      border: 1px solid #2c2c30;
+      border-radius: 18px;
+
+      padding: 38px;
+
+      box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.35);
     }
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 36px;
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
-    }
 
     .brand {
-      font-size: 13px;
-      letter-spacing: 6px;
-      color: #a9abb3;
-      margin-bottom: 26px;
+      font-size: 14px;
+      letter-spacing: 5px;
+      color: #9b9ba1;
+
+      margin-bottom: 28px;
     }
+
 
     .progress {
       display: flex;
       gap: 8px;
-      margin-bottom: 32px;
+
+      margin-bottom: 34px;
     }
+
 
     .progress-bar {
       height: 4px;
       flex: 1;
+
+      background: #36363b;
+
       border-radius: 10px;
-      background: #34363e;
-      transition: 0.3s;
+
+      transition:
+        background .3s ease;
     }
 
+
     .progress-bar.active {
-      background: #e8e8ea;
+      background: #f2f2f2;
     }
+
 
     .step {
       display: none;
+
+      animation:
+        fade .25s ease;
     }
+
 
     .step.active {
       display: block;
     }
 
+
+    @keyframes fade {
+
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
     h1 {
-      font-size: 30px;
-      line-height: 1.15;
+      font-size: 32px;
+
       margin-bottom: 10px;
+
       letter-spacing: -1px;
     }
 
+
     .subtitle {
-      color: var(--muted);
+      color: #a5a5aa;
+
       line-height: 1.6;
+
       margin-bottom: 28px;
-      font-size: 16px;
     }
 
+
     .field {
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
+
 
     label {
       display: block;
-      margin-bottom: 8px;
-      color: #c7c8ce;
+
       font-size: 14px;
-      font-weight: 500;
+
+      margin-bottom: 8px;
+
+      color: #d5d5d8;
     }
+
 
     input,
     select,
     textarea {
       width: 100%;
-      background: var(--input);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 15px 16px;
-      border-radius: 11px;
+
+      background: #101012;
+
+      border:
+        1px solid #343439;
+
+      color: white;
+
+      padding: 15px;
+
+      border-radius: 10px;
+
       font-size: 15px;
+
       outline: none;
-      transition: 0.2s;
     }
+
+
+    textarea {
+      resize: vertical;
+
+      min-height: 100px;
+    }
+
 
     input:focus,
     select:focus,
     textarea:focus {
-      border-color: #777b87;
+      border-color: #77777d;
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 110px;
-    }
 
     .options {
       display: grid;
-      gap: 14px;
+
+      gap: 12px;
+
+      margin-top: 10px;
     }
+
 
     .option {
-      border: 1px solid var(--border);
-      background: var(--input);
-      padding: 18px;
-      border-radius: 12px;
+      background: #101012;
+
+      border:
+        1px solid #343439;
+
+      padding: 16px;
+
+      border-radius: 10px;
+
       cursor: pointer;
-      transition: 0.2s;
+
+      transition: .2s;
     }
+
 
     .option:hover {
-      border-color: #666a76;
+      border-color: #77777d;
     }
 
+
     .option.selected {
-      border-color: #e8e8ea;
-      background: #202126;
+      border-color: #ffffff;
+
+      background: #1d1d20;
     }
+
+
+    .option input {
+      display: none;
+    }
+
 
     .option-title {
       font-weight: 600;
+
       margin-bottom: 5px;
     }
 
-    .option-description {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.5;
+
+    .option-text {
+      font-size: 13px;
+
+      color: #96969c;
+
+      line-height: 1.4;
     }
 
-    .actions {
+
+    .buttons {
       display: flex;
+
       gap: 12px;
-      margin-top: 28px;
+
+      margin-top: 30px;
     }
+
 
     button {
       border: none;
-      border-radius: 11px;
-      padding: 15px 20px;
+
+      padding: 15px 22px;
+
+      border-radius: 10px;
+
       font-size: 15px;
+
       font-weight: 600;
+
       cursor: pointer;
-      transition: 0.2s;
+
+      transition: .2s;
     }
 
-    .btn-primary {
+
+    .primary {
       flex: 1;
-      background: #eeeeef;
-      color: #1b1b1f;
+
+      background: #f2f2f2;
+
+      color: #151515;
     }
 
-    .btn-primary:hover {
-      opacity: 0.9;
+
+    .primary:hover {
+      background: white;
     }
 
-    .btn-primary:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
+
+    .secondary {
+      background: #27272b;
+
+      color: white;
     }
 
-    .btn-secondary {
-      background: var(--button-dark);
-      color: #d9d9dd;
+
+    .secondary:hover {
+      background: #333338;
     }
+
 
     .summary {
-      background: var(--card-dark);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      background: #101012;
+
+      border:
+        1px solid #343439;
+
+      border-radius: 12px;
+
       padding: 20px;
-      line-height: 1.65;
+
+      line-height: 1.7;
     }
 
-    .summary-section {
-      margin-bottom: 20px;
-    }
-
-    .summary-section:last-child {
-      margin-bottom: 0;
-    }
 
     .summary strong {
-      color: #d9d9dd;
+      color: white;
     }
+
 
     .success {
       text-align: center;
-      padding: 20px 0;
+
+      padding: 30px 10px;
     }
 
-    .success-icon {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 20px;
-      border-radius: 50%;
-      background: #eeeeef;
-      color: #111217;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 34px;
-      font-weight: bold;
+
+    .success h1 {
+      margin-bottom: 15px;
     }
 
-    .error-message {
-      display: none;
-      margin-top: 18px;
-      background: #311b1d;
-      border: 1px solid #6b3035;
-      color: #f0b8bc;
-      padding: 14px;
+
+    .schedule-day {
+      background: #101012;
+
+      border:
+        1px solid #343439;
+
       border-radius: 10px;
-      font-size: 14px;
-      line-height: 1.5;
+
+      padding: 15px;
+
+      margin-bottom: 12px;
     }
+
+
+    .schedule-day-title {
+      font-weight: 600;
+
+      margin-bottom: 12px;
+
+      color: #ffffff;
+    }
+
+
+    .schedule-times {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 12px;
+    }
+
+
+    .schedule-closed {
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      margin-top: 12px;
+
+      color: #96969c;
+
+      font-size: 13px;
+    }
+
+
+    .schedule-closed input {
+      width: auto;
+
+      padding: 0;
+    }
+
 
     @media (max-width: 600px) {
-      .card {
-        padding: 26px 20px;
+
+      .container {
+        padding: 25px;
       }
+
 
       h1 {
         font-size: 26px;
       }
+
+
+      .schedule-times {
+        grid-template-columns: 1fr;
+      }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
   <div class="container">
 
-    <div class="card">
 
-      <div class="brand">FGV AUTOMATION</div>
+    <div class="brand">
 
-      <div class="progress">
-        <div class="progress-bar active"></div>
-        <div class="progress-bar"></div>
-        <div class="progress-bar"></div>
-        <div class="progress-bar"></div>
-      </div>
-
-      <!-- PASO 1 -->
-
-      <div class="step active" id="step1">
-
-        <h1>Vamos a configurar tu restaurante.</h1>
-
-        <p class="subtitle">
-          En unos minutos tendremos la información necesaria para adaptar
-          FGV Automation a tu negocio.
-        </p>
-
-        <div class="field">
-          <label>Nombre del restaurante</label>
-
-          <input
-            type="text"
-            id="restaurantName"
-            placeholder="Ej. Restaurante La Plaza"
-          />
-        </div>
-
-        <div class="field">
-
-          <label>Tipo de negocio</label>
-
-          <select id="businessType">
-            <option value="Restaurante">Restaurante</option>
-            <option value="Bar">Bar</option>
-            <option value="Cafetería">Cafetería</option>
-            <option value="Otro">Otro</option>
-          </select>
-
-        </div>
-
-        <div class="field">
-
-          <label>Ciudad</label>
-
-          <input
-            type="text"
-            id="city"
-            placeholder="Ej. Albacete"
-          />
-
-        </div>
-
-        <div class="field">
-
-          <label>Dirección</label>
-
-          <input
-            type="text"
-            id="address"
-            placeholder="Ej. Calle Mayor 10"
-          />
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="btn-primary"
-            onclick="nextStep(2)"
-          >
-            Continuar
-          </button>
-
-        </div>
-
-      </div>
-
-      <!-- PASO 2 -->
-
-      <div class="step" id="step2">
-
-        <h1>Información de contacto.</h1>
-
-        <p class="subtitle">
-          Estos datos permitirán identificar y configurar correctamente
-          el establecimiento.
-        </p>
-
-        <div class="field">
-
-          <label>Teléfono</label>
-
-          <input
-            type="tel"
-            id="phone"
-            placeholder="Ej. 600 000 000"
-          />
-
-        </div>
-
-        <div class="field">
-
-          <label>Email del restaurante</label>
-
-          <input
-            type="email"
-            id="email"
-            placeholder="Ej. hola@restaurante.com"
-          />
-
-        </div>
-
-        <div class="field">
-
-          <label>Zona horaria</label>
-
-          <select id="timezone">
-            <option value="Europe/Madrid">
-              España - Europe/Madrid
-            </option>
-          </select>
-
-        </div>
-
-        <div class="field">
-
-          <label>Idioma principal</label>
-
-          <select id="language">
-            <option value="Español">Español</option>
-            <option value="English">English</option>
-          </select>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="btn-secondary"
-            onclick="previousStep(1)"
-          >
-            Atrás
-          </button>
-
-          <button
-            class="btn-primary"
-            onclick="nextStep(3)"
-          >
-            Continuar
-          </button>
-
-        </div>
-
-      </div>
-
-      <!-- PASO 3 -->
-
-      <div class="step" id="step3">
-
-        <h1>¿Cómo gestionáis las reservas?</h1>
-
-        <p class="subtitle">
-          Esto nos permitirá adaptar FGV Automation al funcionamiento
-          actual de tu restaurante.
-        </p>
-
-        <div class="options">
-
-          <div
-            class="option"
-            id="manualOption"
-            onclick="selectReservationType('manual')"
-          >
-
-            <div class="option-title">
-              Gestionamos las reservas manualmente
-            </div>
-
-            <div class="option-description">
-              Utilizamos una agenda, libro, teléfono, WhatsApp
-              u otro sistema manual.
-            </div>
-
-          </div>
-
-          <div
-            class="option"
-            id="externalOption"
-            onclick="selectReservationType('external')"
-          >
-
-            <div class="option-title">
-              Utilizamos un sistema de reservas
-            </div>
-
-            <div class="option-description">
-              Ya trabajamos con CoverManager, TheFork,
-              Google Calendar u otra plataforma.
-            </div>
-
-          </div>
-
-        </div>
-
-        <div
-          class="field"
-          id="reservationSystemContainer"
-          style="display:none; margin-top:18px;"
-        >
-
-          <label>¿Qué sistema utilizáis?</label>
-
-          <input
-            type="text"
-            id="reservationSystem"
-            placeholder="Ej. CoverManager"
-          />
-
-        </div>
-
-        <div
-          id="manualConfiguration"
-          style="display:none; margin-top:22px;"
-        >
-
-          <div class="field">
-
-            <label>Máximo de personas por reserva</label>
-
-            <input
-              type="number"
-              id="maxPeople"
-              placeholder="Ej. 10"
-              min="1"
-            />
-
-          </div>
-
-          <div class="field">
-
-            <label>¿Con cuánta antelación se puede reservar?</label>
-
-            <input
-              type="text"
-              id="bookingAdvance"
-              placeholder="Ej. Hasta 7 días antes"
-            />
-
-          </div>
-
-          <div class="field">
-
-            <label>Reglas especiales</label>
-
-            <textarea
-              id="specialRules"
-              placeholder="Ej. No aceptamos reservas después de las 22:00..."
-            ></textarea>
-
-          </div>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="btn-secondary"
-            onclick="previousStep(2)"
-          >
-            Atrás
-          </button>
-
-          <button
-            class="btn-primary"
-            onclick="nextStep(4)"
-          >
-            Continuar
-          </button>
-
-        </div>
-
-      </div>
-
-      <!-- PASO 4 -->
-
-      <div class="step" id="step4">
-
-        <h1>Todo preparado.</h1>
-
-        <p class="subtitle">
-          Revisa la información antes de crear la configuración.
-        </p>
-
-        <div
-          class="summary"
-          id="summary"
-        ></div>
-
-        <div
-          class="error-message"
-          id="errorMessage"
-        ></div>
-
-        <div class="actions">
-
-          <button
-            class="btn-secondary"
-            onclick="previousStep(3)"
-            id="backButton"
-          >
-            Atrás
-          </button>
-
-          <button
-            class="btn-primary"
-            id="finishButton"
-            onclick="finishOnboarding()"
-          >
-            Finalizar configuración
-          </button>
-
-        </div>
-
-      </div>
-
-      <!-- ÉXITO -->
-
-      <div
-        class="step"
-        id="stepSuccess"
-      >
-
-        <div class="success">
-
-          <div class="success-icon">
-            ✓
-          </div>
-
-          <h1>Configuración creada.</h1>
-
-          <p class="subtitle">
-            El establecimiento ha sido registrado correctamente.
-            FGV Automation ya puede continuar con la configuración
-            de este negocio.
-          </p>
-
-        </div>
-
-      </div>
+      FGV AUTOMATION
 
     </div>
 
+
+
+    <div class="progress">
+
+      <div class="progress-bar active"></div>
+
+      <div class="progress-bar"></div>
+
+      <div class="progress-bar"></div>
+
+      <div class="progress-bar"></div>
+
+    </div>
+
+
+
+    <!-- ========================== -->
+    <!-- PASO 1 -->
+    <!-- ========================== -->
+
+    <div class="step active">
+
+
+      <h1>
+
+        Vamos a configurar tu restaurante.
+
+      </h1>
+
+
+      <p class="subtitle">
+
+        En unos minutos tendremos la información necesaria para adaptar
+        FGV Automation a tu negocio.
+
+      </p>
+
+
+
+      <div class="field">
+
+        <label>
+
+          Nombre del restaurante
+
+        </label>
+
+        <input
+          type="text"
+          id="name"
+          placeholder="Ej. Restaurante La Plaza"
+        >
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label>
+
+          Tipo de negocio
+
+        </label>
+
+
+        <select id="business_type">
+
+          <option value="">
+            Selecciona una opción
+          </option>
+
+          <option value="restaurant">
+            Restaurante
+          </option>
+
+          <option value="bar_restaurant">
+            Bar / Restaurante
+          </option>
+
+          <option value="cafe">
+            Cafetería
+          </option>
+
+          <option value="other">
+            Otro
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label>
+
+          Ciudad
+
+        </label>
+
+        <input
+          type="text"
+          id="city"
+          placeholder="Ej. Albacete"
+        >
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label>
+
+          Dirección
+
+        </label>
+
+        <input
+          type="text"
+          id="address"
+          placeholder="Ej. Calle Mayor, 10"
+        >
+
+      </div>
+
+
+
+      <div class="buttons">
+
+        <button
+          class="primary"
+          onclick="nextStep()"
+        >
+
+          Continuar
+
+        </button>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- ========================== -->
+    <!-- PASO 2 -->
+    <!-- ========================== -->
+
+    <div class="step">
+
+
+      <h1>
+
+        Información de contacto.
+
+      </h1>
+
+
+      <p class="subtitle">
+
+        Estos datos permitirán identificar y configurar correctamente
+        el establecimiento.
+
+      </p>
+
+
+
+      <div class="field">
+
+        <label>
+
+          Teléfono
+
+        </label>
+
+        <input
+          type="tel"
+          id="phone"
+          placeholder="Ej. 600 000 000"
+        >
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label>
+
+          Email del restaurante
+
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          placeholder="Ej. hola@restaurante.com"
+        >
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label>
+
+          Zona horaria
+
+        </label>
+
+
+        <select id="timezone">
+
+          <option value="Europe/Madrid">
+
+            España - Europe/Madrid
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label>
+
+          Idioma principal
+
+        </label>
+
+
+        <select id="language">
+
+          <option value="es">
+            Español
+          </option>
+
+          <option value="en">
+            English
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <div class="buttons">
+
+        <button
+          class="secondary"
+          onclick="previousStep()"
+        >
+
+          Atrás
+
+        </button>
+
+
+        <button
+          class="primary"
+          onclick="nextStep()"
+        >
+
+          Continuar
+
+        </button>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- ========================== -->
+    <!-- PASO 3 -->
+    <!-- ========================== -->
+
+    <div class="step">
+
+
+      <h1>
+
+        ¿Cómo gestionáis las reservas?
+
+      </h1>
+
+
+      <p class="subtitle">
+
+        FGV Automation puede integrarse con tu sistema actual
+        o gestionar las reservas directamente.
+
+      </p>
+
+
+
+      <div class="options">
+
+
+        <label class="option">
+
+          <input
+            type="radio"
+            name="reservation_type"
+            value="digital"
+          >
+
+
+          <div class="option-title">
+
+            Ya utilizamos un sistema de reservas
+
+          </div>
+
+
+          <div class="option-text">
+
+            Google Calendar, CoverManager,
+            TheFork u otro sistema.
+
+          </div>
+
+        </label>
+
+
+
+        <label class="option">
+
+          <input
+            type="radio"
+            name="reservation_type"
+            value="manual"
+          >
+
+
+          <div class="option-title">
+
+            Gestionamos las reservas manualmente
+
+          </div>
+
+
+          <div class="option-text">
+
+            Agenda, libreta, llamadas o WhatsApp.
+
+          </div>
+
+        </label>
+
+
+      </div>
+
+
+
+      <div
+        id="integrationFields"
+        style="display:none; margin-top:20px;"
+      >
+
+
+        <div class="field">
+
+          <label>
+
+            ¿Qué sistema utilizáis?
+
+          </label>
+
+
+          <select id="reservation_system">
+
+            <option value="">
+
+              Selecciona una opción
+
+            </option>
+
+
+            <option value="covermanager">
+
+              CoverManager
+
+            </option>
+
+
+            <option value="google_calendar">
+
+              Google Calendar
+
+            </option>
+
+
+            <option value="thefork">
+
+              TheFork
+
+            </option>
+
+
+            <option value="other">
+
+              Otro
+
+            </option>
+
+          </select>
+
+        </div>
+
+
+      </div>
+
+
+
+      <div class="buttons">
+
+
+        <button
+          class="secondary"
+          onclick="previousStep()"
+        >
+
+          Atrás
+
+        </button>
+
+
+        <button
+          class="primary"
+          onclick="nextStep()"
+        >
+
+          Continuar
+
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- ========================== -->
+    <!-- PASO 4 -->
+    <!-- ========================== -->
+
+    <div class="step">
+
+
+      <h1>
+
+        Capacidad, horarios y reglas.
+
+      </h1>
+
+
+      <p class="subtitle">
+
+        Configura la información básica que utilizará
+        FGV Automation para gestionar correctamente
+        las reservas de tu restaurante.
+
+      </p>
+
+
+
+      <div class="field">
+
+        <label>
+
+          Aforo total del restaurante
+
+        </label>
+
+        <input
+          type="number"
+          id="total_capacity"
+          placeholder="Ej. 80"
+          min="1"
+        >
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label>
+
+          Número máximo de personas por reserva
+
+        </label>
+
+        <input
+          type="number"
+          id="max_people"
+          placeholder="Ej. 10"
+          min="1"
+        >
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label>
+
+          Duración estimada de la estancia
+
+        </label>
+
+
+        <select id="stay_duration">
+
+          <option value="">
+            Selecciona una duración
+          </option>
+
+          <option value="60">
+            1 hora
+          </option>
+
+          <option value="90">
+            1 hora y 30 minutos
+          </option>
+
+          <option value="120">
+            2 horas
+          </option>
+
+          <option value="150">
+            2 horas y 30 minutos
+          </option>
+
+          <option value="180">
+            3 horas
+          </option>
+
+          <option value="custom">
+            Personalizado
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label>
+
+          ¿Con cuánta antelación se puede reservar?
+
+        </label>
+
+
+        <select id="booking_advance">
+
+          <option value="same_day">
+
+            El mismo día
+
+          </option>
+
+
+          <option value="1_day">
+
+            Hasta 1 día antes
+
+          </option>
+
+
+          <option value="7_days">
+
+            Hasta 7 días antes
+
+          </option>
+
+
+          <option value="30_days">
+
+            Hasta 30 días antes
+
+          </option>
+
+
+          <option value="custom">
+
+            Personalizado
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- ========================== -->
+      <!-- HORARIOS -->
+      <!-- ========================== -->
+
+      <div class="field">
+
+
+        <label>
+
+          Horarios habituales de apertura
+
+        </label>
+
+
+        <!-- LUNES -->
+
+        <div class="schedule-day">
+
+          <div class="schedule-day-title">
+
+            Lunes
+
+          </div>
+
+
+          <div class="schedule-times">
+
+            <input
+              type="time"
+              id="monday_open"
+              value="12:00"
+            >
+
+            <input
+              type="time"
+              id="monday_close"
+              value="23:00"
+            >
+
+          </div>
+
+
+          <label class="schedule-closed">
+
+            <input
+              type="checkbox"
+              id="monday_closed"
+            >
+
+            Cerrado
+
+          </label>
+
+        </div>
+
+
+
+        <!-- MARTES -->
+
+        <div class="schedule-day">
+
+          <div class="schedule-day-title">
+
+            Martes
+
+          </div>
+
+
+          <div class="schedule-times">
+
+            <input
+              type="time"
+              id="tuesday_open"
+              value="12:00"
+            >
+
+            <input
+              type="time"
+              id="tuesday_close"
+              value="23:00"
+            >
+
+          </div>
+
+
+          <label class="schedule-closed">
+
+            <input
+              type="checkbox"
+              id="tuesday_closed"
+            >
+
+            Cerrado
+
+          </label>
+
+        </div>
+
+
+
+        <!-- MIÉRCOLES -->
+
+        <div class="schedule-day">
+
+          <div class="schedule-day-title">
+
+            Miércoles
+
+          </div>
+
+
+          <div class="schedule-times">
+
+            <input
+              type="time"
+              id="wednesday_open"
+              value="12:00"
+            >
+
+            <input
+              type="time"
+              id="wednesday_close"
+              value="23:00"
+            >
+
+          </div>
+
+
+          <label class="schedule-closed">
+
+            <input
+              type="checkbox"
+              id="wednesday_closed"
+            >
+
+            Cerrado
+
+          </label>
+
+        </div>
+
+
+
+        <!-- JUEVES -->
+
+        <div class="schedule-day">
+
+          <div class="schedule-day-title">
+
+            Jueves
+
+          </div>
+
+
+          <div class="schedule-times">
+
+            <input
+              type="time"
+              id="thursday_open"
+              value="12:00"
+            >
+
+            <input
+              type="time"
+              id="thursday_close"
+              value="23:00"
+            >
+
+          </div>
+
+
+          <label class="schedule-closed">
+
+            <input
+              type="checkbox"
+              id="thursday_closed"
+            >
+
+            Cerrado
+
+          </label>
+
+        </div>
+
+
+
+        <!-- VIERNES -->
+
+        <div class="schedule-day">
+
+          <div class="schedule-day-title">
+
+            Viernes
+
+          </div>
+
+
+          <div class="schedule-times">
+
+            <input
+              type="time"
+              id="friday_open"
+              value="12:00"
+            >
+
+            <input
+              type="time"
+              id="friday_close"
+              value="23:00"
+            >
+
+          </div>
+
+
+          <label class="schedule-closed">
+
+            <input
+              type="checkbox"
+              id="friday_closed"
+            >
+
+            Cerrado
+
+          </label>
+
+        </div>
+
+
+
+        <!-- SÁBADO -->
+
+        <div class="schedule-day">
+
+          <div class="schedule-day-title">
+
+            Sábado
+
+          </div>
+
+
+          <div class="schedule-times">
+
+            <input
+              type="time"
+              id="saturday_open"
+              value="12:00"
+            >
+
+            <input
+              type="time"
+              id="saturday_close"
+              value="23:00"
+            >
+
+          </div>
+
+
+          <label class="schedule-closed">
+
+            <input
+              type="checkbox"
+              id="saturday_closed"
+            >
+
+            Cerrado
+
+          </label>
+
+        </div>
+
+
+
+        <!-- DOMINGO -->
+
+        <div class="schedule-day">
+
+          <div class="schedule-day-title">
+
+            Domingo
+
+          </div>
+
+
+          <div class="schedule-times">
+
+            <input
+              type="time"
+              id="sunday_open"
+              value="12:00"
+            >
+
+            <input
+              type="time"
+              id="sunday_close"
+              value="23:00"
+            >
+
+          </div>
+
+
+          <label class="schedule-closed">
+
+            <input
+              type="checkbox"
+              id="sunday_closed"
+            >
+
+            Cerrado
+
+          </label>
+
+        </div>
+
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label>
+
+          Instrucciones especiales para las reservas
+
+        </label>
+
+
+        <textarea
+          id="special_rules"
+          placeholder="Ej. No aceptamos reservas en terraza, se debe confirmar el número de personas, no se permiten reservas después de cierta hora, etc."
+        ></textarea>
+
+      </div>
+
+
+
+      <div class="buttons">
+
+
+        <button
+          class="secondary"
+          onclick="previousStep()"
+        >
+
+          Atrás
+
+        </button>
+
+
+        <button
+          class="primary"
+          onclick="nextStep()"
+        >
+
+          Revisar configuración
+
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- ========================== -->
+    <!-- RESUMEN -->
+    <!-- ========================== -->
+
+    <div class="step">
+
+
+      <h1>
+
+        Todo preparado.
+
+      </h1>
+
+
+      <p class="subtitle">
+
+        Revisa la información antes de crear
+        la configuración.
+
+      </p>
+
+
+      <div
+        class="summary"
+        id="summary"
+      ></div>
+
+
+
+      <div class="buttons">
+
+
+        <button
+          class="secondary"
+          onclick="previousStep()"
+        >
+
+          Atrás
+
+        </button>
+
+
+        <button
+          class="primary"
+          onclick="finishOnboarding()"
+        >
+
+          Finalizar configuración
+
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- ========================== -->
+    <!-- ÉXITO -->
+    <!-- ========================== -->
+
+    <div class="step">
+
+
+      <div class="success">
+
+
+        <h1>
+
+          Restaurante configurado.
+
+        </h1>
+
+
+        <p class="subtitle">
+
+          La información del onboarding ha sido
+          recopilada correctamente.
+
+        </p>
+
+
+      </div>
+
+
+    </div>
+
+
   </div>
+
+
+
+  <!-- ========================== -->
+  <!-- SUPABASE -->
+  <!-- ========================== -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
 
   <script>
 
+
     /*
     ==========================================
-    CONFIGURACIÓN DE SUPABASE
+    CONFIGURACIÓN SUPABASE
     ==========================================
     */
 
     const SUPABASE_URL =
       "https://ehifmrfhysnnikcpdtqg.supabase.co";
 
+
     const SUPABASE_KEY =
       "sb_publishable_oz9UHM_4VYm-RqWerIYOSg_YFOBxO24";
+
 
     const supabaseClient =
       window.supabase.createClient(
@@ -651,73 +1526,230 @@
         SUPABASE_KEY
       );
 
-    /*
-    ==========================================
-    ESTADO DEL ONBOARDING
-    ==========================================
-    */
 
-    let currentStep = 1;
-
-    let reservationType = null;
 
     /*
     ==========================================
-    CAMBIAR PASOS
+    ESTADO
     ==========================================
     */
 
-    function updateProgress(step) {
+    let currentStep =
+      0;
 
-      const bars =
-        document.querySelectorAll(".progress-bar");
 
-      bars.forEach((bar, index) => {
+    const steps =
+      document.querySelectorAll(".step");
 
-        if (index < step) {
-          bar.classList.add("active");
-        } else {
-          bar.classList.remove("active");
-        }
+
+    const progressBars =
+      document.querySelectorAll(".progress-bar");
+
+
+
+    /*
+    ==========================================
+    TIPO DE RESERVAS
+    ==========================================
+    */
+
+    document
+      .querySelectorAll(
+        'input[name="reservation_type"]'
+      )
+      .forEach(input => {
+
+        input.addEventListener(
+          "change",
+
+          function() {
+
+            document
+              .querySelectorAll(".option")
+              .forEach(option => {
+
+                option.classList.remove(
+                  "selected"
+                );
+
+              });
+
+
+            this
+              .closest(".option")
+              .classList
+              .add("selected");
+
+
+            if (
+              this.value === "digital"
+            ) {
+
+              document
+                .getElementById(
+                  "integrationFields"
+                )
+                .style
+                .display =
+                  "block";
+
+            }
+
+            else {
+
+              document
+                .getElementById(
+                  "integrationFields"
+                )
+                .style
+                .display =
+                  "none";
+
+            }
+
+          }
+
+        );
 
       });
 
+
+
+    /*
+    ==========================================
+    MOSTRAR PASO
+    ==========================================
+    */
+
+    function showStep() {
+
+      steps.forEach(
+        (step, index) => {
+
+          step.classList.toggle(
+            "active",
+
+            index === currentStep
+          );
+
+        }
+      );
+
+
+      progressBars.forEach(
+        (bar, index) => {
+
+          bar.classList.toggle(
+            "active",
+
+            index <=
+            Math.min(
+              currentStep,
+              3
+            )
+          );
+
+        }
+      );
+
     }
 
-    function showStep(stepNumber) {
 
-      document
-        .querySelectorAll(".step")
-        .forEach(step => {
 
-          step.classList.remove("active");
+    /*
+    ==========================================
+    SIGUIENTE PASO
+    ==========================================
+    */
 
-        });
+    function nextStep() {
 
-      const targetStep =
-        document.getElementById(
-          "step" + stepNumber
-        );
+      if (
+        !validateStep()
+      ) {
 
-      if (targetStep) {
-        targetStep.classList.add("active");
+        return;
+
       }
 
-      currentStep = stepNumber;
 
-      updateProgress(stepNumber);
+      if (
+        currentStep === 3
+      ) {
+
+        createSummary();
+
+      }
+
+
+      if (
+        currentStep <
+        steps.length - 1
+      ) {
+
+        currentStep++;
+
+        showStep();
+
+      }
 
     }
 
-    function nextStep(stepNumber) {
 
-      if (stepNumber === 2) {
+
+    /*
+    ==========================================
+    PASO ANTERIOR
+    ==========================================
+    */
+
+    function previousStep() {
+
+      if (
+        currentStep > 0
+      ) {
+
+        currentStep--;
+
+        showStep();
+
+      }
+
+    }
+
+
+
+    /*
+    ==========================================
+    VALIDACIÓN
+    ==========================================
+    */
+
+    function validateStep() {
+
+
+      /*
+      PASO 1
+      */
+
+      if (
+        currentStep === 0
+      ) {
 
         const name =
           document
-            .getElementById("restaurantName")
+            .getElementById("name")
             .value
             .trim();
+
+
+        const businessType =
+          document
+            .getElementById(
+              "business_type"
+            )
+            .value;
+
 
         const city =
           document
@@ -725,626 +1757,1096 @@
             .value
             .trim();
 
-        if (!name || !city) {
-
-          alert(
-            "Introduce al menos el nombre del restaurante y la ciudad."
-          );
-
-          return;
-
-        }
-
-      }
-
-      if (stepNumber === 3) {
-
-        const phone =
-          document
-            .getElementById("phone")
-            .value
-            .trim();
-
-        const email =
-          document
-            .getElementById("email")
-            .value
-            .trim();
-
-        if (!phone || !email) {
-
-          alert(
-            "Introduce un teléfono y un email."
-          );
-
-          return;
-
-        }
-
-      }
-
-      if (stepNumber === 4) {
-
-        if (!reservationType) {
-
-          alert(
-            "Selecciona cómo gestionáis actualmente las reservas."
-          );
-
-          return;
-
-        }
 
         if (
-          reservationType === "external"
+          !name ||
+          !businessType ||
+          !city
+        ) {
+
+          alert(
+            "Completa los campos obligatorios."
+          );
+
+          return false;
+
+        }
+
+      }
+
+
+
+      /*
+      PASO 3
+      */
+
+      if (
+        currentStep === 2
+      ) {
+
+        const reservationType =
+          document.querySelector(
+            'input[name="reservation_type"]:checked'
+          );
+
+
+        if (
+          !reservationType
+        ) {
+
+          alert(
+            "Selecciona cómo gestionáis las reservas."
+          );
+
+          return false;
+
+        }
+
+
+        if (
+          reservationType.value ===
+          "digital"
         ) {
 
           const system =
             document
-              .getElementById("reservationSystem")
-              .value
-              .trim();
+              .getElementById(
+                "reservation_system"
+              )
+              .value;
 
-          if (!system) {
+
+          if (
+            !system
+          ) {
 
             alert(
-              "Indica qué sistema de reservas utilizáis."
+              "Selecciona el sistema de reservas."
             );
 
-            return;
+            return false;
 
           }
 
         }
 
-        generateSummary();
+      }
+
+
+
+      /*
+      PASO 4
+      */
+
+      if (
+        currentStep === 3
+      ) {
+
+        const totalCapacity =
+          document
+            .getElementById(
+              "total_capacity"
+            )
+            .value;
+
+
+        const maxPeople =
+          document
+            .getElementById(
+              "max_people"
+            )
+            .value;
+
+
+        if (
+          !totalCapacity ||
+          !maxPeople
+        ) {
+
+          alert(
+            "Indica el aforo total y el máximo de personas por reserva."
+          );
+
+          return false;
+
+        }
 
       }
 
-      showStep(stepNumber);
+
+      return true;
 
     }
 
-    function previousStep(stepNumber) {
 
-      showStep(stepNumber);
-
-    }
 
     /*
     ==========================================
-    SELECCIÓN DEL SISTEMA DE RESERVAS
+    OBTENER HORARIOS
     ==========================================
     */
 
-    function selectReservationType(type) {
-
-      reservationType = type;
-
-      const manualOption =
-        document.getElementById(
-          "manualOption"
-        );
-
-      const externalOption =
-        document.getElementById(
-          "externalOption"
-        );
-
-      const systemContainer =
-        document.getElementById(
-          "reservationSystemContainer"
-        );
-
-      const manualConfiguration =
-        document.getElementById(
-          "manualConfiguration"
-        );
-
-      manualOption.classList.remove(
-        "selected"
-      );
-
-      externalOption.classList.remove(
-        "selected"
-      );
-
-      if (type === "manual") {
-
-        manualOption.classList.add(
-          "selected"
-        );
-
-        systemContainer.style.display =
-          "none";
-
-        manualConfiguration.style.display =
-          "block";
-
-      }
-
-      if (type === "external") {
-
-        externalOption.classList.add(
-          "selected"
-        );
-
-        systemContainer.style.display =
-          "block";
-
-        manualConfiguration.style.display =
-          "none";
-
-      }
-
-    }
-
-    /*
-    ==========================================
-    OBTENER DATOS
-    ==========================================
-    */
-
-    function getFormData() {
+    function getSchedules() {
 
       return {
 
-        name:
-          document
-            .getElementById("restaurantName")
-            .value
-            .trim(),
+        monday: {
+          open:
+            document
+              .getElementById(
+                "monday_open"
+              )
+              .value,
 
-        business_type:
-          document
-            .getElementById("businessType")
-            .value,
+          close:
+            document
+              .getElementById(
+                "monday_close"
+              )
+              .value,
 
-        city:
-          document
-            .getElementById("city")
-            .value
-            .trim(),
+          closed:
+            document
+              .getElementById(
+                "monday_closed"
+              )
+              .checked
+        },
 
-        address:
-          document
-            .getElementById("address")
-            .value
-            .trim(),
 
-        phone:
-          document
-            .getElementById("phone")
-            .value
-            .trim(),
+        tuesday: {
+          open:
+            document
+              .getElementById(
+                "tuesday_open"
+              )
+              .value,
 
-        email:
-          document
-            .getElementById("email")
-            .value
-            .trim(),
+          close:
+            document
+              .getElementById(
+                "tuesday_close"
+              )
+              .value,
 
-        timezone:
-          document
-            .getElementById("timezone")
-            .value,
+          closed:
+            document
+              .getElementById(
+                "tuesday_closed"
+              )
+              .checked
+        },
 
-        language:
-          document
-            .getElementById("language")
-            .value,
 
-        reservation_type:
-          reservationType,
+        wednesday: {
+          open:
+            document
+              .getElementById(
+                "wednesday_open"
+              )
+              .value,
 
-        reservation_system:
-          reservationType === "external"
-            ? document
-                .getElementById("reservationSystem")
-                .value
-                .trim()
-            : "FGV Automation",
+          close:
+            document
+              .getElementById(
+                "wednesday_close"
+              )
+              .value,
 
-        max_people:
-          reservationType === "manual"
-            ? Number(
-                document
-                  .getElementById("maxPeople")
-                  .value
-              ) || null
-            : null,
+          closed:
+            document
+              .getElementById(
+                "wednesday_closed"
+              )
+              .checked
+        },
 
-        booking_advance:
-          reservationType === "manual"
-            ? document
-                .getElementById("bookingAdvance")
-                .value
-                .trim()
-            : null,
 
-        special_rules:
-          reservationType === "manual"
-            ? document
-                .getElementById("specialRules")
-                .value
-                .trim()
-            : null
+        thursday: {
+          open:
+            document
+              .getElementById(
+                "thursday_open"
+              )
+              .value,
+
+          close:
+            document
+              .getElementById(
+                "thursday_close"
+              )
+              .value,
+
+          closed:
+            document
+              .getElementById(
+                "thursday_closed"
+              )
+              .checked
+        },
+
+
+        friday: {
+          open:
+            document
+              .getElementById(
+                "friday_open"
+              )
+              .value,
+
+          close:
+            document
+              .getElementById(
+                "friday_close"
+              )
+              .value,
+
+          closed:
+            document
+              .getElementById(
+                "friday_closed"
+              )
+              .checked
+        },
+
+
+        saturday: {
+          open:
+            document
+              .getElementById(
+                "saturday_open"
+              )
+              .value,
+
+          close:
+            document
+              .getElementById(
+                "saturday_close"
+              )
+              .value,
+
+          closed:
+            document
+              .getElementById(
+                "saturday_closed"
+              )
+              .checked
+        },
+
+
+        sunday: {
+          open:
+            document
+              .getElementById(
+                "sunday_open"
+              )
+              .value,
+
+          close:
+            document
+              .getElementById(
+                "sunday_close"
+              )
+              .value,
+
+          closed:
+            document
+              .getElementById(
+                "sunday_closed"
+              )
+              .checked
+        }
 
       };
 
     }
 
+
+
     /*
     ==========================================
-    RESUMEN FINAL
+    OBTENER DATOS ONBOARDING
     ==========================================
     */
 
-    function generateSummary() {
+    function getOnboardingData() {
+
+
+      const reservationType =
+        document.querySelector(
+          'input[name="reservation_type"]:checked'
+        );
+
+
+      return {
+
+
+        establishment: {
+
+          name:
+            document
+              .getElementById("name")
+              .value
+              .trim(),
+
+
+          business_type:
+            document
+              .getElementById(
+                "business_type"
+              )
+              .value,
+
+
+          phone:
+            document
+              .getElementById("phone")
+              .value
+              .trim(),
+
+
+          email:
+            document
+              .getElementById("email")
+              .value
+              .trim(),
+
+
+          address:
+            document
+              .getElementById("address")
+              .value
+              .trim(),
+
+
+          timezone:
+            document
+              .getElementById("timezone")
+              .value,
+
+
+          language:
+            document
+              .getElementById("language")
+              .value
+
+        },
+
+
+        config: {
+
+          city:
+            document
+              .getElementById("city")
+              .value
+              .trim(),
+
+
+          reservation_type:
+            reservationType
+              ? reservationType.value
+              : null,
+
+
+          reservation_system:
+            document
+              .getElementById(
+                "reservation_system"
+              )
+              .value ||
+            null
+
+        },
+
+
+        business_rules: {
+
+          total_capacity:
+            document
+              .getElementById(
+                "total_capacity"
+              )
+              .value ||
+            null,
+
+
+          max_people:
+            document
+              .getElementById(
+                "max_people"
+              )
+              .value ||
+            null,
+
+
+          stay_duration:
+            document
+              .getElementById(
+                "stay_duration"
+              )
+              .value ||
+            null,
+
+
+          booking_advance:
+            document
+              .getElementById(
+                "booking_advance"
+              )
+              .value,
+
+
+          schedules:
+            getSchedules(),
+
+
+          special_rules:
+            document
+              .getElementById(
+                "special_rules"
+              )
+              .value
+              .trim()
+
+        }
+
+      };
+
+    }
+
+
+
+    /*
+    ==========================================
+    RESUMEN
+    ==========================================
+    */
+
+    function createSummary() {
+
 
       const data =
-        getFormData();
+        getOnboardingData();
 
-      const reservationsText =
-        data.reservation_type === "manual"
-          ? "Gestión manual"
-          : "Sistema externo";
+
+      const businessTypeLabels = {
+
+        restaurant:
+          "Restaurante",
+
+        bar_restaurant:
+          "Bar / Restaurante",
+
+        cafe:
+          "Cafetería",
+
+        other:
+          "Otro"
+
+      };
+
+
+      const reservationTypeLabels = {
+
+        digital:
+          "Sistema externo",
+
+        manual:
+          "Gestión manual"
+
+      };
+
+
+      const bookingAdvanceLabels = {
+
+        same_day:
+          "El mismo día",
+
+        "1_day":
+          "Hasta 1 día antes",
+
+        "7_days":
+          "Hasta 7 días antes",
+
+        "30_days":
+          "Hasta 30 días antes",
+
+        custom:
+          "Personalizado"
+
+      };
+
+
+      const stayDurationLabels = {
+
+        "60":
+          "1 hora",
+
+        "90":
+          "1 hora y 30 minutos",
+
+        "120":
+          "2 horas",
+
+        "150":
+          "2 horas y 30 minutos",
+
+        "180":
+          "3 horas",
+
+        custom:
+          "Personalizado"
+
+      };
+
 
       document
         .getElementById("summary")
         .innerHTML = `
 
-          <div class="summary-section">
+          <strong>
+            Restaurante:
+          </strong>
 
-            <strong>
-              Restaurante:
-            </strong>
+          ${data.establishment.name}
 
-            ${data.name}
+          <br><br>
 
-            <br><br>
 
-            <strong>
-              Tipo:
-            </strong>
-
-            ${data.business_type}
-
-            <br>
-
-            <strong>
-              Ciudad:
-            </strong>
-
-            ${data.city}
-
-            <br>
-
-            <strong>
-              Dirección:
-            </strong>
-
-            ${data.address || "No indicada"}
-
-          </div>
-
-          <div class="summary-section">
-
-            <strong>
-              Teléfono:
-            </strong>
-
-            ${data.phone}
-
-            <br>
-
-            <strong>
-              Email:
-            </strong>
-
-            ${data.email}
-
-          </div>
-
-          <div class="summary-section">
-
-            <strong>
-              Reservas:
-            </strong>
-
-            ${reservationsText}
-
-            <br>
-
-            <strong>
-              Sistema:
-            </strong>
-
-            ${data.reservation_system}
-
-          </div>
+          <strong>
+            Tipo:
+          </strong>
 
           ${
-            data.reservation_type === "manual"
-              ? `
-              <div class="summary-section">
+            businessTypeLabels[
+              data.establishment.business_type
+            ]
+            ||
+            data.establishment.business_type
+          }
 
-                <strong>
-                  Máximo personas:
-                </strong>
+          <br>
 
-                ${data.max_people || "No indicado"}
 
-                <br>
+          <strong>
+            Ciudad:
+          </strong>
 
-                <strong>
-                  Antelación:
-                </strong>
+          ${data.config.city}
 
-                ${data.booking_advance || "No indicada"}
+          <br>
 
-                <br><br>
 
-                <strong>
-                  Reglas especiales:
-                </strong>
+          <strong>
+            Dirección:
+          </strong>
 
-                ${data.special_rules || "Ninguna"}
+          ${
+            data.establishment.address ||
+            "No indicada"
+          }
 
-              </div>
-              `
-              : ""
+          <br><br>
+
+
+          <strong>
+            Teléfono:
+          </strong>
+
+          ${
+            data.establishment.phone ||
+            "No indicado"
+          }
+
+          <br>
+
+
+          <strong>
+            Email:
+          </strong>
+
+          ${
+            data.establishment.email ||
+            "No indicado"
+          }
+
+          <br><br>
+
+
+          <strong>
+            Reservas:
+          </strong>
+
+          ${
+            reservationTypeLabels[
+              data.config.reservation_type
+            ]
+            ||
+            "No indicado"
+          }
+
+          <br>
+
+
+          <strong>
+            Sistema:
+          </strong>
+
+          ${
+            data.config.reservation_system ||
+            "FGV Automation"
+          }
+
+          <br><br>
+
+
+          <strong>
+            Aforo total:
+          </strong>
+
+          ${
+            data.business_rules.total_capacity ||
+            "No indicado"
+          }
+
+          personas
+
+          <br>
+
+
+          <strong>
+            Máximo por reserva:
+          </strong>
+
+          ${
+            data.business_rules.max_people ||
+            "No indicado"
+          }
+
+          personas
+
+          <br>
+
+
+          <strong>
+            Duración estimada:
+          </strong>
+
+          ${
+            stayDurationLabels[
+              data.business_rules.stay_duration
+            ]
+            ||
+            "No indicada"
+          }
+
+          <br>
+
+
+          <strong>
+            Antelación:
+          </strong>
+
+          ${
+            bookingAdvanceLabels[
+              data.business_rules.booking_advance
+            ]
+            ||
+            data.business_rules.booking_advance
+          }
+
+          <br><br>
+
+
+          <strong>
+            Horarios:
+          </strong>
+
+          <br>
+
+          Lunes:
+          ${
+            data.business_rules.schedules.monday.closed
+              ? "Cerrado"
+              : data.business_rules.schedules.monday.open +
+                " - " +
+                data.business_rules.schedules.monday.close
+          }
+
+          <br>
+
+          Martes:
+          ${
+            data.business_rules.schedules.tuesday.closed
+              ? "Cerrado"
+              : data.business_rules.schedules.tuesday.open +
+                " - " +
+                data.business_rules.schedules.tuesday.close
+          }
+
+          <br>
+
+          Miércoles:
+          ${
+            data.business_rules.schedules.wednesday.closed
+              ? "Cerrado"
+              : data.business_rules.schedules.wednesday.open +
+                " - " +
+                data.business_rules.schedules.wednesday.close
+          }
+
+          <br>
+
+          Jueves:
+          ${
+            data.business_rules.schedules.thursday.closed
+              ? "Cerrado"
+              : data.business_rules.schedules.thursday.open +
+                " - " +
+                data.business_rules.schedules.thursday.close
+          }
+
+          <br>
+
+          Viernes:
+          ${
+            data.business_rules.schedules.friday.closed
+              ? "Cerrado"
+              : data.business_rules.schedules.friday.open +
+                " - " +
+                data.business_rules.schedules.friday.close
+          }
+
+          <br>
+
+          Sábado:
+          ${
+            data.business_rules.schedules.saturday.closed
+              ? "Cerrado"
+              : data.business_rules.schedules.saturday.open +
+                " - " +
+                data.business_rules.schedules.saturday.close
+          }
+
+          <br>
+
+          Domingo:
+          ${
+            data.business_rules.schedules.sunday.closed
+              ? "Cerrado"
+              : data.business_rules.schedules.sunday.open +
+                " - " +
+                data.business_rules.schedules.sunday.close
+          }
+
+          <br><br>
+
+
+          <strong>
+            Reglas especiales:
+          </strong>
+
+          <br>
+
+          ${
+            data.business_rules.special_rules ||
+            "Ninguna"
           }
 
         `;
 
     }
 
+
+
     /*
     ==========================================
-    GUARDAR EN SUPABASE
+    FINALIZAR ONBOARDING
     ==========================================
     */
 
     async function finishOnboarding() {
 
-      const button =
-        document.getElementById(
-          "finishButton"
+
+      const onboardingData =
+        getOnboardingData();
+
+
+      const finishButton =
+        document.querySelector(
+          'button[onclick="finishOnboarding()"]'
         );
 
-      const backButton =
-        document.getElementById(
-          "backButton"
-        );
 
-      const errorMessage =
-        document.getElementById(
-          "errorMessage"
-        );
+      if (
+        finishButton
+      ) {
 
-      errorMessage.style.display =
-        "none";
+        finishButton.disabled =
+          true;
 
-      button.disabled = true;
-      backButton.disabled = true;
 
-      button.textContent =
-        "Guardando...";
+        finishButton.textContent =
+          "Guardando...";
+
+      }
+
+
 
       try {
 
-        const data =
-          getFormData();
 
         /*
         =======================================
-        1. CREAR ESTABLECIMIENTO
-
-        No enviamos city porque esa columna
-        no existe en establishments.
+        CREAR ESTABLECIMIENTO
         =======================================
         */
 
-        const establishmentData = {
-
-          name:
-            data.name,
-
-          business_type:
-            data.business_type,
-
-          address:
-            data.address || null,
-
-          phone:
-            data.phone || null,
-
-          email:
-            data.email || null,
-
-          timezone:
-            data.timezone ||
-            "Europe/Madrid",
-
-          language:
-            data.language ||
-            "Español",
-
-          status:
-            "active",
-
-          active:
-            true
-
-        };
-
-        console.log(
-          "DATOS ESTABLECIMIENTO:",
-          establishmentData
-        );
-
         const {
+
           data: establishment,
+
           error: establishmentError
-        } = await supabaseClient
-          .from("establishments")
-          .insert(establishmentData)
-          .select()
-          .single();
 
-        if (establishmentError) {
+        } =
+          await supabaseClient
+            .from("establishments")
+            .insert({
 
-          console.error(
-            "ERROR ESTABLISHMENTS:",
-            establishmentError
-          );
+              name:
+                onboardingData
+                  .establishment
+                  .name,
+
+
+              business_type:
+                onboardingData
+                  .establishment
+                  .business_type,
+
+
+              phone:
+                onboardingData
+                  .establishment
+                  .phone ||
+                null,
+
+
+              email:
+                onboardingData
+                  .establishment
+                  .email ||
+                null,
+
+
+              address:
+                onboardingData
+                  .establishment
+                  .address ||
+                null,
+
+
+              timezone:
+                onboardingData
+                  .establishment
+                  .timezone ||
+                "Europe/Madrid",
+
+
+              language:
+                onboardingData
+                  .establishment
+                  .language ||
+                "es",
+
+
+              status:
+                "active",
+
+
+              active:
+                true
+
+            })
+            .select()
+            .single();
+
+
+
+        if (
+          establishmentError
+        ) {
 
           throw establishmentError;
 
         }
 
-        console.log(
-          "ESTABLECIMIENTO CREADO:",
-          establishment
-        );
+
 
         /*
         =======================================
-        2. GUARDAR CONFIGURACIÓN
-
-        establishment_config utiliza:
-        - establishment_id
-        - config (jsonb)
-
-        Todo lo específico de la configuración
-        va dentro de config.
+        GUARDAR CONFIGURACIÓN
         =======================================
         */
 
-        const configData = {
+        const {
 
-          establishment_id:
-            establishment.id,
+          error: configError
 
-          config: {
+        } =
+          await supabaseClient
+            .from(
+              "establishment_config"
+            )
+            .insert({
 
-            city:
-              data.city || null,
+              establishment_id:
+                establishment.id,
 
-            reservation_type:
-              data.reservation_type || null,
 
-            reservation_system:
-              data.reservation_system || null,
+              config:
+                onboardingData.config
 
-            max_people:
-              data.max_people,
+            });
 
-            booking_advance:
-              data.booking_advance || null,
 
-            special_rules:
-              data.special_rules || null
 
-          }
+        if (
+          configError
+        ) {
 
-        };
+          throw configError;
 
-        console.log(
-          "CONFIGURACIÓN A ENVIAR:",
-          configData
-        );
+        }
+
+
+
+        /*
+        =======================================
+        GUARDAR REGLAS
+        =======================================
+        */
 
         const {
-  error: configError
-} = await supabaseClient
-  .from("establishment_config")
-  .insert(configData);
 
-if (configError) {
+          error: rulesError
 
-  console.error(
-    "ERROR CONFIGURACIÓN:",
-    configError
-  );
+        } =
+          await supabaseClient
+            .from(
+              "business_rules"
+            )
+            .insert({
 
-  throw configError;
+              establishment_id:
+                establishment.id,
 
-}
 
-console.log(
-  "CONFIGURACIÓN CREADA CORRECTAMENTE"
-);
+              name:
+                "Reglas iniciales",
 
-/*
-=======================================
-ONBOARDING COMPLETADO
-=======================================
-*/
 
-console.log(
-  "ONBOARDING COMPLETADO CORRECTAMENTE"
-);
+              rule_type:
+                "general",
 
-console.log(
-  "REDIRIGIENDO AL DASHBOARD:",
-  establishment.id
-);
 
-/*
-=======================================
-REDIRECCIÓN AL DASHBOARD
-=======================================
-*/
+              rule:
+                onboardingData.business_rules,
 
-window.location.replace(
-  "dashboard.html?id=" +
-  encodeURIComponent(
-    establishment.id
-  )
-);
 
-      } catch (error) {
+              active:
+                true
+
+            });
+
+
+
+        if (
+          rulesError
+        ) {
+
+          throw rulesError;
+
+        }
+
+
+
+        console.log(
+          "ONBOARDING GUARDADO:",
+          onboardingData
+        );
+
+
+
+        /*
+        =======================================
+        MOSTRAR ÉXITO
+        =======================================
+        */
+
+        currentStep =
+          5;
+
+
+        showStep();
+
+
+        /*
+        =======================================
+        IR AL DASHBOARD
+        =======================================
+        */
+
+        setTimeout(
+          function() {
+
+            window.location.href =
+              "dashboard.html";
+
+          },
+          1500
+        );
+
+
+      }
+
+      catch (
+        error
+      ) {
+
 
         console.error(
           "ERROR GUARDANDO ONBOARDING:",
           error
         );
 
-        let message =
-          "Ha ocurrido un error al guardar la configuración.";
+
+        alert(
+          "Ha ocurrido un error al guardar la configuración. Revisa la consola."
+        );
+
 
         if (
-          error &&
-          error.message
+          finishButton
         ) {
 
-          message +=
-            " " + error.message;
+          finishButton.disabled =
+            false;
+
+
+          finishButton.textContent =
+            "Finalizar configuración";
 
         }
 
-        errorMessage.textContent =
-          message;
-
-        errorMessage.style.display =
-          "block";
-
-        button.disabled =
-          false;
-
-        backButton.disabled =
-          false;
-
-        button.textContent =
-          "Finalizar configuración";
-
       }
 
-    }
+    );
+
 
   </script>
 
+
 </body>
+
 </html>

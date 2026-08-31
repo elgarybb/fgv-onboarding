@@ -319,6 +319,67 @@
       color: #ffffff;
     }
 
+    .schedule-type {
+      display: flex;
+
+      gap: 10px;
+
+      margin-bottom: 14px;
+    }
+
+    .schedule-type label {
+      flex: 1;
+
+      margin: 0;
+
+      cursor: pointer;
+    }
+
+    .schedule-type input {
+      display: none;
+    }
+
+    .schedule-type-option {
+      display: block;
+
+      background: #171719;
+
+      border:
+        1px solid #343439;
+
+      border-radius: 9px;
+
+      padding: 10px 12px;
+
+      text-align: center;
+
+      font-size: 13px;
+
+      color: #a5a5aa;
+
+      transition: .2s;
+    }
+
+    .schedule-type input:checked + .schedule-type-option {
+      border-color: #ffffff;
+
+      color: #ffffff;
+
+      background: #1d1d20;
+    }
+
+    .schedule-service {
+      margin-bottom: 12px;
+    }
+
+    .schedule-service-title {
+      font-size: 13px;
+
+      color: #96969c;
+
+      margin-bottom: 7px;
+    }
+
     .schedule-times {
       display: grid;
 
@@ -326,6 +387,14 @@
         1fr 1fr;
 
       gap: 12px;
+    }
+
+    .schedule-second-service {
+      display: none;
+    }
+
+    .schedule-second-service.visible {
+      display: block;
     }
 
     .schedule-closed {
@@ -370,6 +439,10 @@
 
       .schedule-times {
         grid-template-columns: 1fr;
+      }
+
+      .schedule-type {
+        flex-direction: column;
       }
 
     }
@@ -976,13 +1049,11 @@
 
           </option>
 
-
           <option value="1_day">
 
             Hasta 1 día antes
 
           </option>
-
 
           <option value="7_days">
 
@@ -990,13 +1061,11 @@
 
           </option>
 
-
           <option value="30_days">
 
             Hasta 30 días antes
 
           </option>
-
 
           <option value="custom">
 
@@ -1023,7 +1092,17 @@
         </label>
 
 
+        <p class="field-note" style="margin-top: 0; margin-bottom: 14px;">
+
+          Puedes indicar un horario seguido o un horario partido
+          con servicio de comida y cena.
+
+        </p>
+
+
+        <!-- ========================== -->
         <!-- LUNES -->
+        <!-- ========================== -->
 
         <div class="schedule-day">
 
@@ -1034,19 +1113,100 @@
           </div>
 
 
-          <div class="schedule-times">
+          <div class="schedule-type">
 
-            <input
-              type="time"
-              id="monday_open"
-              value="12:00"
-            >
+            <label>
 
-            <input
-              type="time"
-              id="monday_close"
-              value="23:00"
-            >
+              <input
+                type="radio"
+                name="monday_type"
+                value="continuous"
+                checked
+                onchange="updateScheduleType('monday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario seguido
+
+              </span>
+
+            </label>
+
+
+            <label>
+
+              <input
+                type="radio"
+                name="monday_type"
+                value="split"
+                onchange="updateScheduleType('monday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario partido
+
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <div class="schedule-service">
+
+            <div class="schedule-service-title">
+
+              Horario de servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="monday_open"
+                value="12:00"
+              >
+
+              <input
+                type="time"
+                id="monday_close"
+                value="23:00"
+              >
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="schedule-second-service"
+            id="monday_second_service"
+          >
+
+            <div class="schedule-service-title">
+
+              Segundo servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="monday_second_open"
+                value="20:00"
+              >
+
+              <input
+                type="time"
+                id="monday_second_close"
+                value="23:00"
+              >
+
+            </div>
 
           </div>
 
@@ -1065,7 +1225,9 @@
         </div>
 
 
+        <!-- ========================== -->
         <!-- MARTES -->
+        <!-- ========================== -->
 
         <div class="schedule-day">
 
@@ -1076,19 +1238,100 @@
           </div>
 
 
-          <div class="schedule-times">
+          <div class="schedule-type">
 
-            <input
-              type="time"
-              id="tuesday_open"
-              value="12:00"
-            >
+            <label>
 
-            <input
-              type="time"
-              id="tuesday_close"
-              value="23:00"
-            >
+              <input
+                type="radio"
+                name="tuesday_type"
+                value="continuous"
+                checked
+                onchange="updateScheduleType('tuesday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario seguido
+
+              </span>
+
+            </label>
+
+
+            <label>
+
+              <input
+                type="radio"
+                name="tuesday_type"
+                value="split"
+                onchange="updateScheduleType('tuesday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario partido
+
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <div class="schedule-service">
+
+            <div class="schedule-service-title">
+
+              Horario de servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="tuesday_open"
+                value="12:00"
+              >
+
+              <input
+                type="time"
+                id="tuesday_close"
+                value="23:00"
+              >
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="schedule-second-service"
+            id="tuesday_second_service"
+          >
+
+            <div class="schedule-service-title">
+
+              Segundo servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="tuesday_second_open"
+                value="20:00"
+              >
+
+              <input
+                type="time"
+                id="tuesday_second_close"
+                value="23:00"
+              >
+
+            </div>
 
           </div>
 
@@ -1107,7 +1350,9 @@
         </div>
 
 
+        <!-- ========================== -->
         <!-- MIÉRCOLES -->
+        <!-- ========================== -->
 
         <div class="schedule-day">
 
@@ -1118,19 +1363,100 @@
           </div>
 
 
-          <div class="schedule-times">
+          <div class="schedule-type">
 
-            <input
-              type="time"
-              id="wednesday_open"
-              value="12:00"
-            >
+            <label>
 
-            <input
-              type="time"
-              id="wednesday_close"
-              value="23:00"
-            >
+              <input
+                type="radio"
+                name="wednesday_type"
+                value="continuous"
+                checked
+                onchange="updateScheduleType('wednesday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario seguido
+
+              </span>
+
+            </label>
+
+
+            <label>
+
+              <input
+                type="radio"
+                name="wednesday_type"
+                value="split"
+                onchange="updateScheduleType('wednesday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario partido
+
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <div class="schedule-service">
+
+            <div class="schedule-service-title">
+
+              Horario de servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="wednesday_open"
+                value="12:00"
+              >
+
+              <input
+                type="time"
+                id="wednesday_close"
+                value="23:00"
+              >
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="schedule-second-service"
+            id="wednesday_second_service"
+          >
+
+            <div class="schedule-service-title">
+
+              Segundo servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="wednesday_second_open"
+                value="20:00"
+              >
+
+              <input
+                type="time"
+                id="wednesday_second_close"
+                value="23:00"
+              >
+
+            </div>
 
           </div>
 
@@ -1149,7 +1475,9 @@
         </div>
 
 
+        <!-- ========================== -->
         <!-- JUEVES -->
+        <!-- ========================== -->
 
         <div class="schedule-day">
 
@@ -1160,19 +1488,100 @@
           </div>
 
 
-          <div class="schedule-times">
+          <div class="schedule-type">
 
-            <input
-              type="time"
-              id="thursday_open"
-              value="12:00"
-            >
+            <label>
 
-            <input
-              type="time"
-              id="thursday_close"
-              value="23:00"
-            >
+              <input
+                type="radio"
+                name="thursday_type"
+                value="continuous"
+                checked
+                onchange="updateScheduleType('thursday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario seguido
+
+              </span>
+
+            </label>
+
+
+            <label>
+
+              <input
+                type="radio"
+                name="thursday_type"
+                value="split"
+                onchange="updateScheduleType('thursday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario partido
+
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <div class="schedule-service">
+
+            <div class="schedule-service-title">
+
+              Horario de servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="thursday_open"
+                value="12:00"
+              >
+
+              <input
+                type="time"
+                id="thursday_close"
+                value="23:00"
+              >
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="schedule-second-service"
+            id="thursday_second_service"
+          >
+
+            <div class="schedule-service-title">
+
+              Segundo servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="thursday_second_open"
+                value="20:00"
+              >
+
+              <input
+                type="time"
+                id="thursday_second_close"
+                value="23:00"
+              >
+
+            </div>
 
           </div>
 
@@ -1191,7 +1600,9 @@
         </div>
 
 
+        <!-- ========================== -->
         <!-- VIERNES -->
+        <!-- ========================== -->
 
         <div class="schedule-day">
 
@@ -1202,19 +1613,100 @@
           </div>
 
 
-          <div class="schedule-times">
+          <div class="schedule-type">
 
-            <input
-              type="time"
-              id="friday_open"
-              value="12:00"
-            >
+            <label>
 
-            <input
-              type="time"
-              id="friday_close"
-              value="23:00"
-            >
+              <input
+                type="radio"
+                name="friday_type"
+                value="continuous"
+                checked
+                onchange="updateScheduleType('friday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario seguido
+
+              </span>
+
+            </label>
+
+
+            <label>
+
+              <input
+                type="radio"
+                name="friday_type"
+                value="split"
+                onchange="updateScheduleType('friday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario partido
+
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <div class="schedule-service">
+
+            <div class="schedule-service-title">
+
+              Horario de servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="friday_open"
+                value="12:00"
+              >
+
+              <input
+                type="time"
+                id="friday_close"
+                value="23:00"
+              >
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="schedule-second-service"
+            id="friday_second_service"
+          >
+
+            <div class="schedule-service-title">
+
+              Segundo servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="friday_second_open"
+                value="20:00"
+              >
+
+              <input
+                type="time"
+                id="friday_second_close"
+                value="23:00"
+              >
+
+            </div>
 
           </div>
 
@@ -1233,7 +1725,9 @@
         </div>
 
 
+        <!-- ========================== -->
         <!-- SÁBADO -->
+        <!-- ========================== -->
 
         <div class="schedule-day">
 
@@ -1244,19 +1738,100 @@
           </div>
 
 
-          <div class="schedule-times">
+          <div class="schedule-type">
 
-            <input
-              type="time"
-              id="saturday_open"
-              value="12:00"
-            >
+            <label>
 
-            <input
-              type="time"
-              id="saturday_close"
-              value="23:00"
-            >
+              <input
+                type="radio"
+                name="saturday_type"
+                value="continuous"
+                checked
+                onchange="updateScheduleType('saturday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario seguido
+
+              </span>
+
+            </label>
+
+
+            <label>
+
+              <input
+                type="radio"
+                name="saturday_type"
+                value="split"
+                onchange="updateScheduleType('saturday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario partido
+
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <div class="schedule-service">
+
+            <div class="schedule-service-title">
+
+              Horario de servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="saturday_open"
+                value="12:00"
+              >
+
+              <input
+                type="time"
+                id="saturday_close"
+                value="23:00"
+              >
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="schedule-second-service"
+            id="saturday_second_service"
+          >
+
+            <div class="schedule-service-title">
+
+              Segundo servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="saturday_second_open"
+                value="20:00"
+              >
+
+              <input
+                type="time"
+                id="saturday_second_close"
+                value="23:00"
+              >
+
+            </div>
 
           </div>
 
@@ -1275,7 +1850,9 @@
         </div>
 
 
+        <!-- ========================== -->
         <!-- DOMINGO -->
+        <!-- ========================== -->
 
         <div class="schedule-day">
 
@@ -1286,19 +1863,100 @@
           </div>
 
 
-          <div class="schedule-times">
+          <div class="schedule-type">
 
-            <input
-              type="time"
-              id="sunday_open"
-              value="12:00"
-            >
+            <label>
 
-            <input
-              type="time"
-              id="sunday_close"
-              value="23:00"
-            >
+              <input
+                type="radio"
+                name="sunday_type"
+                value="continuous"
+                checked
+                onchange="updateScheduleType('sunday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario seguido
+
+              </span>
+
+            </label>
+
+
+            <label>
+
+              <input
+                type="radio"
+                name="sunday_type"
+                value="split"
+                onchange="updateScheduleType('sunday')"
+              >
+
+              <span class="schedule-type-option">
+
+                Horario partido
+
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <div class="schedule-service">
+
+            <div class="schedule-service-title">
+
+              Horario de servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="sunday_open"
+                value="12:00"
+              >
+
+              <input
+                type="time"
+                id="sunday_close"
+                value="23:00"
+              >
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="schedule-second-service"
+            id="sunday_second_service"
+          >
+
+            <div class="schedule-service-title">
+
+              Segundo servicio
+
+            </div>
+
+            <div class="schedule-times">
+
+              <input
+                type="time"
+                id="sunday_second_open"
+                value="20:00"
+              >
+
+              <input
+                type="time"
+                id="sunday_second_close"
+                value="23:00"
+              >
+
+            </div>
 
           </div>
 
@@ -1575,6 +2233,48 @@
 
     /*
     ==========================================
+    TIPO DE HORARIO
+    ==========================================
+    */
+
+    function updateScheduleType(day) {
+
+      const selected =
+        document.querySelector(
+          `input[name="${day}_type"]:checked`
+        );
+
+
+      const secondService =
+        document.getElementById(
+          `${day}_second_service`
+        );
+
+
+      if (
+        selected &&
+        selected.value === "split"
+      ) {
+
+        secondService.classList.add(
+          "visible"
+        );
+
+      }
+
+      else {
+
+        secondService.classList.remove(
+          "visible"
+        );
+
+      }
+
+    }
+
+
+    /*
+    ==========================================
     MOSTRAR PASO
     ==========================================
     */
@@ -1846,6 +2546,182 @@
 
         }
 
+
+        if (
+          Number(totalCapacity) < 1
+        ) {
+
+          alert(
+            "El aforo total debe ser como mínimo 1."
+          );
+
+          return false;
+
+        }
+
+
+        if (
+          Number(maxPeople) < 1
+        ) {
+
+          alert(
+            "El máximo de personas por reserva debe ser como mínimo 1."
+          );
+
+          return false;
+
+        }
+
+
+        /*
+        VALIDAR HORARIOS
+        */
+
+        const days = [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday",
+          "saturday",
+          "sunday"
+        ];
+
+
+        for (
+          const day of days
+        ) {
+
+          const closed =
+            document
+              .getElementById(
+                `${day}_closed`
+              )
+              .checked;
+
+
+          if (
+            closed
+          ) {
+
+            continue;
+
+          }
+
+
+          const open =
+            document
+              .getElementById(
+                `${day}_open`
+              )
+              .value;
+
+
+          const close =
+            document
+              .getElementById(
+                `${day}_close`
+              )
+              .value;
+
+
+          if (
+            !open ||
+            !close
+          ) {
+
+            alert(
+              "Completa todos los horarios de apertura y cierre."
+            );
+
+            return false;
+
+          }
+
+
+          if (
+            open >= close
+          ) {
+
+            alert(
+              "La hora de apertura debe ser anterior a la hora de cierre."
+            );
+
+            return false;
+
+          }
+
+
+          const scheduleType =
+            document.querySelector(
+              `input[name="${day}_type"]:checked`
+            );
+
+
+          if (
+            scheduleType &&
+            scheduleType.value === "split"
+          ) {
+
+            const secondOpen =
+              document
+                .getElementById(
+                  `${day}_second_open`
+                )
+                .value;
+
+
+            const secondClose =
+              document
+                .getElementById(
+                  `${day}_second_close`
+                )
+                .value;
+
+
+            if (
+              !secondOpen ||
+              !secondClose
+            ) {
+
+              alert(
+                "Completa el segundo servicio del horario partido."
+              );
+
+              return false;
+
+            }
+
+
+            if (
+              secondOpen >= secondClose
+            ) {
+
+              alert(
+                "La hora de apertura del segundo servicio debe ser anterior a la hora de cierre."
+              );
+
+              return false;
+
+            }
+
+
+            if (
+              secondOpen <= close
+            ) {
+
+              alert(
+                "En un horario partido, el segundo servicio debe comenzar después de terminar el primero."
+              );
+
+              return false;
+
+            }
+
+          }
+
+        }
+
       }
 
 
@@ -1862,176 +2738,124 @@
 
     function getSchedules() {
 
-      return {
-
-        monday: {
-          open:
-            document
-              .getElementById(
-                "monday_open"
-              )
-              .value,
-
-          close:
-            document
-              .getElementById(
-                "monday_close"
-              )
-              .value,
-
-          closed:
-            document
-              .getElementById(
-                "monday_closed"
-              )
-              .checked
-        },
+      const days = [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday"
+      ];
 
 
-        tuesday: {
-          open:
-            document
-              .getElementById(
-                "tuesday_open"
-              )
-              .value,
-
-          close:
-            document
-              .getElementById(
-                "tuesday_close"
-              )
-              .value,
-
-          closed:
-            document
-              .getElementById(
-                "tuesday_closed"
-              )
-              .checked
-        },
+      const schedules = {};
 
 
-        wednesday: {
-          open:
-            document
-              .getElementById(
-                "wednesday_open"
-              )
-              .value,
+      days.forEach(day => {
 
-          close:
-            document
-              .getElementById(
-                "wednesday_close"
-              )
-              .value,
-
-          closed:
-            document
-              .getElementById(
-                "wednesday_closed"
-              )
-              .checked
-        },
+        const closed =
+          document
+            .getElementById(
+              `${day}_closed`
+            )
+            .checked;
 
 
-        thursday: {
-          open:
-            document
-              .getElementById(
-                "thursday_open"
-              )
-              .value,
-
-          close:
-            document
-              .getElementById(
-                "thursday_close"
-              )
-              .value,
-
-          closed:
-            document
-              .getElementById(
-                "thursday_closed"
-              )
-              .checked
-        },
+        const scheduleType =
+          document.querySelector(
+            `input[name="${day}_type"]:checked`
+          );
 
 
-        friday: {
-          open:
-            document
-              .getElementById(
-                "friday_open"
-              )
-              .value,
+        if (
+          closed
+        ) {
 
-          close:
-            document
-              .getElementById(
-                "friday_close"
-              )
-              .value,
+          schedules[day] = {
 
-          closed:
-            document
-              .getElementById(
-                "friday_closed"
-              )
-              .checked
-        },
+            type:
+              "closed",
 
+            closed:
+              true,
 
-        saturday: {
-          open:
-            document
-              .getElementById(
-                "saturday_open"
-              )
-              .value,
+            services:
+              []
 
-          close:
-            document
-              .getElementById(
-                "saturday_close"
-              )
-              .value,
+          };
 
-          closed:
-            document
-              .getElementById(
-                "saturday_closed"
-              )
-              .checked
-        },
+          return;
 
-
-        sunday: {
-          open:
-            document
-              .getElementById(
-                "sunday_open"
-              )
-              .value,
-
-          close:
-            document
-              .getElementById(
-                "sunday_close"
-              )
-              .value,
-
-          closed:
-            document
-              .getElementById(
-                "sunday_closed"
-              )
-              .checked
         }
 
-      };
+
+        const services = [
+
+          {
+            open:
+              document
+                .getElementById(
+                  `${day}_open`
+                )
+                .value,
+
+            close:
+              document
+                .getElementById(
+                  `${day}_close`
+                )
+                .value
+          }
+
+        ];
+
+
+        if (
+          scheduleType &&
+          scheduleType.value === "split"
+        ) {
+
+          services.push({
+
+            open:
+              document
+                .getElementById(
+                  `${day}_second_open`
+                )
+                .value,
+
+            close:
+              document
+                .getElementById(
+                  `${day}_second_close`
+                )
+                .value
+
+          });
+
+        }
+
+
+        schedules[day] = {
+
+          type:
+            scheduleType
+              ? scheduleType.value
+              : "continuous",
+
+          closed:
+            false,
+
+          services:
+            services
+
+        };
+
+      });
+
+
+      return schedules;
 
     }
 
@@ -2281,6 +3105,77 @@
       };
 
 
+      const dayLabels = {
+
+        monday:
+          "Lunes",
+
+        tuesday:
+          "Martes",
+
+        wednesday:
+          "Miércoles",
+
+        thursday:
+          "Jueves",
+
+        friday:
+          "Viernes",
+
+        saturday:
+          "Sábado",
+
+        sunday:
+          "Domingo"
+
+      };
+
+
+      let schedulesHTML = "";
+
+
+      Object.keys(
+        data.business_rules.schedules
+      ).forEach(day => {
+
+        const schedule =
+          data
+            .business_rules
+            .schedules[day];
+
+
+        if (
+          schedule.closed
+        ) {
+
+          schedulesHTML += `
+            ${dayLabels[day]}:
+            Cerrado
+            <br>
+          `;
+
+          return;
+
+        }
+
+
+        const services =
+          schedule.services
+            .map(service =>
+              `${service.open} - ${service.close}`
+            )
+            .join(" / ");
+
+
+        schedulesHTML += `
+          ${dayLabels[day]}:
+          ${services}
+          <br>
+        `;
+
+      });
+
+
       document
         .getElementById("summary")
         .innerHTML = `
@@ -2459,82 +3354,9 @@
 
           <br>
 
-          Lunes:
-          ${
-            data.business_rules.schedules.monday.closed
-              ? "Cerrado"
-              : data.business_rules.schedules.monday.open +
-                " - " +
-                data.business_rules.schedules.monday.close
-          }
+          ${schedulesHTML}
 
           <br>
-
-          Martes:
-          ${
-            data.business_rules.schedules.tuesday.closed
-              ? "Cerrado"
-              : data.business_rules.schedules.tuesday.open +
-                " - " +
-                data.business_rules.schedules.tuesday.close
-          }
-
-          <br>
-
-          Miércoles:
-          ${
-            data.business_rules.schedules.wednesday.closed
-              ? "Cerrado"
-              : data.business_rules.schedules.wednesday.open +
-                " - " +
-                data.business_rules.schedules.wednesday.close
-          }
-
-          <br>
-
-          Jueves:
-          ${
-            data.business_rules.schedules.thursday.closed
-              ? "Cerrado"
-              : data.business_rules.schedules.thursday.open +
-                " - " +
-                data.business_rules.schedules.thursday.close
-          }
-
-          <br>
-
-          Viernes:
-          ${
-            data.business_rules.schedules.friday.closed
-              ? "Cerrado"
-              : data.business_rules.schedules.friday.open +
-                " - " +
-                data.business_rules.schedules.friday.close
-          }
-
-          <br>
-
-          Sábado:
-          ${
-            data.business_rules.schedules.saturday.closed
-              ? "Cerrado"
-              : data.business_rules.schedules.saturday.open +
-                " - " +
-                data.business_rules.schedules.saturday.close
-          }
-
-          <br>
-
-          Domingo:
-          ${
-            data.business_rules.schedules.sunday.closed
-              ? "Cerrado"
-              : data.business_rules.schedules.sunday.open +
-                " - " +
-                data.business_rules.schedules.sunday.close
-          }
-
-          <br><br>
 
 
           <strong>
@@ -2590,9 +3412,9 @@
 
 
         /*
-        =======================================
+        ========================================
         CREAR ESTABLECIMIENTO
-        =======================================
+        ========================================
         */
 
         const {
@@ -2675,9 +3497,9 @@
 
 
         /*
-        =======================================
+        ========================================
         GUARDAR CONFIGURACIÓN
-        =======================================
+        ========================================
         */
 
         const {
@@ -2711,9 +3533,9 @@
 
 
         /*
-        =======================================
+        ========================================
         GUARDAR REGLAS
-        =======================================
+        ========================================
         */
 
         const {
@@ -2765,9 +3587,9 @@
 
 
         /*
-        =======================================
+        ========================================
         MOSTRAR ÉXITO
-        =======================================
+        ========================================
         */
 
         currentStep =
@@ -2778,9 +3600,9 @@
 
 
         /*
-        =======================================
+        ========================================
         IR AL DASHBOARD
-        =======================================
+        ========================================
         */
 
         setTimeout(

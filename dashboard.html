@@ -33,6 +33,7 @@
       --muted: #a0a1a8;
       --green: #58d68d;
       --red: #f08080;
+      --blue: #7aa7ff;
     }
 
 
@@ -46,6 +47,11 @@
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
+    }
+
+
+    button {
+      font-family: inherit;
     }
 
 
@@ -193,6 +199,10 @@
 
 
     .menu-item {
+      width: 100%;
+      text-align: left;
+      color: inherit;
+      font: inherit;
       background: var(--card-dark);
       border: 1px solid var(--border);
       border-radius: 15px;
@@ -291,6 +301,281 @@
     }
 
 
+    /* ==========================================
+       SECCIONES
+       ========================================== */
+
+    .dashboard-section {
+      display: none;
+    }
+
+
+    .dashboard-section.active {
+      display: block;
+    }
+
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+
+    .section-header h2 {
+      font-size: 28px;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+
+    .section-header p {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+
+    .section-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 9px 14px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+
+    .section-back:hover {
+      border-color: #777b87;
+      background: var(--card);
+    }
+
+
+    /* ==========================================
+       TARJETAS DE MODO
+       ========================================== */
+
+    .mode-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+
+    .mode-card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+
+    .mode-card p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+
+    .mode-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 16px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      color: var(--green);
+      font-size: 13px;
+    }
+
+
+    /* ==========================================
+       TABLAS
+       ========================================== */
+
+    .data-table-wrap {
+      overflow-x: auto;
+      background: var(--card-dark);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+    }
+
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 620px;
+    }
+
+
+    .data-table th,
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      font-size: 14px;
+    }
+
+
+    .data-table th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+
+    /* ==========================================
+       ESTADOS
+       ========================================== */
+
+    .empty-state {
+      background: var(--card-dark);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+
+    .loading-inline {
+      color: var(--muted);
+      padding: 20px 0;
+    }
+
+
+    .state-message {
+      padding: 18px;
+      background: var(--card-dark);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+
+    /* ==========================================
+       CONFIGURACIÓN
+       ========================================== */
+
+    .config-card {
+      margin-bottom: 18px;
+    }
+
+
+    .config-card h3 {
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+
+
+    .config-note {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+
+    .info-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(260px, 1fr)
+        );
+      gap: 16px;
+    }
+
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+
+    .info-label {
+      color: var(--muted);
+    }
+
+
+    .info-value {
+      text-align: right;
+      font-weight: 500;
+      overflow-wrap: anywhere;
+    }
+
+
+    .config-section-title {
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+
+    /* ==========================================
+       RESUMEN
+       ========================================== */
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(180px, 1fr)
+        );
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+
+    .summary-card {
+      background: var(--card-dark);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+
+    .summary-card-label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+
+    .summary-card-value {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+
+    /* ==========================================
+       RESPONSIVE
+       ========================================== */
+
     @media (max-width: 600px) {
 
       .container {
@@ -326,7 +611,25 @@
         align-items: flex-start;
       }
 
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+
+      .info-row {
+        flex-direction: column;
+        gap: 5px;
+      }
+
+
+      .info-value {
+        text-align: left;
+      }
+
     }
+
 
   </style>
 
@@ -452,10 +755,15 @@
             </div>
 
             <div class="card-value">
+
               <span class="status">
+
                 <span class="status-dot"></span>
+
                 Superadmin
+
               </span>
+
             </div>
 
           </div>
@@ -490,146 +798,351 @@
         style="display:none;"
       >
 
-        <section class="hero">
 
-          <button
-            class="back-button"
-            type="button"
-            onclick="goBackToSuperadmin()"
-            style="margin-bottom:25px;"
-          >
-            ← Volver al panel
-          </button>
+        <!-- ========================= -->
+        <!-- INICIO -->
+        <!-- ========================= -->
+
+        <section
+          id="restaurantDashboardHome"
+          class="dashboard-section active"
+        >
+
+          <section class="hero">
+
+            <button
+              class="back-button"
+              type="button"
+              onclick="goBackToSuperadmin()"
+              style="margin-bottom:25px;"
+            >
+              ← Volver al panel
+            </button>
 
 
-          <h1 id="restaurantName">
-            Cargando...
-          </h1>
+            <h1 id="restaurantName">
+              Cargando...
+            </h1>
+
+
+            <div
+              class="subtitle"
+              id="restaurantLocation"
+            >
+            </div>
+
+          </section>
+
+
+
+          <section class="grid">
+
+
+            <div class="card">
+
+              <div class="card-label">
+                Gestión de reservas
+              </div>
+
+              <div
+                class="card-value"
+                id="reservationType"
+              >
+                —
+              </div>
+
+            </div>
+
+
+
+            <div class="card">
+
+              <div class="card-label">
+                Sistema
+              </div>
+
+              <div
+                class="card-value"
+                id="reservationSystem"
+              >
+                —
+              </div>
+
+            </div>
+
+
+
+            <div class="card">
+
+              <div class="card-label">
+                Tipo de negocio
+              </div>
+
+              <div
+                class="card-value"
+                id="businessType"
+              >
+                —
+              </div>
+
+            </div>
+
+          </section>
+
+
+
+          <section>
+
+            <h2 class="menu-title">
+              Gestión del restaurante
+            </h2>
+
+
+            <div class="menu">
+
+
+              <button
+                type="button"
+                class="menu-item"
+                onclick="showRestaurantSection('reservas')"
+              >
+
+                <h3>
+                  Reservas
+                </h3>
+
+                <p>
+                  Gestiona las reservas, disponibilidad
+                  y sistema de reservas del restaurante.
+                </p>
+
+              </button>
+
+
+
+              <button
+                type="button"
+                class="menu-item"
+                onclick="showRestaurantSection('clientes')"
+              >
+
+                <h3>
+                  Clientes
+                </h3>
+
+                <p>
+                  Consulta y gestiona los clientes,
+                  conversaciones e historial.
+                </p>
+
+              </button>
+
+
+
+              <button
+                type="button"
+                class="menu-item"
+                onclick="showRestaurantSection('configuracion')"
+              >
+
+                <h3>
+                  Configuración
+                </h3>
+
+                <p>
+                  Gestiona los datos, horarios,
+                  capacidad y reglas del restaurante.
+                </p>
+
+              </button>
+
+
+            </div>
+
+          </section>
+
+        </section>
+
+
+
+        <!-- ========================= -->
+        <!-- RESERVAS -->
+        <!-- ========================= -->
+
+        <section
+          id="restaurantSectionReservas"
+          class="dashboard-section"
+        >
+
+          <div class="section-header">
+
+            <div>
+
+              <h2>
+                Reservas
+              </h2>
+
+              <p>
+                Gestiona las reservas y la disponibilidad
+                del restaurante.
+              </p>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="section-back"
+              onclick="showRestaurantSection('inicio')"
+            >
+              ← Volver
+            </button>
+
+          </div>
+
 
 
           <div
-            class="subtitle"
-            id="restaurantLocation"
+            id="reservationModeContent"
+            class="mode-card"
+          >
+            Cargando sistema de reservas...
+          </div>
+
+
+
+          <div
+            id="reservationsSummary"
+            class="summary-grid"
           >
           </div>
 
-        </section>
 
 
-
-        <section class="grid">
-
-
-          <div class="card">
-
-            <div class="card-label">
-              Gestión de reservas
-            </div>
-
-            <div
-              class="card-value"
-              id="reservationType"
-            >
-              —
-            </div>
-
-          </div>
-
-
-
-          <div class="card">
-
-            <div class="card-label">
-              Sistema
-            </div>
-
-            <div
-              class="card-value"
-              id="reservationSystem"
-            >
-              —
-            </div>
-
-          </div>
-
-
-
-          <div class="card">
-
-            <div class="card-label">
-              Tipo de negocio
-            </div>
-
-            <div
-              class="card-value"
-              id="businessType"
-            >
-              —
-            </div>
-
+          <div
+            id="reservationsContent"
+            class="loading-inline"
+          >
+            Cargando reservas...
           </div>
 
         </section>
 
 
 
-        <section>
+        <!-- ========================= -->
+        <!-- CLIENTES -->
+        <!-- ========================= -->
 
-          <h2 class="menu-title">
-            Gestión del restaurante
-          </h2>
+        <section
+          id="restaurantSectionClientes"
+          class="dashboard-section"
+        >
 
+          <div class="section-header">
 
-          <div class="menu">
+            <div>
 
-
-            <div class="menu-item">
-
-              <h3>
-                Reservas
-              </h3>
-
-              <p>
-                Gestiona las reservas y disponibilidad
-                del restaurante.
-              </p>
-
-            </div>
-
-
-
-            <div class="menu-item">
-
-              <h3>
+              <h2>
                 Clientes
-              </h3>
+              </h2>
 
               <p>
-                Consulta y gestiona la información
-                de tus clientes.
+                Gestiona la información de los clientes
+                y su historial con el restaurante.
               </p>
 
             </div>
 
 
-
-            <div class="menu-item">
-
-              <h3>
-                Configuración
-              </h3>
-
-              <p>
-                Modifica las reglas y preferencias
-                del restaurante.
-              </p>
-
-            </div>
-
+            <button
+              type="button"
+              class="section-back"
+              onclick="showRestaurantSection('inicio')"
+            >
+              ← Volver
+            </button>
 
           </div>
 
+
+
+          <div class="mode-card">
+
+            <h3>
+              Base de clientes
+            </h3>
+
+            <p>
+              Los clientes podrán incorporarse a esta base
+              a través de las reservas y de las conversaciones
+              mantenidas con FGV Automation.
+            </p>
+
+            <div class="mode-badge">
+              ● Datos vinculados al restaurante
+            </div>
+
+          </div>
+
+
+
+          <div
+            id="customersContent"
+            class="loading-inline"
+          >
+            Cargando clientes...
+          </div>
+
         </section>
+
+
+
+        <!-- ========================= -->
+        <!-- CONFIGURACIÓN -->
+        <!-- ========================= -->
+
+        <section
+          id="restaurantSectionConfiguracion"
+          class="dashboard-section"
+        >
+
+          <div class="section-header">
+
+            <div>
+
+              <h2>
+                Configuración
+              </h2>
+
+              <p>
+                Gestiona toda la información y las reglas
+                que utiliza FGV Automation para este restaurante.
+              </p>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="section-back"
+              onclick="showRestaurantSection('inicio')"
+            >
+              ← Volver
+            </button>
+
+          </div>
+
+
+
+          <div
+            id="configurationContent"
+          >
+            Cargando configuración...
+          </div>
+
+        </section>
+
 
       </div>
 
@@ -648,9 +1161,9 @@
 
 
     /*
-    ==========================================
-    SUPABASE
-    ==========================================
+      ==========================================
+      SUPABASE
+      ==========================================
     */
 
     const SUPABASE_URL =
@@ -670,9 +1183,9 @@
 
 
     /*
-    ==========================================
-    SUPERADMIN
-    ==========================================
+      ==========================================
+      SUPERADMIN
+      ==========================================
     */
 
     const SUPERADMIN_EMAIL =
@@ -681,9 +1194,9 @@
 
 
     /*
-    ==========================================
-    OBTENER ID DESDE URL
-    ==========================================
+      ==========================================
+      OBTENER ID DESDE URL
+      ==========================================
     */
 
     const params =
@@ -698,9 +1211,23 @@
 
 
     /*
-    ==========================================
-    CERRAR SESIÓN
-    ==========================================
+      ==========================================
+      DATOS ACTUALES
+      ==========================================
+    */
+
+    let currentEstablishment = null;
+
+    let currentEstablishmentConfig = {};
+
+    let currentBusinessRules = {};
+
+
+
+    /*
+      ==========================================
+      CERRAR SESIÓN
+      ==========================================
     */
 
     async function logout() {
@@ -716,9 +1243,9 @@
 
 
     /*
-    ==========================================
-    VOLVER AL PANEL SUPERADMIN
-    ==========================================
+      ==========================================
+      VOLVER AL PANEL SUPERADMIN
+      ==========================================
     */
 
     function goBackToSuperadmin() {
@@ -731,9 +1258,9 @@
 
 
     /*
-    ==========================================
-    MOSTRAR APP
-    ==========================================
+      ==========================================
+      MOSTRAR APP
+      ==========================================
     */
 
     function showApp() {
@@ -754,9 +1281,9 @@
 
 
     /*
-    ==========================================
-    CARGAR SUPERADMIN
-    ==========================================
+      ==========================================
+      CARGAR SUPERADMIN
+      ==========================================
     */
 
     async function loadSuperadminDashboard(
@@ -894,9 +1421,9 @@
 
 
     /*
-    ==========================================
-    ABRIR RESTAURANTE
-    ==========================================
+      ==========================================
+      ABRIR RESTAURANTE
+      ==========================================
     */
 
     function openRestaurant(id) {
@@ -910,9 +1437,9 @@
 
 
     /*
-    ==========================================
-    ESCAPAR HTML
-    ==========================================
+      ==========================================
+      ESCAPAR HTML
+      ==========================================
     */
 
     function escapeHtml(value) {
@@ -944,9 +1471,1336 @@
 
 
     /*
-    ==========================================
-    CARGAR DASHBOARD RESTAURANTE
-    ==========================================
+      ==========================================
+      SECCIONES DEL DASHBOARD
+      ==========================================
+    */
+
+    function showRestaurantSection(
+      section
+    ) {
+
+      const sectionMap = {
+
+        inicio:
+          "restaurantDashboardHome",
+
+        reservas:
+          "restaurantSectionReservas",
+
+        clientes:
+          "restaurantSectionClientes",
+
+        configuracion:
+          "restaurantSectionConfiguracion"
+
+      };
+
+
+      Object
+        .values(sectionMap)
+        .forEach(
+          function(id) {
+
+            const element =
+              document.getElementById(id);
+
+
+            if (element) {
+
+              element.classList.remove(
+                "active"
+              );
+
+            }
+
+          }
+        );
+
+
+      const target =
+        document.getElementById(
+          sectionMap[section]
+        );
+
+
+      if (target) {
+
+        target.classList.add(
+          "active"
+        );
+
+      }
+
+
+      if (section === "reservas") {
+
+        loadReservationSection();
+
+      }
+
+
+      if (section === "clientes") {
+
+        loadCustomers();
+
+      }
+
+
+      if (section === "configuracion") {
+
+        renderConfiguration();
+
+      }
+
+
+      window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+      });
+
+    }
+
+
+
+    /*
+      ==========================================
+      CONFIGURAR MODO DE RESERVAS
+      ==========================================
+    */
+
+    function renderReservationMode() {
+
+      const container =
+        document.getElementById(
+          "reservationModeContent"
+        );
+
+
+      if (!container) {
+
+        return;
+
+      }
+
+
+      const reservationType =
+        currentEstablishmentConfig
+          .reservation_type;
+
+
+      const reservationSystem =
+        currentEstablishmentConfig
+          .reservation_system;
+
+
+      if (
+        reservationType === "manual"
+      ) {
+
+        container.innerHTML =
+          `
+
+            <h3>
+              Reservas FGV Automation
+            </h3>
+
+            <p>
+              Este restaurante utiliza el sistema de reservas
+              propio de FGV Automation. Las reservas se gestionarán
+              mediante la información almacenada en nuestra base
+              de datos y estarán preparadas para conectarse con
+              WhatsApp y la automatización.
+            </p>
+
+            <div class="mode-badge">
+              ● Sistema propio FGV Automation
+            </div>
+
+          `;
+
+        return;
+
+      }
+
+
+      if (
+        reservationType
+      ) {
+
+        container.innerHTML =
+          `
+
+            <h3>
+              Integración de reservas
+            </h3>
+
+            <p>
+              Este restaurante utiliza un sistema externo de reservas.
+              FGV Automation utilizará la integración correspondiente
+              para consultar y gestionar la disponibilidad y las reservas.
+            </p>
+
+            <div class="mode-badge">
+              ● ${escapeHtml(
+                reservationSystem ||
+                "Sistema externo"
+              )}
+            </div>
+
+          `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        `
+
+          <h3>
+            Sistema de reservas
+          </h3>
+
+          <p>
+            Todavía no se ha configurado un sistema de reservas
+            para este restaurante.
+          </p>
+
+        `;
+
+    }
+
+
+
+    /*
+      ==========================================
+      CARGAR SECCIÓN RESERVAS
+      ==========================================
+    */
+
+    async function loadReservationSection() {
+
+      renderReservationMode();
+
+      await loadReservations();
+
+    }
+
+
+
+    /*
+      ==========================================
+      CARGAR RESERVAS
+      ==========================================
+    */
+
+    async function loadReservations() {
+
+      const container =
+        document.getElementById(
+          "reservationsContent"
+        );
+
+
+      const summary =
+        document.getElementById(
+          "reservationsSummary"
+        );
+
+
+      if (
+        !container ||
+        !establishmentId
+      ) {
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        `
+          <div class="loading-inline">
+            Cargando reservas...
+          </div>
+        `;
+
+
+      if (summary) {
+
+        summary.innerHTML = "";
+
+      }
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("reservations")
+            .select("*")
+            .eq(
+              "establishment_id",
+              establishmentId
+            )
+            .order(
+              "created_at",
+              {
+                ascending: false
+              }
+            );
+
+
+        if (error) {
+
+          throw error;
+
+        }
+
+
+        const reservations =
+          data || [];
+
+
+        renderReservationSummary(
+          reservations
+        );
+
+
+        if (
+          reservations.length === 0
+        ) {
+
+          container.innerHTML =
+            `
+
+              <div class="empty-state">
+
+                Todavía no hay reservas registradas
+                para este restaurante.
+
+                <br>
+                <br>
+
+                El siguiente paso será construir aquí
+                el sistema de reservas FGV Automation
+                y su gestión completa.
+
+              </div>
+
+            `;
+
+          return;
+
+        }
+
+
+        container.innerHTML =
+          renderGenericTable(
+            reservations
+          );
+
+
+      } catch (error) {
+
+        console.error(
+          "ERROR CARGANDO RESERVAS:",
+          error
+        );
+
+
+        container.innerHTML =
+          `
+
+            <div class="empty-state">
+
+              No se han podido cargar las reservas.
+
+              <br>
+              <br>
+
+              ${escapeHtml(
+                error.message ||
+                String(error)
+              )}
+
+            </div>
+
+          `;
+
+      }
+
+    }
+
+
+
+    /*
+      ==========================================
+      RESUMEN DE RESERVAS
+      ==========================================
+    */
+
+    function renderReservationSummary(
+      reservations
+    ) {
+
+      const container =
+        document.getElementById(
+          "reservationsSummary"
+        );
+
+
+      if (!container) {
+
+        return;
+
+      }
+
+
+      const total =
+        reservations.length;
+
+
+      const pending =
+        reservations.filter(
+
+          function(reservation) {
+
+            const status =
+              String(
+                reservation.status ||
+                ""
+              ).toLowerCase();
+
+
+            return (
+              status === "pending" ||
+              status === "pendiente"
+            );
+
+          }
+
+        ).length;
+
+
+      const confirmed =
+        reservations.filter(
+
+          function(reservation) {
+
+            const status =
+              String(
+                reservation.status ||
+                ""
+              ).toLowerCase();
+
+
+            return (
+              status === "confirmed" ||
+              status === "confirmada" ||
+              status === "confirmado"
+            );
+
+          }
+
+        ).length;
+
+
+      const cancelled =
+        reservations.filter(
+
+          function(reservation) {
+
+            const status =
+              String(
+                reservation.status ||
+                ""
+              ).toLowerCase();
+
+
+            return (
+              status === "cancelled" ||
+              status === "canceled" ||
+              status === "cancelada" ||
+              status === "cancelado"
+            );
+
+          }
+
+        ).length;
+
+
+      container.innerHTML =
+        `
+
+          <div class="summary-card">
+
+            <div class="summary-card-label">
+              Total
+            </div>
+
+            <div class="summary-card-value">
+              ${total}
+            </div>
+
+          </div>
+
+
+          <div class="summary-card">
+
+            <div class="summary-card-label">
+              Confirmadas
+            </div>
+
+            <div class="summary-card-value">
+              ${confirmed}
+            </div>
+
+          </div>
+
+
+          <div class="summary-card">
+
+            <div class="summary-card-label">
+              Pendientes
+            </div>
+
+            <div class="summary-card-value">
+              ${pending}
+            </div>
+
+          </div>
+
+
+          <div class="summary-card">
+
+            <div class="summary-card-label">
+              Canceladas
+            </div>
+
+            <div class="summary-card-value">
+              ${cancelled}
+            </div>
+
+          </div>
+
+        `;
+
+    }
+
+
+
+    /*
+      ==========================================
+      CARGAR CLIENTES
+      ==========================================
+    */
+
+    async function loadCustomers() {
+
+      const container =
+        document.getElementById(
+          "customersContent"
+        );
+
+
+      if (
+        !container ||
+        !establishmentId
+      ) {
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        `
+          <div class="loading-inline">
+            Cargando clientes...
+          </div>
+        `;
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("customers")
+            .select("*")
+            .eq(
+              "establishment_id",
+              establishmentId
+            )
+            .order(
+              "created_at",
+              {
+                ascending: false
+              }
+            );
+
+
+        if (error) {
+
+          throw error;
+
+        }
+
+
+        if (
+          !data ||
+          data.length === 0
+        ) {
+
+          container.innerHTML =
+            `
+
+              <div class="empty-state">
+
+                Todavía no hay clientes registrados
+                para este restaurante.
+
+                <br>
+                <br>
+
+                Los clientes que lleguen mediante
+                reservas y conversaciones de WhatsApp
+                quedarán asociados a este restaurante.
+
+              </div>
+
+            `;
+
+          return;
+
+        }
+
+
+        container.innerHTML =
+          renderGenericTable(
+            data
+          );
+
+
+      } catch (error) {
+
+        console.error(
+          "ERROR CARGANDO CLIENTES:",
+          error
+        );
+
+
+        container.innerHTML =
+          `
+
+            <div class="empty-state">
+
+              No se han podido cargar los clientes.
+
+              <br>
+              <br>
+
+              ${escapeHtml(
+                error.message ||
+                String(error)
+              )}
+
+            </div>
+
+          `;
+
+      }
+
+    }
+
+
+
+    /*
+      ==========================================
+      TABLA GENÉRICA
+      ==========================================
+    */
+
+    function renderGenericTable(
+      rows
+    ) {
+
+      if (
+        !rows ||
+        rows.length === 0
+      ) {
+
+        return "";
+
+      }
+
+
+      const preferredOrder = [
+
+        "id",
+
+        "name",
+
+        "full_name",
+
+        "phone",
+
+        "email",
+
+        "date",
+
+        "reservation_date",
+
+        "time",
+
+        "reservation_time",
+
+        "status",
+
+        "party_size",
+
+        "created_at"
+
+      ];
+
+
+      const keys =
+        Object.keys(
+          rows[0]
+        );
+
+
+      const orderedKeys = [
+
+        ...preferredOrder.filter(
+
+          function(key) {
+
+            return keys.includes(
+              key
+            );
+
+          }
+
+        ),
+
+        ...keys.filter(
+
+          function(key) {
+
+            return !preferredOrder.includes(
+              key
+            );
+
+          }
+
+        )
+
+      ].slice(
+        0,
+        8
+      );
+
+
+      const header =
+        orderedKeys
+          .map(
+
+            function(key) {
+
+              return `
+                <th>
+                  ${escapeHtml(
+                    formatLabel(key)
+                  )}
+                </th>
+              `;
+
+            }
+
+          )
+          .join("");
+
+
+      const body =
+        rows
+          .map(
+
+            function(row) {
+
+              return `
+                <tr>
+
+                  ${
+                    orderedKeys
+                      .map(
+
+                        function(key) {
+
+                          return `
+                            <td>
+                              ${escapeHtml(
+                                formatValue(
+                                  row[key]
+                                )
+                              )}
+                            </td>
+                          `;
+
+                        }
+
+                      )
+                      .join("")
+                  }
+
+                </tr>
+              `;
+
+            }
+
+          )
+          .join("");
+
+
+      return `
+        <div class="data-table-wrap">
+
+          <table class="data-table">
+
+            <thead>
+
+              <tr>
+
+                ${header}
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              ${body}
+
+            </tbody>
+
+          </table>
+
+        </div>
+      `;
+
+    }
+
+
+
+    /*
+      ==========================================
+      FORMATEAR ETIQUETA
+      ==========================================
+    */
+
+    function formatLabel(
+      key
+    ) {
+
+      return String(key)
+
+        .replace(
+          /_/g,
+          " "
+        )
+
+        .replace(
+          /\b\w/g,
+          function(letter) {
+
+            return letter.toUpperCase();
+
+          }
+        );
+
+    }
+
+
+
+    /*
+      ==========================================
+      FORMATEAR VALOR
+      ==========================================
+    */
+
+    function formatValue(
+      value
+    ) {
+
+      if (
+
+        value === null ||
+
+        value === undefined ||
+
+        value === ""
+
+      ) {
+
+        return "—";
+
+      }
+
+
+      if (
+        typeof value === "object"
+      ) {
+
+        return JSON.stringify(
+          value
+        );
+
+      }
+
+
+      return String(
+        value
+      );
+
+    }
+
+
+
+    /*
+      ==========================================
+      CONFIGURACIÓN
+      ==========================================
+    */
+
+    function renderConfiguration() {
+
+      const container =
+        document.getElementById(
+          "configurationContent"
+        );
+
+
+      if (!container) {
+
+        return;
+
+      }
+
+
+      const establishment =
+        currentEstablishment ||
+        {};
+
+
+      const config =
+        currentEstablishmentConfig ||
+        {};
+
+
+      const rules =
+        currentBusinessRules ||
+        {};
+
+
+      const schedules =
+        rules.schedules ||
+        {};
+
+
+      const scheduleHtml =
+        Object.keys(
+          schedules
+        )
+          .map(
+
+            function(day) {
+
+              const schedule =
+                schedules[day] ||
+                {};
+
+
+              const services =
+                Array.isArray(
+                  schedule.services
+                )
+                  ? schedule.services
+                  : [];
+
+
+              let serviceText =
+                "Cerrado";
+
+
+              if (
+                !schedule.closed
+              ) {
+
+                if (
+                  services.length === 0
+                ) {
+
+                  serviceText =
+                    "Horario no configurado";
+
+                } else {
+
+                  serviceText =
+                    services
+                      .map(
+
+                        function(service) {
+
+                          return (
+
+                            (
+                              service.open ||
+                              "—"
+                            )
+
+                            +
+
+                            " - "
+
+                            +
+
+                            (
+                              service.close ||
+                              "—"
+                            )
+
+                          );
+
+                        }
+
+                      )
+                      .join(
+                        " · "
+                      );
+
+                }
+
+              }
+
+
+              return `
+                <div class="info-row">
+
+                  <span class="info-label">
+
+                    ${escapeHtml(
+                      day
+                    )}
+
+                  </span>
+
+
+                  <span class="info-value">
+
+                    ${escapeHtml(
+                      serviceText
+                    )}
+
+                  </span>
+
+                </div>
+              `;
+
+            }
+
+          )
+          .join("");
+
+
+      container.innerHTML =
+        `
+
+          <div class="card config-card">
+
+            <h3>
+              Datos del restaurante
+            </h3>
+
+
+            <div class="info-grid">
+
+              <div>
+
+                ${renderInfoRow(
+                  "Nombre",
+                  establishment.name
+                )}
+
+                ${renderInfoRow(
+                  "Tipo de negocio",
+                  establishment.business_type
+                )}
+
+                ${renderInfoRow(
+                  "Dirección",
+                  establishment.address
+                )}
+
+              </div>
+
+
+              <div>
+
+                ${renderInfoRow(
+                  "Ciudad",
+                  config.city
+                )}
+
+                ${renderInfoRow(
+                  "Teléfono",
+                  config.phone
+                )}
+
+                ${renderInfoRow(
+                  "Email",
+                  config.email
+                )}
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="card config-card">
+
+            <h3>
+              Reservas
+            </h3>
+
+
+            <div class="info-grid">
+
+              <div>
+
+                ${renderInfoRow(
+                  "Gestión",
+
+                  config.reservation_type ===
+                  "manual"
+
+                    ? "FGV Automation"
+
+                    : config.reservation_type
+
+                      ? "Sistema externo"
+
+                      : "No configurado"
+                )}
+
+                ${renderInfoRow(
+                  "Sistema",
+                  config.reservation_system
+                )}
+
+              </div>
+
+
+              <div>
+
+                ${renderInfoRow(
+                  "Zona horaria",
+                  config.timezone
+                )}
+
+                ${renderInfoRow(
+                  "Idioma",
+                  config.language
+                )}
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="card config-card">
+
+            <h3>
+              Capacidad y reservas
+            </h3>
+
+
+            <div class="info-grid">
+
+              <div>
+
+                ${renderInfoRow(
+                  "Capacidad total",
+                  rules.total_capacity
+                )}
+
+                ${renderInfoRow(
+                  "Número de mesas",
+                  rules.tables_count
+                )}
+
+                ${renderInfoRow(
+                  "Máximo de personas",
+                  rules.max_people
+                )}
+
+              </div>
+
+
+              <div>
+
+                ${renderInfoRow(
+                  "Duración de estancia",
+                  rules.stay_duration
+                )}
+
+                ${renderInfoRow(
+                  "Antelación de reserva",
+                  rules.booking_advance
+                )}
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="card config-card">
+
+            <h3>
+              Horarios
+            </h3>
+
+
+            <div>
+
+              ${
+                scheduleHtml ||
+
+                `
+                  <div class="config-note">
+                    No hay horarios configurados.
+                  </div>
+                `
+              }
+
+            </div>
+
+          </div>
+
+
+
+          <div class="card config-card">
+
+            <h3>
+              Reglas especiales
+            </h3>
+
+
+            <div class="config-note">
+
+              ${
+                rules.special_rules
+                  ? escapeHtml(
+                      rules.special_rules
+                    )
+                  : "No se han configurado reglas especiales."
+              }
+
+            </div>
+
+          </div>
+
+
+
+          <div class="card config-card">
+
+            <h3>
+              Ampliación de configuración
+            </h3>
+
+
+            <div class="config-note">
+
+              Esta sección será el centro de configuración
+              del restaurante. Sobre esta base añadiremos
+              posteriormente más información, reglas de negocio,
+              servicios, mesas, condiciones de reserva,
+              integraciones y configuración específica
+              de FGV Automation.
+
+            </div>
+
+          </div>
+
+        `;
+
+    }
+
+
+
+    /*
+      ==========================================
+      FILA DE INFORMACIÓN
+      ==========================================
+    */
+
+    function renderInfoRow(
+      label,
+      value
+    ) {
+
+      return `
+
+        <div class="info-row">
+
+          <span class="info-label">
+
+            ${escapeHtml(
+              label
+            )}
+
+          </span>
+
+
+          <span class="info-value">
+
+            ${escapeHtml(
+              formatValue(value)
+            )}
+
+          </span>
+
+        </div>
+
+      `;
+
+    }
+
+
+
+    /*
+      ==========================================
+      CARGAR DASHBOARD RESTAURANTE
+      ==========================================
     */
 
     async function loadRestaurantDashboard() {
@@ -1033,6 +2887,53 @@
             : {};
 
 
+        const {
+          data: rulesRows,
+          error: rulesError
+        } =
+          await supabaseClient
+            .from("business_rules")
+            .select("*")
+            .eq(
+              "establishment_id",
+              establishmentId
+            )
+            .limit(1);
+
+
+        if (rulesError) {
+
+          throw rulesError;
+
+        }
+
+
+        const rulesRow =
+          rulesRows &&
+          rulesRows.length > 0
+            ? rulesRows[0]
+            : null;
+
+
+        const businessRules =
+          rulesRow &&
+          rulesRow.rules
+            ? rulesRow.rules
+            : {};
+
+
+        currentEstablishment =
+          establishment;
+
+
+        currentEstablishmentConfig =
+          config;
+
+
+        currentBusinessRules =
+          businessRules;
+
+
         document
           .getElementById(
             "restaurantName"
@@ -1083,9 +2984,13 @@
           .textContent =
             config.reservation_type ===
             "manual"
-              ? "Gestión manual"
+
+              ? "FGV Automation"
+
               : config.reservation_type
+
                 ? "Sistema externo"
+
                 : "No configurado";
 
 
@@ -1094,8 +2999,13 @@
             "reservationSystem"
           )
           .textContent =
-            config.reservation_system ||
-            "No configurado";
+            config.reservation_type ===
+            "manual"
+
+              ? "FGV Automation"
+
+              : config.reservation_system ||
+                "No configurado";
 
 
         document
@@ -1107,7 +3017,13 @@
             "No especificado";
 
 
+        showRestaurantSection(
+          "inicio"
+        );
+
+
         showApp();
+
 
       } catch (error) {
 
@@ -1125,22 +3041,29 @@
 
         document.body.innerHTML =
           `
+
             <div class="error">
 
               <h2>
                 No se ha podido cargar el restaurante
               </h2>
 
+
               <br>
 
+
               <p>
+
                 ${escapeHtml(
                   error.message ||
                   String(error)
                 )}
+
               </p>
 
+
               <br>
+
 
               <button
                 class="logout-button"
@@ -1150,6 +3073,7 @@
               </button>
 
             </div>
+
           `;
 
       }
@@ -1159,9 +3083,9 @@
 
 
     /*
-    ==========================================
-    INICIAR DASHBOARD
-    ==========================================
+      ==========================================
+      INICIAR DASHBOARD
+      ==========================================
     */
 
     async function initDashboard() {
@@ -1219,9 +3143,9 @@
 
 
       /*
-      Si es el superadmin y no ha pedido
-      abrir un restaurante concreto,
-      mostramos el panel general.
+        Si es el superadmin y no ha pedido
+        abrir un restaurante concreto,
+        mostramos el panel general.
       */
 
       if (
@@ -1239,8 +3163,8 @@
 
 
       /*
-      Si hay un ID de restaurante,
-      cargamos el dashboard normal.
+        Si hay un ID de restaurante,
+        cargamos el dashboard normal.
       */
 
       if (establishmentId) {
@@ -1253,10 +3177,11 @@
 
 
       /*
-      Usuario normal sin restaurante
-      seleccionado.
-      Buscamos su establecimiento en
-      establishment_users.
+        Usuario normal sin restaurante
+        seleccionado.
+
+        Buscamos su establecimiento en
+        establishment_users.
       */
 
       const {
@@ -1265,7 +3190,9 @@
       } =
         await supabaseClient
           .from("establishment_users")
-          .select("establishment_id")
+          .select(
+            "establishment_id"
+          )
           .eq(
             "user_id",
             user.id
@@ -1279,6 +3206,7 @@
           "ERROR BUSCANDO ESTABLECIMIENTO DEL USUARIO:",
           membershipError
         );
+
 
         throw membershipError;
 
@@ -1298,19 +3226,24 @@
 
         document.body.innerHTML =
           `
+
             <div class="error">
 
               <h2>
                 No se ha encontrado ningún restaurante
               </h2>
 
+
               <br>
+
 
               <p>
                 Tu cuenta todavía no tiene un restaurante configurado.
               </p>
 
+
               <br>
+
 
               <button
                 class="logout-button"
@@ -1320,7 +3253,9 @@
               </button>
 
             </div>
+
           `;
+
 
         return;
 
@@ -1328,7 +3263,8 @@
 
 
       establishmentId =
-        memberships[0].establishment_id;
+        memberships[0]
+          .establishment_id;
 
 
       await loadRestaurantDashboard();

@@ -711,7 +711,9 @@
 
 
         <h1>
+
           Información de contacto.
+
         </h1>
 
 
@@ -797,7 +799,9 @@
             class="secondary"
             onclick="previousStep()"
           >
+
             Atrás
+
           </button>
 
 
@@ -805,7 +809,9 @@
             class="primary"
             onclick="nextStep()"
           >
+
             Continuar
+
           </button>
 
         </div>
@@ -822,7 +828,9 @@
 
 
         <h1>
+
           ¿Cómo gestionáis las reservas?
+
         </h1>
 
 
@@ -936,7 +944,9 @@
             class="secondary"
             onclick="previousStep()"
           >
+
             Atrás
+
           </button>
 
 
@@ -944,7 +954,9 @@
             class="primary"
             onclick="nextStep()"
           >
+
             Continuar
+
           </button>
 
         </div>
@@ -961,7 +973,9 @@
 
 
         <h1>
+
           Capacidad, horarios y reglas.
+
         </h1>
 
 
@@ -1153,7 +1167,9 @@
             class="secondary"
             onclick="previousStep()"
           >
+
             Atrás
+
           </button>
 
 
@@ -1161,7 +1177,9 @@
             class="primary"
             onclick="nextStep()"
           >
+
             Revisar configuración
+
           </button>
 
         </div>
@@ -1178,7 +1196,9 @@
 
 
         <h1>
+
           Todo preparado.
+
         </h1>
 
 
@@ -1202,7 +1222,9 @@
             class="secondary"
             onclick="previousStep()"
           >
+
             Atrás
+
           </button>
 
 
@@ -1210,7 +1232,9 @@
             class="primary"
             onclick="finishOnboarding()"
           >
+
             Finalizar configuración
+
           </button>
 
         </div>
@@ -1230,7 +1254,9 @@
 
 
           <h1>
+
             Restaurante configurado.
+
           </h1>
 
 
@@ -1249,6 +1275,7 @@
 
 
     </div>
+
 
   </div>
 
@@ -1531,6 +1558,7 @@
 
             <div class="schedule-type">
 
+
               <label>
 
                 <input
@@ -1566,6 +1594,7 @@
                 </span>
 
               </label>
+
 
             </div>
 
@@ -1639,6 +1668,7 @@
               Cerrado
 
             </label>
+
 
           </div>
 
@@ -1891,7 +1921,9 @@
 
         const businessType =
           document
-            .getElementById("business_type")
+            .getElementById(
+              "business_type"
+            )
             .value;
 
 
@@ -2899,7 +2931,6 @@
         finishButton.disabled =
           true;
 
-
         finishButton.textContent =
           "Guardando...";
 
@@ -2916,11 +2947,8 @@
         */
 
         const {
-
           data: establishment,
-
           error: establishmentError
-
         } =
           await supabaseClient
             .from("establishments")
@@ -2931,12 +2959,10 @@
                   .establishment
                   .name,
 
-
               business_type:
                 onboardingData
                   .establishment
                   .business_type,
-
 
               phone:
                 onboardingData
@@ -2944,13 +2970,11 @@
                   .phone ||
                 null,
 
-
               email:
                 onboardingData
                   .establishment
                   .email ||
                 null,
-
 
               address:
                 onboardingData
@@ -2958,13 +2982,11 @@
                   .address ||
                 null,
 
-
               timezone:
                 onboardingData
                   .establishment
                   .timezone ||
                 "Europe/Madrid",
-
 
               language:
                 onboardingData
@@ -2972,10 +2994,8 @@
                   .language ||
                 "es",
 
-
               status:
                 "active",
-
 
               active:
                 true
@@ -2996,14 +3016,46 @@
 
         /*
         ========================================
+        VINCULAR USUARIO CON ESTABLECIMIENTO
+        ========================================
+        */
+
+        const {
+          error: membershipError
+        } =
+          await supabaseClient
+            .from("establishment_users")
+            .insert({
+
+              establishment_id:
+                establishment.id,
+
+              user_id:
+                session.user.id,
+
+              role:
+                "owner"
+
+            });
+
+
+        if (
+          membershipError
+        ) {
+
+          throw membershipError;
+
+        }
+
+
+        /*
+        ========================================
         GUARDAR CONFIGURACIÓN
         ========================================
         */
 
         const {
-
           error: configError
-
         } =
           await supabaseClient
             .from(
@@ -3013,7 +3065,6 @@
 
               establishment_id:
                 establishment.id,
-
 
               config:
                 onboardingData.config
@@ -3037,9 +3088,7 @@
         */
 
         const {
-
           error: rulesError
-
         } =
           await supabaseClient
             .from(
@@ -3050,18 +3099,14 @@
               establishment_id:
                 establishment.id,
 
-
               name:
                 "Reglas iniciales",
-
 
               rule_type:
                 "general",
 
-
               rule:
                 onboardingData.business_rules,
-
 
               active:
                 true
@@ -3092,7 +3137,6 @@
 
         currentStep =
           5;
-
 
         showStep();
 
@@ -3137,7 +3181,6 @@
 
           finishButton.disabled =
             false;
-
 
           finishButton.textContent =
             "Finalizar configuración";

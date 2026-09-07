@@ -1020,7 +1020,7 @@
           <p class="field-note">
 
             Dentro del Dashboard podrás nombrar las mesas
-            y crear combinaciones entre ellas.
+            e indicar las plazas de cada una.
 
           </p>
 
@@ -2940,194 +2940,14 @@
       try {
 
 
-        /*
-        ========================================
-        CREAR ESTABLECIMIENTO
-        ========================================
-        */
-
-        const {
-          data: establishment,
-          error: establishmentError
-        } =
-          await supabaseClient
-            .from("establishments")
-            .insert({
-
-              name:
-                onboardingData
-                  .establishment
-                  .name,
-
-              business_type:
-                onboardingData
-                  .establishment
-                  .business_type,
-
-              phone:
-                onboardingData
-                  .establishment
-                  .phone ||
-                null,
-
-              email:
-                onboardingData
-                  .establishment
-                  .email ||
-                null,
-
-              address:
-                onboardingData
-                  .establishment
-                  .address ||
-                null,
-
-              timezone:
-                onboardingData
-                  .establishment
-                  .timezone ||
-                "Europe/Madrid",
-
-              language:
-                onboardingData
-                  .establishment
-                  .language ||
-                "es",
-
-              status:
-                "active",
-
-              active:
-                true
-
-            })
-            .select()
-            .single();
-
-
-        if (
-          establishmentError
-        ) {
-
-          throw establishmentError;
-
-        }
-
-
-        /*
-        ========================================
-        VINCULAR USUARIO CON ESTABLECIMIENTO
-        ========================================
-        */
-
-        const {
-          error: membershipError
-        } =
-          await supabaseClient
-            .from("establishment_users")
-            .insert({
-
-              establishment_id:
-                establishment.id,
-
-              user_id:
-                session.user.id,
-
-              role:
-                "owner"
-
-            });
-
-
-        if (
-          membershipError
-        ) {
-
-          throw membershipError;
-
-        }
-
-
-        /*
-        ========================================
-        GUARDAR CONFIGURACIÓN
-        ========================================
-        */
-
-        const {
-          error: configError
-        } =
-          await supabaseClient
-            .from(
-              "establishment_config"
-            )
-            .insert({
-
-              establishment_id:
-                establishment.id,
-
-              config:
-                onboardingData.config
-
-            });
-
-
-        if (
-          configError
-        ) {
-
-          throw configError;
-
-        }
-
-
-        /*
-        ========================================
-        GUARDAR REGLAS
-        ========================================
-        */
-
-        const {
-          error: rulesError
-        } =
-          await supabaseClient
-            .from(
-              "business_rules"
-            )
-            .insert({
-
-              establishment_id:
-                establishment.id,
-
-              name:
-                "Reglas iniciales",
-
-              rule_type:
-                "general",
-
-              rule:
-                onboardingData.business_rules,
-
-              active:
-                true
-
-            });
-
-
-        if (
-          rulesError
-        ) {
-
-          throw rulesError;
-
-        }
-
-
-        console.log(
-          "ONBOARDING GUARDADO:",
-          onboardingData
-        );
-
+        const keyName = 'fgv_onboarding_' + session.user.id;
+        let requestKey = sessionStorage.getItem(keyName);
+        if (!requestKey) { requestKey = crypto.randomUUID(); sessionStorage.setItem(keyName, requestKey); }
+        const { data: establishment, error: saveError } = await supabaseClient.rpc('fgv_complete_onboarding', {
+          p_data: onboardingData, p_request_key: requestKey
+        });
+        if (saveError) throw saveError;
+        sessionStorage.removeItem(keyName);
 
         /*
         ========================================

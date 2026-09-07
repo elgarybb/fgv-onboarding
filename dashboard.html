@@ -633,6 +633,7 @@
 
   </style>
 
+  <link rel="stylesheet" href="reservations.css">
 </head>
 
 
@@ -1188,8 +1189,7 @@
       ==========================================
     */
 
-    const SUPERADMIN_EMAIL =
-      "fgv2030mll@gmail.com";
+
 
 
 
@@ -2564,12 +2564,12 @@
 
                 ${renderInfoRow(
                   "Teléfono",
-                  config.phone
+                  establishment.phone
                 )}
 
                 ${renderInfoRow(
                   "Email",
-                  config.email
+                  establishment.email
                 )}
 
               </div>
@@ -2618,12 +2618,12 @@
 
                 ${renderInfoRow(
                   "Zona horaria",
-                  config.timezone
+                  establishment.timezone
                 )}
 
                 ${renderInfoRow(
                   "Idioma",
-                  config.language
+                  establishment.language
                 )}
 
               </div>
@@ -2898,6 +2898,7 @@
               "establishment_id",
               establishmentId
             )
+            .eq("active", true).eq("rule_type", "general").order("updated_at", { ascending: false })
             .limit(1);
 
 
@@ -2917,8 +2918,8 @@
 
         const businessRules =
           rulesRow &&
-          rulesRow.rules
-            ? rulesRow.rules
+          rulesRow.rule
+            ? rulesRow.rule
             : {};
 
 
@@ -2930,8 +2931,18 @@
           config;
 
 
-        currentBusinessRules =
-          businessRules;
+        const {data: engineSettings, error: settingsError} = await supabaseClient
+          .from("reservation_settings").select("*").eq("establishment_id", establishmentId).maybeSingle();
+        if (settingsError) throw settingsError;
+        const {count: activeTableCount, error: tablesError} = await supabaseClient
+          .from("restaurant_tables").select("id", {count:"exact", head:true})
+          .eq("establishment_id", establishmentId).eq("active", true);
+        if (tablesError) throw tablesError;
+        currentBusinessRules = engineSettings
+          ? {...businessRules, ...engineSettings, tables_count:activeTableCount,
+             stay_duration:engineSettings.duration_minutes + " minutos",
+             booking_advance:`Entre ${engineSettings.min_notice_minutes} minutos y ${engineSettings.max_advance_days} días`}
+          : businessRules;
 
 
         document
@@ -3127,20 +3138,8 @@
         session.user;
 
 
-      const userEmail =
-        (
-          user.email ||
-          ""
-        )
-          .trim()
-          .toLowerCase();
-
-
-      const superadminEmail =
-        SUPERADMIN_EMAIL
-          .trim()
-          .toLowerCase();
-
+      const { data: backendRole, error: roleError } = await supabaseClient.rpc('get_my_role');
+      if (roleError) throw roleError;
 
       /*
         Si es el superadmin y no ha pedido
@@ -3149,7 +3148,7 @@
       */
 
       if (
-        userEmail === superadminEmail &&
+        backendRole === "superadmin" &&
         !establishmentId
       ) {
 
@@ -3279,6 +3278,7 @@
   </script>
 
 
+  <script src="reservations.js"></script>
 </body>
 
 </html>

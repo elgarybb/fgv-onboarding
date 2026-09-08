@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+  <script src="theme.js?v=20260908.1"></script>
 
   <meta charset="UTF-8">
 
@@ -490,24 +491,29 @@
   </style>
 
   <link rel="stylesheet" href="design-system.css?v=20260908.6">
+  <link rel="stylesheet" href="entry.css?v=20260908.1">
+  <script src="entry.js?v=20260908.1" defer></script>
+  <link rel="stylesheet" href="theme.css?v=20260908.1">
 </head>
 
 
-<body>
+<body class="entry-page entry-onboarding">
+<aside class="entry-story" aria-label="FGV Restaurantes">
+  <a class="entry-logo" href="login.html"><span class="entry-mark" aria-hidden="true">↗</span> FGV Group <small>RESTAURANTES</small></a>
+  <div class="entry-story-content"><span class="entry-eyebrow">LA ATENCIÓN DE TU RESTAURANTE, A TU MANERA</span><h2>Automatiza<br>la atención de<br>tu restaurante.</h2><p>Conecta el programa que ya utilizas o empieza con el nuestro. Tú eliges cómo gestionar tus reservas.</p>
+  <div class="entry-illustration" aria-hidden="true"><div class="illustration-heading"><span>De la consulta a la reserva</span><span>↗</span></div><div class="illustration-conversation"><span class="conversation-label">TU CLIENTE</span><div class="conversation-bubble">Una mesa para cuatro, por favor.</div><div class="conversation-route"><span>Consulta</span><span>→</span><span>Tu agenda</span><span>→</span><span>Reserva</span></div><div class="conversation-note">La disponibilidad se consulta en el sistema que elijas.</div></div><div class="illustration-footer"><span>Conexión y prueba durante la puesta en marcha</span></div></div>
+  </div><p class="entry-story-footer">Diseñado alrededor de tu negocio.</p>
+</aside>
 
 
   <!-- =====================================================
        CONTENEDOR PRINCIPAL
        ===================================================== -->
 
-  <div class="container">
+  <main class="container entry-main" id="entryMain">
 
 
-    <div class="brand">
-
-      FGV · RESTAURANTES
-
-    </div>
+    <div class="brand entry-page-label">TU PUESTA EN MARCHA</div>
 
 
     <!-- =====================================================
@@ -517,7 +523,7 @@
     <div id="authGate">
 
 
-      <div class="auth-screen">
+      <div class="auth-screen"><a class="entry-back" href="login.html">¿Ya tienes cuenta? Inicia sesión →</a>
 
 
         <h1>
@@ -555,7 +561,7 @@
         <p class="auth-note">
 
           Después de crear tu cuenta recibirás un email
-          con el enlace para comenzar el onboarding.
+          con el enlace para configurar tu restaurante.
 
         </p>
 
@@ -573,7 +579,8 @@
     <div id="onboardingContainer">
 
 
-      <div class="progress">
+      <div class="entry-step-caption" id="entryStepCaption" role="status" aria-live="polite">Paso 1 de 5 · Tu restaurante</div><ol class="entry-steps" aria-label="Progreso de configuración"><li>Restaurante</li><li>Contacto</li><li>Reservas</li><li>Reglas</li><li>Revisión</li></ol>
+      <div class="progress" aria-hidden="true">
 
         <div class="progress-bar active"></div>
 
@@ -837,8 +844,8 @@
 
         <p class="subtitle">
 
-          FGV Restaurantes puede integrarse con tu sistema actual
-          o gestionar las reservas directamente.
+          Elige el motor incluido o conserva tu programa actual.
+          Las conexiones externas se completan y prueban después del alta.
 
         </p>
 
@@ -856,7 +863,7 @@
 
             <div class="option-title">
 
-              Ya utilizamos un sistema de reservas
+              Conectar mi programa de reservas
 
             </div>
 
@@ -880,13 +887,13 @@
 
             <div class="option-title">
 
-              Gestionamos las reservas manualmente
+              Usar el programa de reservas incluido
 
             </div>
 
             <div class="option-text">
 
-              Agenda, libreta, llamadas o WhatsApp.
+              Para empezar si utilizas agenda, libreta o todavía no tienes un programa.
 
             </div>
 
@@ -1278,7 +1285,7 @@
     </div>
 
 
-  </div>
+  </main>
 
 
   <!-- =====================================================

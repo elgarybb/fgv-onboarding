@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+  <script src="theme.js?v=20260908.1"></script>
 
   <meta charset="UTF-8">
 
@@ -198,32 +199,37 @@
   </style>
 
   <link rel="stylesheet" href="design-system.css?v=20260908.6">
+  <link rel="stylesheet" href="entry.css?v=20260908.1">
+  <script src="entry.js?v=20260908.1" defer></script>
+  <link rel="stylesheet" href="theme.css?v=20260908.1">
 </head>
 
 
-<body>
+<body class="entry-page">
+<aside class="entry-story" aria-label="FGV Restaurantes">
+  <a class="entry-logo" href="login.html"><span class="entry-mark" aria-hidden="true">↗</span> FGV Group <small>RESTAURANTES</small></a>
+  <div class="entry-story-content"><span class="entry-eyebrow">LA ATENCIÓN DE TU RESTAURANTE, A TU MANERA</span><h2>Automatiza<br>la atención de<br>tu restaurante.</h2><p>Conecta el programa que ya utilizas o empieza con el nuestro. Tú eliges cómo gestionar tus reservas.</p>
+  <div class="entry-illustration" aria-hidden="true"><div class="illustration-heading"><span>De la consulta a la reserva</span><span>↗</span></div><div class="illustration-conversation"><span class="conversation-label">TU CLIENTE</span><div class="conversation-bubble">Una mesa para cuatro, por favor.</div><div class="conversation-route"><span>Consulta</span><span>→</span><span>Tu agenda</span><span>→</span><span>Reserva</span></div><div class="conversation-note">La disponibilidad se consulta en el sistema que elijas.</div></div><div class="illustration-footer"><span>Conexión y prueba durante la puesta en marcha</span></div></div>
+  </div><p class="entry-story-footer">Diseñado alrededor de tu negocio.</p>
+</aside>
 
 
-  <div class="card">
+  <main class="card entry-main" id="entryMain">
 
 
-    <div class="brand">
-
-      FGV · RESTAURANTES
-
-    </div>
+    <div class="brand entry-page-label">BIENVENIDO A TU ESPACIO</div>
 
 
     <h1>
 
-      Accede a tu cuenta
+      Qué bueno verte de nuevo.
 
     </h1>
 
 
     <p class="subtitle">
 
-      Gestiona las reservas y la configuración de tu restaurante.
+      Accede a la configuración y gestión de tu restaurante.
 
     </p>
 
@@ -245,7 +251,7 @@
 
       <input
         type="email"
-        id="email"
+        id="email" autocomplete="email"
         placeholder="tu@email.com"
         required
       >
@@ -261,7 +267,7 @@
 
       <input
         type="password"
-        id="password"
+        id="password" autocomplete="current-password"
         placeholder="Introduce tu contraseña"
         required
       >
@@ -303,7 +309,7 @@
     <!-- ========================== -->
 
     <div
-      id="message"
+      id="message" role="status" aria-live="polite"
       class="message"
     ></div>
 
@@ -336,7 +342,7 @@
     </div>
 
 
-  </div>
+  </main>
 
 
 

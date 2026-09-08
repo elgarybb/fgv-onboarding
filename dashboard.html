@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>FGV Automation | Dashboard</title>
+  <title>FGV Restaurantes | Dashboard</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -634,10 +634,11 @@
   </style>
 
   <link rel="stylesheet" href="reservations.css">
+  <link rel="stylesheet" href="design-system.css">
 </head>
 
 
-<body>
+<body class="workspace-page">
 
 
   <!-- ============================= -->
@@ -669,12 +670,13 @@
       <!-- HEADER -->
       <!-- ========================= -->
 
-      <header>
+      <aside class="workspace-sidebar"><div class="sidebar-brand"><span class="brand-mark">↗</span>FGV Group</div><div class="sidebar-caption">RESTAURANTES</div><div id="workspaceRestaurant" class="workspace-restaurant">Tu espacio de trabajo</div><nav class="workspace-nav" aria-label="Secciones del restaurante"><button type="button" data-nav="inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3Z"/><path d="M9 20v-7h6v7"/></svg><span>Inicio</span></button><button type="button" data-nav="reservas"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 2v6m10-6v6M3 11h18"/></svg><span>Reservas</span></button><button type="button" data-nav="sala"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="3"/><path d="M9 3h6M9 21h6M3 9v6m18-6v6"/></svg><span>Sala</span></button><button type="button" data-nav="clientes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>Clientes</span></button><button type="button" data-nav="configuracion"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg><span>Ajustes</span></button></nav><div class="sidebar-bottom"><strong>Más tiempo para tus clientes.</strong>Gestión conectada, desde un solo lugar.</div></aside>
+<header>
 
         <div class="header-left">
 
           <div class="brand">
-            FGV AUTOMATION
+            FGV · RESTAURANTES
           </div>
 
         </div>
@@ -708,7 +710,7 @@
           </h1>
 
           <p class="subtitle">
-            Gestión general de FGV Automation.
+            Gestión general de FGV Restaurantes.
           </p>
 
         </section>
@@ -836,6 +838,7 @@
 
 
 
+          <div id="workspaceHome"></div>
           <section class="grid">
 
 
@@ -970,6 +973,7 @@
         <!-- RESERVAS -->
         <!-- ========================= -->
 
+        <section id="restaurantSectionSala" class="dashboard-section"><div class="section-header"><div><div class="workspace-kicker">DISEÑADA PARA TU SERVICIO</div><h2>Tu sala, en un vistazo.</h2><p>Organiza tus mesas y prepara el próximo servicio.</p></div></div><div id="floorContent"></div></section>
         <section
           id="restaurantSectionReservas"
           class="dashboard-section"
@@ -1077,7 +1081,7 @@
             <p>
               Los clientes podrán incorporarse a esta base
               a través de las reservas y de las conversaciones
-              mantenidas con FGV Automation.
+              mantenidas con FGV Restaurantes.
             </p>
 
             <div class="mode-badge">
@@ -1118,7 +1122,7 @@
 
               <p>
                 Gestiona toda la información y las reglas
-                que utiliza FGV Automation para este restaurante.
+                que utiliza FGV Restaurantes para este restaurante.
               </p>
 
             </div>
@@ -1479,6 +1483,8 @@
     function showRestaurantSection(
       section
     ) {
+      if (!establishmentId) return;
+
 
       const sectionMap = {
 
@@ -1492,8 +1498,8 @@
           "restaurantSectionClientes",
 
         configuracion:
-          "restaurantSectionConfiguracion"
-
+          "restaurantSectionConfiguracion",
+        sala: "restaurantSectionSala"
       };
 
 
@@ -1532,6 +1538,8 @@
 
       }
 
+
+      document.dispatchEvent(new CustomEvent("fgv:section", {detail:section}));
 
       if (section === "reservas") {
 
@@ -1605,19 +1613,19 @@
           `
 
             <h3>
-              Reservas FGV Automation
+              Reservas FGV Restaurantes
             </h3>
 
             <p>
               Este restaurante utiliza el sistema de reservas
-              propio de FGV Automation. Las reservas se gestionarán
+              propio de FGV Restaurantes. Las reservas se gestionarán
               mediante la información almacenada en nuestra base
               de datos y estarán preparadas para conectarse con
               WhatsApp y la automatización.
             </p>
 
             <div class="mode-badge">
-              ● Sistema propio FGV Automation
+              ● Sistema propio FGV Restaurantes
             </div>
 
           `;
@@ -1640,7 +1648,7 @@
 
             <p>
               Este restaurante utiliza un sistema externo de reservas.
-              FGV Automation utilizará la integración correspondiente
+              FGV Restaurantes utilizará la integración correspondiente
               para consultar y gestionar la disponibilidad y las reservas.
             </p>
 
@@ -1790,7 +1798,7 @@
                 <br>
 
                 El siguiente paso será construir aquí
-                el sistema de reservas FGV Automation
+                el sistema de reservas FGV Restaurantes
                 y su gestión completa.
 
               </div>
@@ -2597,7 +2605,7 @@
                   config.reservation_type ===
                   "manual"
 
-                    ? "FGV Automation"
+                    ? "FGV Restaurantes"
 
                     : config.reservation_type
 
@@ -2745,7 +2753,7 @@
               posteriormente más información, reglas de negocio,
               servicios, mesas, condiciones de reserva,
               integraciones y configuración específica
-              de FGV Automation.
+              de FGV Restaurantes.
 
             </div>
 
@@ -2996,7 +3004,7 @@
             config.reservation_type ===
             "manual"
 
-              ? "FGV Automation"
+              ? "FGV Restaurantes"
 
               : config.reservation_type
 
@@ -3013,7 +3021,7 @@
             config.reservation_type ===
             "manual"
 
-              ? "FGV Automation"
+              ? "FGV Restaurantes"
 
               : config.reservation_system ||
                 "No configurado";
@@ -3249,7 +3257,7 @@
                 onclick="logout()"
               >
                 Cerrar sesión
-              </button>
+              </button><br><br><a href="index.html">Configurar mi restaurante →</a>
 
             </div>
 
@@ -3272,13 +3280,19 @@
 
 
 
-    initDashboard();
+    // Wait until all dashboard modules have registered their handlers.
+    window.addEventListener('DOMContentLoaded',()=>initDashboard().catch(error=>{
+      document.getElementById('loading').textContent='No se pudo abrir el panel. Recarga para reintentar.';
+    }));
 
 
   </script>
 
 
   <script src="reservations.js"></script>
+  <script src="configuration.js"></script>
+  <script src="workspace.js"></script>
+  <script src="floor-plan.js"></script>
 </body>
 
 </html>

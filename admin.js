@@ -1,6 +1,8 @@
 /* Dedicated commercial administration. Restaurant operations retain their own workspace. */
 (() => {
  const $=id=>document.getElementById(id),esc=v=>FGV.esc(v),labels={prospect:'Pendiente',trial:'De prueba',contracted:'Contratado',paused:'En pausa',archived:'Archivado'};
+ window.openRestaurant=id=>{window.location.href='dashboard.html?v=20260908.admin2&id='+encodeURIComponent(id);};
+ window.goBackToSuperadmin=()=>{window.location.href='dashboard.html?v=20260908.admin2';};
  let data={restaurants:[],plans:[],activity:[]},section='overview',query='',filter='all',loadVersion=0,unsaved=false;
  const tabs=[['overview','Resumen','◈'],['restaurants','Restaurantes','▦'],['clients','Clientes','♙'],['operations','Operaciones','⌁'],['plans','Planes','◇']];
  const date=v=>v?new Intl.DateTimeFormat('es-ES',{dateStyle:'medium'}).format(new Date(v.length===10?v+'T12:00:00':v)):'Sin fecha';

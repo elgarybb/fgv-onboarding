@@ -1,7 +1,7 @@
 /* FGV dashboard: the database is authoritative for availability and writes. */
 (() => {
   const days = [['monday','Lunes'],['tuesday','Martes'],['wednesday','Miércoles'],['thursday','Jueves'],['friday','Viernes'],['saturday','Sábado'],['sunday','Domingo']];
-  const state = {date:'', rows:[], tables:[], settings:null, editing:null, requestKey:null, loading:0, settingsDirty:false, tableDirty:false};
+  const state = {date:'', rows:[], tables:[], settings:null, editing:null, requestKey:null, loading:0, optionsGeneration:0, settingsDirty:false, tableDirty:false};
   const esc = value => escapeHtml(value ?? '');
   const $ = id => document.getElementById(id);
   const tz = () => currentEstablishment?.timezone || 'Europe/Madrid';
@@ -41,6 +41,7 @@
        <label>Personas<input id="fgvPeople" required type="number" min="1" max="100" value="2"></label></div>
        <label>Notas<textarea id="fgvNotes" maxlength="2000" rows="2"></textarea></label>
        <div class="fgv-toolbar"><button type="button" id="fgvCheck">Comprobar disponibilidad</button><button type="submit">Guardar reserva</button><button type="button" id="fgvClose">Cerrar</button></div>
+       <div id="fgvOptions" class="reservation-options" aria-live="polite" hidden></div>
       </form>
       <div class="filter-strip"><label>Buscar reservas<input id="fgvSearch" type="search" placeholder="Nombre, teléfono o mesa"></label><label>Estado<select id="fgvStatusFilter"><option value="">Todos</option><option value="confirmed">Confirmadas</option><option value="pending">Pendientes</option><option value="cancelled">Canceladas</option></select></label></div>
       <div id="fgvList" aria-live="polite"></div>
@@ -55,16 +56,24 @@
        <h3>Mesas</h3><div id="fgvTables"></div>
        <form id="fgvTableForm" class="fgv-toolbar"><input id="fgvTableId" type="hidden"><label>Nombre de mesa<input id="fgvTableName" maxlength="80" required placeholder="Mesa 1"></label><label>Plazas<input id="fgvTableCapacity" type="number" min="1" max="100" required></label><label><input id="fgvTableActive" type="checkbox" checked> Activa</label><button type="submit">Guardar mesa</button><button id="fgvTableReset" type="button">Nueva mesa</button></form>
       </details></div>`;
-    state.date ||= localDate(new Date()); $('fgvDate').value=state.date;
+    state.date ||= currentEstablishmentConfig.demo_scenario?.date||localDate(new Date()); $('fgvDate').value=state.date;
     $('fgvDate').onchange=()=>{if(!$('fgvDate').value)return;state.date=$('fgvDate').value; refresh();};
     $('fgvSearch').oninput=renderRows; $('fgvStatusFilter').onchange=renderRows;
     $('fgvRefresh').onclick=refresh; $('fgvNew').onclick=()=>edit(null);
     $('fgvClose').onclick=()=>{$('fgvBooking').hidden=true;};
     $('fgvBooking').onsubmit=e=>{e.preventDefault();busy(e.currentTarget,saveBooking);};
+    for(const id of ['fgvStart','fgvPeople'])$(id).addEventListener('input',()=>{state.optionsGeneration++;$('fgvOptions').hidden=true;});
     $('fgvCheck').onclick=()=>busy($('fgvBooking'),async()=>{
       if(!$('fgvStart').reportValidity()||!$('fgvPeople').reportValidity())return;
-      const result=await rpc('fgv_check_availability',{p_local_start:$('fgvStart').value,p_people:Number($('fgvPeople').value),p_exclude:state.editing?.id||null});
-      notify(result.available?`Disponible: ${result.table_name}. Puedes guardar la reserva.`:result.reason,!result.available);
+      const ticket=++state.optionsGeneration,requested=$('fgvStart').value,people=Number($('fgvPeople').value);
+      $('fgvOptions').hidden=true;
+      const result=await rpc('fgv_reservation_options',{p_local_start:requested,p_people:people,p_exclude:state.editing?.id||null});
+      if(ticket!==state.optionsGeneration)return;
+      const now=result.requested,options=result.alternatives;
+      notify(now.available?`Disponible a las ${time(now.start_at)}: ${now.table_name}, ${now.table_capacity} plazas. Se comprobará de nuevo al guardar.`:now.reason,!now.available);
+      const root=$('fgvOptions');
+      if(options.length){root.innerHTML=`<h3>${now.available?'También puedes esperar a una mesa más ajustada':'Otros horarios disponibles'}</h3><p class="fgv-muted">${now.available?`Para ${people} personas hay a esa hora una mesa de ${now.table_capacity} plazas. Puedes mantener esa hora o elegir una opción posterior.`:'Estas opciones respetan las mesas, el aforo y la duración de la reserva.'}</p><div class="reservation-option-grid">${options.map((o,i)=>`<button type="button" class="quiet-button reservation-option" data-option="${i}"><strong>${esc(time(o.start_at))} · ${o.table_capacity} plazas</strong><span>${esc(o.table_name)}</span><small>Esperar ${o.wait_minutes} min · Elegir hora</small></button>`).join('')}</div><small class="fgv-muted">Consultar no bloquea mesas. Elegir una hora tampoco guarda la reserva.</small>`;root.hidden=false;root.querySelectorAll('[data-option]').forEach(b=>b.onclick=()=>{if(ticket!==state.optionsGeneration)return;const option=options[Number(b.dataset.option)];$('fgvStart').value=localInput(option.start_at);state.optionsGeneration++;root.hidden=true;notify(`Hora elegida: ${time(option.start_at)}. Completa los datos y pulsa Guardar reserva para confirmar.`);});}
+      else if(!now.available){root.innerHTML='<p class="fgv-muted">No se han encontrado alternativas en las tres horas siguientes. Prueba otra fecha o servicio.</p>';root.hidden=false;}
     });
     $('fgvSettings').oninput=()=>{state.settingsDirty=true;};
     $('fgvTableForm').oninput=()=>{state.tableDirty=true;};
@@ -76,11 +85,11 @@
     $('fgvTableReset').onclick=()=>{$('fgvTableForm').reset();$('fgvTableId').value='';};
   }
   function edit(row) {
-    state.editing=row; state.requestKey=crypto.randomUUID();
+    state.editing=row; state.requestKey=crypto.randomUUID();state.optionsGeneration++;$('fgvOptions').hidden=true;
     $('fgvFormTitle').textContent=row?'Modificar reserva':'Nueva reserva';
     $('fgvName').value=row?.metadata?.guest_name||row?.guest_name||'';
     $('fgvPhone').value=row?.metadata?.guest_phone||row?.guest_phone||'';
-    $('fgvStart').value=row?localInput(row.start_at):`${state.date}T13:00`;
+    $('fgvStart').value=row?localInput(row.start_at):`${state.date}T${currentEstablishmentConfig.demo_scenario?'21:00':'13:00'}`;
     $('fgvPeople').value=row?.party_size||2; $('fgvNotes').value=row?.metadata?.notes||'';
     $('fgvPeople').max=state.settings?.max_people||100;
     $('fgvBooking').hidden=false; $('fgvName').focus();

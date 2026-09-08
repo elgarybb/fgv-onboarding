@@ -26,7 +26,7 @@ Public pages use a publishable Supabase key. Server secrets must never be embedd
 
 ## Verification and limits
 
-49 integration scenarios passed locally against PostgreSQL via PGlite for the 2026-09-08 release. Browser verification uses isolated fictional fixtures before checking the published app. Current workspace documentation records the exact production checks.
+53 integration scenarios passed locally against PostgreSQL via PGlite for the 2026-09-08 release. Browser verification uses isolated fictional fixtures before checking the published app. Current workspace documentation records the exact production checks.
 
 WhatsApp, n8n production hosting, live calls, external booking providers, payments and installable PWA are not activated in this release. External booking mode explicitly reports the missing connection. The room map represents layout, not live attendance or physical occupancy. Explicit table combinations allocate and block every member table for the booking interval.
 
@@ -37,3 +37,7 @@ Básico, Pro and Business are draft feature definitions with server checks for r
 ## Administration update
 
 Migration 011 adds a superadmin-only directory, private commercial accounts, revision checks, audit history and retry-safe sales onboarding. Dedicated navigation provides overview, restaurants, commercial clients, setup operations and plan counts. Sales status does not alter booking operations or charge customers. Creating a restaurant grants access only to its creator; contact email is informational and client account linking remains a separate pending step. Operational alerts reflect configuration, not live provider telemetry.
+
+## Availability alternatives and demonstration
+
+Migration 012 adds read-only availability alternatives over the next three hours in 15-minute steps. A larger free table can be offered now alongside an earlier smaller suitable table later; saving still rechecks authoritative availability. Demo SQL is restricted to the named Fernando Prueba restaurant, refuses existing bookings/design, and takes a private snapshot. It is a one-off explicitly authorized demonstration, not a migration or a customer setup default. Execute as postgres with a locally set superadmin JWT subject; never replay after the scenario exists.

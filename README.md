@@ -26,10 +26,14 @@ Public pages use a publishable Supabase key. Server secrets must never be embedd
 
 ## Verification and limits
 
-44 integration scenarios passed locally against PostgreSQL via PGlite for the 2026-09-08 release. Browser verification uses isolated fictional fixtures before checking the published app. Current workspace documentation records the exact production checks.
+49 integration scenarios passed locally against PostgreSQL via PGlite for the 2026-09-08 release. Browser verification uses isolated fictional fixtures before checking the published app. Current workspace documentation records the exact production checks.
 
 WhatsApp, n8n production hosting, live calls, external booking providers, payments and installable PWA are not activated in this release. External booking mode explicitly reports the missing connection. The room map represents layout, not live attendance or physical occupancy. Explicit table combinations allocate and block every member table for the booking interval.
 
 ## Commercial preparation
 
 Básico, Pro and Business are draft feature definitions with server checks for room editing, combinations and channel requests. Guided setup stores a phone number as pending authorization; it does not connect Meta or a telephony provider. Prices, quotas, payment, provider authorization, the conversational agent, advanced operations monitoring, and an operational multi-location interface remain pending. Existing combinations remain available to the engine after a plan downgrade; removing or changing them requires the entitlement, so downgrades need an explicit configuration review before commercial use.
+
+## Administration update
+
+Migration 011 adds a superadmin-only directory, private commercial accounts, revision checks, audit history and retry-safe sales onboarding. Dedicated navigation provides overview, restaurants, commercial clients, setup operations and plan counts. Sales status does not alter booking operations or charge customers. Creating a restaurant grants access only to its creator; contact email is informational and client account linking remains a separate pending step. Operational alerts reflect configuration, not live provider telemetry.

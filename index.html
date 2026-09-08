@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>FGV Automation | Onboarding</title>
+  <title>FGV Restaurantes | Onboarding</title>
 
   <style>
 
@@ -489,6 +489,7 @@
 
   </style>
 
+  <link rel="stylesheet" href="design-system.css">
 </head>
 
 
@@ -504,7 +505,7 @@
 
     <div class="brand">
 
-      FGV AUTOMATION
+      FGV · RESTAURANTES
 
     </div>
 
@@ -528,7 +529,7 @@
 
         <p class="subtitle">
 
-          Crea tu cuenta de FGV Automation para comenzar
+          Crea tu cuenta de FGV Restaurantes para comenzar
           la configuración de tu restaurante.
 
         </p>
@@ -602,7 +603,7 @@
         <p class="subtitle">
 
           En unos minutos tendremos la información necesaria para adaptar
-          FGV Automation a tu negocio.
+          FGV Restaurantes a tu negocio.
 
         </p>
 
@@ -836,7 +837,7 @@
 
         <p class="subtitle">
 
-          FGV Automation puede integrarse con tu sistema actual
+          FGV Restaurantes puede integrarse con tu sistema actual
           o gestionar las reservas directamente.
 
         </p>
@@ -982,7 +983,7 @@
         <p class="subtitle">
 
           Configura la información básica que utilizará
-          FGV Automation para gestionar correctamente
+          FGV Restaurantes para gestionar correctamente
           las reservas de tu restaurante.
 
         </p>
@@ -1049,7 +1050,7 @@
             Duración estimada de la estancia
           </label>
 
-          <select id="stay_duration">
+          <select id="stay_duration" onchange="document.getElementById('custom_duration_field').hidden=this.value!=='custom'">
 
             <option value="">
               Selecciona una duración
@@ -1079,7 +1080,7 @@
               Personalizado
             </option>
 
-          </select>
+          </select><div id="custom_duration_field" hidden><label for="custom_duration">Duración en minutos</label><input id="custom_duration" required type="number" min="15" max="720" value="120"></div>
 
         </div>
 
@@ -1090,7 +1091,7 @@
             ¿Con cuánta antelación se puede reservar?
           </label>
 
-          <select id="booking_advance">
+          <select id="booking_advance" onchange="document.getElementById('custom_advance_field').hidden=this.value!=='custom'">
 
             <option value="same_day">
               El mismo día
@@ -1112,7 +1113,7 @@
               Personalizado
             </option>
 
-          </select>
+          </select><div id="custom_advance_field" hidden><label for="custom_advance">Días de antelación máxima</label><input id="custom_advance" required type="number" min="0" max="730" value="30"></div>
 
         </div>
 
@@ -1801,6 +1802,9 @@
     */
 
     function showStep() {
+      const external = document.querySelector('input[name="reservation_type"]:checked')?.value === 'digital';
+      for (const id of ['total_capacity','tables_count','max_people','stay_duration','booking_advance']) document.getElementById(id).closest('.field').hidden=external;
+
 
       steps.forEach(
         (step, index) => {
@@ -1902,6 +1906,17 @@
     */
 
     function validateStep() {
+      if (currentStep === 1) {
+        for (const id of ['phone','email']) if (!document.getElementById(id).reportValidity()) return false;
+      }
+      if (currentStep === 3 && document.querySelector('input[name="reservation_type"]:checked')?.value === 'digital') return true;
+      if (currentStep === 3) {
+        const duration=document.getElementById('stay_duration').value;
+        if (!duration) {alert('Selecciona la duración de las reservas.');return false;}
+        if(duration==='custom'&&!document.getElementById('custom_duration').reportValidity()) return false;
+        if(document.getElementById('booking_advance').value==='custom'&&!document.getElementById('custom_advance').reportValidity()) return false;
+      }
+
 
 
       /*
@@ -2150,11 +2165,11 @@
 
 
           if (
-            open >= close
+            open === close
           ) {
 
             alert(
-              "La hora de apertura debe ser anterior a la hora de cierre."
+              "La apertura y el cierre no pueden coincidir."
             );
 
             return false;
@@ -2204,11 +2219,11 @@
 
 
             if (
-              secondOpen >= secondClose
+              secondOpen === secondClose
             ) {
 
               alert(
-                "La hora de apertura del segundo servicio debe ser anterior a la hora de cierre."
+                "La apertura y el cierre del segundo servicio no pueden coincidir."
               );
 
               return false;
@@ -2217,7 +2232,7 @@
 
 
             if (
-              secondOpen <= close
+              open < close && secondOpen < secondClose && open < close && secondOpen < secondClose && secondOpen <= close
             ) {
 
               alert(
@@ -2456,6 +2471,8 @@
 
 
         business_rules: {
+          custom_duration: document.getElementById("custom_duration").value,
+          custom_advance: document.getElementById("custom_advance").value,
 
           total_capacity:
             document
@@ -2528,8 +2545,17 @@
 
     function createSummary() {
 
-      const data =
-        getOnboardingData();
+      const raw = getOnboardingData();
+      if(raw.business_rules.stay_duration==='custom') raw.business_rules.stay_duration=raw.business_rules.custom_duration+' minutos';
+      if(raw.business_rules.booking_advance==='custom') raw.business_rules.booking_advance=raw.business_rules.custom_advance+' días';
+      const escape = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+      const sanitize = value => typeof value === 'string' ? escape(value) : Array.isArray(value) ? value.map(sanitize) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([k,v])=>[k,sanitize(v)])) : value;
+      const data = sanitize(raw);
+      if (data.config.reservation_type === 'digital') {
+        document.getElementById('summary').innerHTML=`<strong>${data.establishment.name}</strong><p>${data.config.city} · ${data.establishment.address||'Dirección pendiente'}</p><p>Programa elegido: <strong>${data.config.reservation_system}</strong></p><p>Conservarás tu programa actual como referencia de disponibilidad. El siguiente paso será conectar y probar la integración.</p><p>Contacto: ${data.establishment.phone||'Pendiente'} · ${data.establishment.email||'Pendiente'}</p>`;
+        return;
+      }
+
 
 
       const businessTypeLabels = {
@@ -2774,7 +2800,7 @@
 
           ${
             data.config.reservation_system ||
-            "FGV Automation"
+            "FGV Restaurantes"
           }
 
           <br><br>
@@ -2971,7 +2997,7 @@
           function() {
 
             window.location.href =
-              "dashboard.html";
+              "dashboard.html?id=" + encodeURIComponent(establishment.id);
 
           },
           1500
@@ -2991,7 +3017,7 @@
 
 
         alert(
-          "Ha ocurrido un error al guardar la configuración. Revisa la consola."
+          error.message || "No se pudo guardar. Tus datos siguen aquí; vuelve a intentarlo."
         );
 
 

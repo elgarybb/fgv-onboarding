@@ -2966,10 +2966,10 @@
           [];
 
 
-        if (config.city) {
+        if (establishment.city ?? config.city) {
 
           locationParts.push(
-            config.city
+            establishment.city ?? config.city
           );
 
         }

@@ -7,7 +7,7 @@
     const ticket = ++generation, root = document.getElementById('configurationContent');
     if (!root) return;
     const e = currentEstablishment || {}, c = currentEstablishmentConfig || {};
-    const field = (key,label,type='text',max=160) => `<label>${label}<input name="${key}" type="${type}" maxlength="${max}" value="${esc(e[key])}" ${['name','business_type'].includes(key)?'required':''}></label>`;
+    const field = (key,label,type='text',max=160) => `<label>${label}<input name="${key}" type="${type}" maxlength="${max}" value="${esc(key==='city'?(e.city??c.city):e[key])}" ${['name','business_type'].includes(key)?'required':''}></label>`;
     root.innerHTML = `<div class="fgv-panel"><h3>Puesta en marcha</h3><p id="fgvReadiness" role="status">Comprobando la configuración…</p><button id="fgvGoReservations" type="button">Ver reservas, horarios y mesas</button><p class="fgv-muted">WhatsApp, notas de voz y llamadas: pendientes de conexión y prueba. Elegir un programa de reservas no lo conecta automáticamente.</p></div>
       <form id="fgvProfile" class="fgv-panel"><h3>Tu restaurante</h3><div class="fgv-grid">${field('name','Nombre')}${field('business_type','Tipo de negocio','text',80)}${field('phone','Teléfono','tel',30)}${field('email','Correo','email',254)}${field('address','Dirección','text',300)}${field('city','Ciudad','text',120)}
       <label>Zona horaria<input name="timezone" value="${esc(e.timezone||'Europe/Madrid')}" required list="fgvTimezones"><datalist id="fgvTimezones"><option value="Europe/Madrid"><option value="Atlantic/Canary"><option value="Europe/Lisbon"></datalist></label>
@@ -33,7 +33,7 @@
         const values=Object.fromEntries(new FormData(form));
         const {data,error}=await supabaseClient.rpc('fgv_update_restaurant',{p_establishment_id:establishmentId,p_data:values,p_expected_revision:currentEstablishment.settings_revision});
         if(error) throw error;
-        currentEstablishment=data; currentEstablishmentConfig={...currentEstablishmentConfig,reservation_type:values.reservation_type,reservation_system:values.reservation_type==='digital'?values.reservation_system:''};
+        currentEstablishment=data; currentEstablishmentConfig={...currentEstablishmentConfig,city:data.city,reservation_type:values.reservation_type,reservation_system:values.reservation_type==='digital'?values.reservation_system:''};
         // Refresh summary labels from the saved state on the next page load.
         message.textContent='Cambios guardados.'; message.className='fgv-message'; button.disabled=false;
         document.getElementById('restaurantName').textContent=data.name;

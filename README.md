@@ -20,7 +20,7 @@ Existing restaurant workspace: Supabase authentication, guided onboarding, prote
 
 ## Database changes
 
-Migrations 001 and 002 were applied together on 2026-09-07. Migration 003 and migrations 004–005 were applied together on 2026-09-08. Never replay historical releases against that production database. Existing table identifiers and bookings are preserved.
+Migrations 001 and 002 were applied together on 2026-09-07. Migrations 003–005 were applied together on 2026-09-08; migration 006 followed to synchronize the legacy onboarding city with profile edits. Never replay historical releases against that production database. Existing table identifiers and bookings are preserved.
 
 Public pages use a publishable Supabase key. Server secrets must never be embedded in these files. Access is enforced by database policies and authorized functions; integration credentials remain server-side.
 
